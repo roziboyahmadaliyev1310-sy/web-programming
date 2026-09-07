@@ -1,12 +1,186 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Week 2 simple html</title>
-        </head>
-        <body>
-            <h1>new page for html lesson</h1>
-            <p>this is for textting</p>
-            <p>CSS would style it. JavaScript would animate it.</p>
-        </body>
+<head>
+  <!-- 1. Character set encoding (MUST be first inside head) -->
+  <meta charset="UTF-8">
+
+  <!-- 2. Responsive viewport for mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 3. Page title displayed in the browser tab and search engines -->
+  <title>Kim Jisoo — Web Programming Portfolio · Gachon University</title>
+
+  <!-- 4. Meta description for SEO -->
+  <meta name="description" content="Portfolio and HTML study guide exercises for Kim Jisoo, Web Programming student at Gachon University.">
+
+  <!-- 5. Internal styles for quick layout and interactive cards -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    header {
+      border-bottom: 2px solid #0056b3;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #0056b3;
+      font-weight: bold;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+    }
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    footer {
+      border-top: 1px solid #ccc;
+      padding-top: 15px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER SECTION ==================== -->
+  <header>
+    <h1>Kim Jisoo</h1>
+    <p>Student ID: <span lang="ko">202438037</span> · Course: <strong>K0126002 Web Programming</strong></p>
+
+    <!-- Navigation structure using <nav>, <ul>, <li>, and <a> -->
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#recipe">Tutorial</a></li>
+        <li><a href="#favourites">Favourites</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <img src="https://picsum.photos/200/200" alt="Kim Jisoo sitting at a desk with a computer at Gachon University campus" width="200" height="200">
+      <p>
+        I am a <strong>Computer Science student</strong> at <em>Gachon University</em> passionate about modern frontend engineering.
+        Building clean, structured HTML forms the foundation of every scalable web application.
+      </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>My Technical Skills</h2>
+      <ul>
+        <li><strong>HTML5:</strong> Semantic page layout and web accessibility (WCAG).</li>
+        <li><strong>CSS3:</strong> Visual design, Flexbox, and responsive web styling.</li>
+        <li><strong>JavaScript:</strong> Dynamic web page interaction and logic.</li>
+      </ul>
+    </section>
+
+    <!-- Recipe / Tutorial Section -->
+    <section id="recipe">
+      <h2>How to Prepare Korean Kimchi Ramen</h2>
+
+      <h3>What You Need</h3>
+      <ul>
+        <li>1 packet of instant ramen</li>
+        <li>500ml water</li>
+        <li>1/2 cup aged kimchi (sliced)</li>
+        <li>1 green onion (chopped)</li>
+        <li>1 fresh egg</li>
+      </ul>
+
+      <h3>Steps</h3>
+      <ol>
+        <li>Bring 500ml of water to a roll boil in a small pot.</li>
+        <li>Add the sliced kimchi and broth powder; simmer for <strong>2 minutes</strong> to build the flavor base.</li>
+        <li>Drop in the ramen noodles and cook for <em>exactly 3 minutes</em>.</li>
+        <li><strong>Warning:</strong> Crack the egg into the boiling soup without stirring if you prefer a intact yolk.</li>
+        <li>Garnish with fresh green onions and serve hot immediately.</li>
+      </ol>
+    </section>
+
+    <!-- Favourites Gallery Section -->
+    <section id="favourites">
+      <h2>My Favourites</h2>
+
+      <!-- Card 1: Book -->
+      <div class="card">
+        <h2>Favourite Book: Clean Code</h2>
+        <img src="https://picsum.photos/300/200?random=1" alt="Open programming book sitting on a wooden desk" width="300" height="200">
+        <p>
+          This book revolutionized how I approach software structure. Writing <strong>maintainable code</strong> requires <em>relentless discipline</em> and continuous refactoring.
+        </p>
+        <a href="https://en.wikipedia.org/wiki/Software_craftsmanship" target="_blank" rel="noopener noreferrer">Learn more about software engineering</a>
+      </div>
+
+      <!-- Card 2: Film -->
+      <div class="card">
+        <h2>Favourite Film: Parasite (2019)</h2>
+        <img src="https://picsum.photos/300/200?random=2" alt="Cinematic shot representing modern film production" width="300" height="200">
+        <p>
+          Directed by Bong Joon-ho, this <strong>Oscar-winning masterpiece</strong> masterfully explores <em>social hierarchy</em> through brilliant visual storytelling.
+        </p>
+        <a href="https://en.wikipedia.org/wiki/Parasite_(2019_film)" target="_blank" rel="noopener noreferrer">Learn more about Parasite</a>
+      </div>
+
+      <!-- Card 3: Website -->
+      <div class="card">
+        <h2>Favourite Website: MDN Web Docs</h2>
+        <img src="https://picsum.photos/300/200?random=3" alt="Monitor display showing software documentation" width="300" height="200">
+        <p>
+          MDN is the premier source for <strong>web development documentation</strong>. It provides clear guidance on standardizing <em>HTML, CSS, and JavaScript</em>.
+        </p>
+        <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">Visit MDN Web Docs</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact & Connect</h2>
+      <p>Email: <a href="mailto:jisoo@gachon.ac.kr">jisoo@gachon.ac.kr</a></p>
+      <p>
+        GitHub:
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          github.com/jisoo
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER SECTION ==================== -->
+  <footer>
+    <p>&copy; 2026 Kim Jisoo · Web Programming K0126002 · Gachon University</p>
+  </footer>
+
+</body>
 </html>
