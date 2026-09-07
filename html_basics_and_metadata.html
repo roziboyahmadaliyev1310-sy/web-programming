@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basics & Metadata</title>
+</head>
+<body>
+  <h1>Module 1: Fundamentals & Invisible Metadata</h1>
+
+  <section>
+    <h2>1. What is HTML?</h2>
+    <p>HTML (HyperText Markup Language) describes the structure of a web page using tags. It is <strong>not a programming language</strong>—it cannot make calculations or decisions. Every web page starts with an HTML file.</p>
+  </section>
+
+  <section>
+    <h2>2. DOCTYPE & Page Structure</h2>
+    <p>The <code>&lt;!DOCTYPE html&gt;</code> declaration must be the first line to trigger <strong>standards mode</strong> in modern browsers, preventing unpredictable "quirks mode" rendering.</p>
+    <p>The <code>&lt;body&gt;</code> tag contains everything visible to the user, while <code>&lt;head&gt;</code> holds invisible metadata.</p>
+  </section>
+
+  <section>
+    <h2>3. Essential Head Metadata</h2>
+    <ul>
+      <li><code>&lt;meta charset="UTF-8"&gt;</code> — Must be first in <code>&lt;head&gt;</code> to decode all human languages (including Korean 한글) and emojis without rendering garbage text.</li>
+      <li><code>&lt;title&gt;</code> — Sets browser tab text and Google search headline (does NOT appear on the page body).</li>
+      <li><code>lang="en"</code> attribute — Declares language for accessibility screen readers and translation tools; omitting it causes WCAG violations.</li>
+    </ul>
+  </section>
+</body>
+</html>
