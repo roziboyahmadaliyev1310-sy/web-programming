@@ -1,0 +1,59 @@
+# Semantic HTML — Quick Reference Guide
+
+A simple, straightforward summary of the 8 core HTML5 semantic elements covered in the Gachon University Web Programming Study Guide.
+
+---
+
+### 1. `<header>` — Introductory Content
+
+* **What it is:** Holds site titles, logos, top-level navigation, or article headers.
+* **Key Rule:** A page can have multiple `<header>` elements (one main site header, plus one inside each `<article>`).
+
+---
+
+### 2. `<nav>` — Main Navigation Links
+
+* **What it is:** Encloses major navigation link menus.
+* **Key Rule:** Only use it for primary link blocks (like menus or breadcrumbs), not every single link on a page.
+
+---
+
+### 3. `<main>` — Page-Unique Content
+
+* **What it is:** Contains the main, unique content of the specific page.
+* **Key Rule:** Exactly **one visible `<main>**` element per page. Do not put repeating elements like global headers or footers inside it.
+
+---
+
+### 4. `<footer>>` — Meta & Copyright Info
+
+* **What it is:** Contains copyright notices, author info, policy links, or contact details.
+* **Key Rule:** Can be placed at the bottom of the entire page or inside individual `<article>` tags for section metadata.
+
+---
+
+### 5. `<section>` — Thematic Topic Grouping
+
+* **What it is:** Groups related content into a distinct topic or chapter.
+* **Key Rule:** Every `<section>` **must contain a heading tag** (`<h2>`–`<h6>`). Do not use it purely for CSS styling—use `<div>` for that.
+
+---
+
+### 6. `<article>` — Self-Contained Content
+
+* **What it is:** Encloses content that makes total sense on its own (blog posts, news articles, product cards).
+* **Key Rule:** Test if the content could be shared individually via email or RSS and still make sense.
+
+---
+
+### 7. `<aside>` — Side Information
+
+* **What it is:** Contains tangentially related info, such as sidebars, quick facts, or related link boxes.
+* **Key Rule:** Removing the `<aside>` block should not ruin the main content's clarity.
+
+---
+
+### 8. `<figure>` & `<figcaption>` — Images with Captions
+
+* **What it is:** `<figure>` wraps self-contained visual elements (images, code snippets, charts), and `<figcaption>` gives it a visible label.
+* **Key Rule:** Keep the image and its visible text caption grouped together as one semantic unit.
