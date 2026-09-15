@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E8 — Full Style Sheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      margin: 0;
+      padding: 40px;
+    }
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(15,23,42,0.08);
+      padding: 28px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+    }
+    .menu {
+      display: flex;
+      gap: 18px;
+    }
+    .menu a {
+      color: white;
+      text-decoration: none;
+    }
+    .hero {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding-top: 26px;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-box {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      border: 2px solid #0f172a;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>AKHMADALIEV RUZIBOY</div>
+      <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Gachon</a>
+        <a href="#">Football</a>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Student at Gachon University</h1>
+        <p>Second year student, favorite color is white, and I enjoy playing football.</p>
+      </div>
+      <div class="hero-box"></div>
+    </div>
+  </div>
+</body>
+</html>

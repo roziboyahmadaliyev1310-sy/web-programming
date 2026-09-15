@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Specificity</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8fafc; color: #111827; padding: 32px; } p { color: #334155; } .special { color: #0f766e; } #lead { color: #7c3aed; }
+  </style>
+</head>
+<body>
+  <p>Type selector is lower specificity.</p>
+  <p class="special">Class selector beats the type selector.</p>
+  <p id="lead">ID selector wins with the highest specificity.</p>
+</body>
+</html>

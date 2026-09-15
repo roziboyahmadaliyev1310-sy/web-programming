@@ -1,0 +1,42 @@
+# Week 3 CSS Lesson Files
+
+This folder contains the CSS topic examples and exercises from the Week 3 Monday study guide.
+
+## Topic files
+- ex01_what_is_css.html
+- ex02_three_ways_to_add_css.html
+- ex03_css_syntax.html
+- ex04_universal_selector.html
+- ex05_id_selector.html
+- ex06_class_selector.html
+- ex07_type_selector.html
+- ex08_color_property.html
+- ex09_background_color_property.html
+- ex10_hex_color_codes.html
+- ex11_rgb_color_values.html
+- ex12_font_size_property.html
+- ex13_font_weight_property.html
+- ex14_font_style_property.html
+- ex15_text_align_property.html
+- ex16_box_model_padding.html
+- ex17_box_model_margin.html
+- ex18_box_model_width_calculation.html
+- ex19_display_block.html
+- ex20_display_none.html
+- ex21_display_flex.html
+- ex22_css_specificity.html
+- ex23_which_selector_wins.html
+- ex24_css_comments.html
+- ex25_putting_it_all_together.html
+
+## Exercise files
+- exE01_style_your_first_heading.html
+- exE02_three_ways_spot_the_difference.html
+- exE03_color_palette_card.html
+- exE04_box_model_explorer.html
+- exE05_fix_the_broken_css.html
+- exE06_flexbox_navigation_bar.html
+- exE07_profile_card_with_css.html
+- exE08_full_style_sheet.html
+
+Open the files in your browser to view the examples.

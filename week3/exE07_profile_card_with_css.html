@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E7 — Profile Card with CSS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      color: #0f172a;
+      padding: 40px;
+    }
+    .card {
+      max-width: 380px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e2e8f0;
+    }
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      margin: 0 auto 16px;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .skill {
+      background: #f8fafc;
+      color: #0f172a;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">AR</div>
+    <h2>AKHMADALIEV RUZIBOY</h2>
+    <p>Student at Gachon University, 2nd year.</p>
+    <p>Favorite color: white</p>
+    <p>Hobby: playing football</p>
+    <div class="skills">
+      <span class="skill">Gachon</span>
+      <span class="skill">Football</span>
+      <span class="skill">Student</span>
+      <span class="skill">2nd Year</span>
+    </div>
+  </div>
+</body>
+</html>

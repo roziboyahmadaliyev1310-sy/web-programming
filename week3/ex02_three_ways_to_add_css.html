@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Three Ways to Add CSS</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8fafc; color: #0f172a; padding: 32px; } .wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 18px; } .box { background: white; border: 1px solid #dbe3ee; border-radius: 12px; padding: 18px; } h2 { margin-top: 0; } .inline { color: #dc2626; font-size: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="box">
+      <h2>Inline CSS</h2>
+      <p class="inline" style="color: #dc2626; font-size: 20px;">This paragraph uses inline styling.</p>
+    </div>
+    <div class="box">
+      <h2>Internal CSS</h2>
+      <style>.internal { color: #15803d; font-weight: 700; }</style>
+      <p class="internal">This paragraph uses internal CSS.</p>
+    </div>
+    <div class="box">
+      <h2>External CSS</h2>
+      <p class="external">This paragraph can be styled via an external stylesheet.</p>
+    </div>
+  </div>
+</body>
+</html>

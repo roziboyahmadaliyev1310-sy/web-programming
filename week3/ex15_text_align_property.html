@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>text-align Property</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 32px;
+      background: #f9fafb;
+      color: #0f172a;
+    }
+
+    .box,
+    .centered-box {
+      display: block;
+    }
+
+    .box {
+      border: 1px dashed #cbd5e1;
+      padding: 12px;
+      margin: 10px 0;
+      max-width: 560px;
+    }
+
+    .left { text-align: left; }
+    .center { text-align: center; }
+    .right { text-align: right; }
+    .justify { text-align: justify; }
+
+    .centered-box {
+      width: 320px;
+      margin: 0 auto;
+      background: #ecfdf5;
+      text-align: center;
+      padding: 18px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box left">text-align: left</div>
+  <div class="box center">text-align: center</div>
+  <div class="box right">text-align: right</div>
+  <div class="box justify">text-align: justify stretches text across the whole width to create a newspaper-like block.</div>
+  <div class="centered-box">This box is centered on the page using margin: 0 auto.</div>
+</body>
+</html>
