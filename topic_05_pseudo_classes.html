@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Topic 05: Pseudo-classes
+  </title>
+  <style>.btn {
+    background: #0f766e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn:hover {
+    background: #14b8a6;
+}
+tr:nth-child(even) {
+    background: #f0fdfa;
+}
+tr:nth-child(odd) {
+    background: white;
+}</style>
+ </head>
+ <body>
+  <button class="btn">
+   Hover Me
+  </button>
+ </body>
+</html>
+

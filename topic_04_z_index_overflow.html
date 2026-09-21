@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Topic 04: z-index &amp; overflow
+  </title>
+  <style>.stack {
+    display: block;
+    position: static;
+    height: auto;
+}
+.layer {
+    position: static;
+    display: block;
+    width: 180px;
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 8px 0;
+}
+.layer-1 {
+    background:#0f766e;
+    color:white;
+    top:auto;
+    left:auto;
+    z-index:1;
+    margin: 8px 0;
+}
+.layer-2 {
+    background:#14b8a6;
+    color:white;
+    top:auto;
+    left:auto;
+    z-index:2;
+    margin: 8px 0;
+}
+.layer-3 {
+    background:#ccfbf1;
+    color:#0f766e;
+    top:auto;
+    left:auto;
+    z-index:3;
+    margin: 8px 0;
+}
+.overflow-demo {
+    width: 220px;
+    height: auto;
+    overflow: visible;
+    border: 2px solid #14b8a6;
+    padding: 8px;
+    margin-top: 16px;
+}</style>
+ </head>
+ <body>
+  <div class="stack">
+   <div class="layer layer-1">
+    z-index: 1
+   </div>
+   <div class="layer layer-2">
+    z-index: 2
+   </div>
+   <div class="layer layer-3">
+    z-index: 3
+   </div>
+  </div>
+  <div class="overflow-demo">
+   overflow: hidden clips everything outside the box.
+  </div>
+ </body>
+</html>
+

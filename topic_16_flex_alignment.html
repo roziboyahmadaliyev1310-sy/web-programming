@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Topic 16: Flex Alignment
+  </title>
+  <style>.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    height: auto;
+}
+.box {
+    background: #0f766e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+.box.custom {
+    align-self: flex-end;
+    background: #14b8a6;
+}</style>
+ </head>
+ <body>
+  <div class="container">
+   <div class="box">
+    Item 1
+   </div>
+   <div class="box custom">
+    Item 2
+   </div>
+  </div>
+ </body>
+</html>
+
