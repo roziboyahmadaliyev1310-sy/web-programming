@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Portfolio - AKHMADALIEV RUZIBOY
+  </title>
+  <style>:root {
+    --primary: #7c3aed;
+    --secondary: #f59e0b;
+    --bg: #fdf2f8;
+    --card-bg: #ffffff;
+    --text: #1f2937;
+    --line: #e9d5ff;
+}
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #fdf2f8, #eef2ff, #ecfeff);
+    color: var(--text);
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    color: white;
+    padding: 1rem 2rem;
+    z-index: 100;
+}
+.container {
+    max-width: 900px;
+    margin: 80px auto 40px;
+    padding: 0 20px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.08);
+}
+.card h3 {
+    color: #7c3aed;
+}
+.card:nth-child(2) h3 {
+    color: #f59e0b;
+}
+.card:nth-child(3) h3 {
+    color: #10b981;
+}
+.card:nth-child(4) h3 {
+    color: #2563eb;
+}</style>
+ </head>
+ <body>
+  <nav>
+   <strong>
+    AKHMADALIEV RUZIBOY
+   </strong>
+   | Portfolio
+  </nav>
+  <div class="container">
+   <div class="grid">
+    <div class="card">
+     <h3>
+      Web Programming Project
+     </h3>
+     <p>
+      I am a second-year student at Gachon University, and I enjoy building web pages while learning CSS and HTML.
+     </p>
+    </div>
+    <div class="card">
+     <h3>
+      Hobby
+     </h3>
+     <p>
+      Playing football is one of my favorite activities and helps me stay active and focused.
+     </p>
+    </div>
+    <div class="card">
+     <h3>
+      Dream
+     </h3>
+     <p>
+      My dream is to make more money by working in a strong and successful technology field.
+     </p>
+    </div>
+    <div class="card">
+     <h3>
+      Plan
+     </h3>
+     <p>
+      My plan is to get a job in my subject after finishing my studies and growing my skills.
+     </p>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+
