@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 05 - Pseudo Classes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 32px;
+      }
+      .btn {
+        background: #0f766e;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+      .btn:hover {
+        background: #14b8a6;
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      input {
+        padding: 10px 12px;
+        border: 2px solid #cbd5e1;
+        border-radius: 8px;
+        display: block;
+        margin-top: 20px;
+      }
+      input:focus {
+        border-color: #0f766e;
+        outline: none;
+      }
+      li:first-child {
+        color: #0f766e;
+        font-weight: bold;
+      }
+      li:last-child {
+        color: #ea580c;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">Hover me</button>
+    <input type="text" placeholder="Focus here" />
+
+    <ul>
+      <li>First child</li>
+      <li>Second child</li>
+      <li>Third child</li>
+    </ul>
+  </body>
+</html>

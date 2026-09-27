@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 4 - CSS Advanced</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 24px;
+        background: #f8fafc;
+        color: #1f2937;
+      }
+      h1 {
+        margin-bottom: 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+      .card {
+        background: white;
+        border: 1px solid #dbe3ec;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      a {
+        color: #0f766e;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Week 4 - CSS Advanced</h1>
+    <p>15 lesson files and 7 exercises based on the Friday study guide.</p>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Lessons</h2>
+        <ul>
+          <li><a href="topic_01_position_static_relative.html">01. Position Static & Relative</a></li>
+          <li><a href="topic_02_position_absolute.html">02. Position Absolute</a></li>
+          <li><a href="topic_03_position_fixed_sticky.html">03. Position Fixed & Sticky</a></li>
+          <li><a href="topic_04_z_index_overflow.html">04. z-index & overflow</a></li>
+          <li><a href="topic_05_pseudo_classes.html">05. Pseudo Classes</a></li>
+          <li><a href="topic_06_pseudo_elements.html">06. Pseudo Elements</a></li>
+          <li><a href="topic_07_css_transitions.html">07. CSS Transitions</a></li>
+          <li><a href="topic_08_keyframes_animations.html">08. Keyframes</a></li>
+          <li><a href="topic_09_css_variables.html">09. CSS Variables</a></li>
+          <li><a href="topic_10_media_queries.html">10. Media Queries</a></li>
+          <li><a href="topic_11_advanced_flexbox.html">11. Advanced Flexbox</a></li>
+          <li><a href="topic_12_css_grid.html">12. CSS Grid</a></li>
+          <li><a href="topic_13_border_radius_box_shadow.html">13. Border Radius & Box Shadow</a></li>
+          <li><a href="topic_14_inherit_keyword.html">14. inherit Keyword</a></li>
+          <li><a href="topic_15_putting_it_all_together.html">15. Putting It All Together</a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Exercises</h2>
+        <ul>
+          <li><a href="exercise_E1_heading.html">E1. Position the Badge</a></li>
+          <li><a href="exercise_E2_three_ways.html">E2. Hover Card</a></li>
+          <li><a href="exercise_E3_loading_spinner.html">E3. Loading Spinner</a></li>
+          <li><a href="exercise_E4_variables.html">E4. CSS Variables Theme</a></li>
+          <li><a href="exercise_E5_fixed_nav.html">E5. Fixed Navigation</a></li>
+          <li><a href="exercise_E6_responsive_grid.html">E6. Responsive Grid</a></li>
+          <li><a href="exercise_E7_personalized.html">E7. Personalized Portfolio</a></li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>

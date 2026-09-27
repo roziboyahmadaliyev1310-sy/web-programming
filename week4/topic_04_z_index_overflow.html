@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 04 - z-index & overflow</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 32px;
+      }
+      .stack {
+        position: relative;
+        height: 180px;
+      }
+      .layer {
+        position: absolute;
+        width: 180px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-radius: 12px;
+      }
+      .one { background: #0f766e; top: 20px; left: 20px; z-index: 1; }
+      .two { background: #14b8a6; top: 50px; left: 80px; z-index: 2; }
+      .three { background: #0ea5e9; top: 80px; left: 140px; z-index: 3; }
+      .overflow-demo {
+        width: 220px;
+        height: 90px;
+        overflow: hidden;
+        border: 2px solid #14b8a6;
+        padding: 8px;
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack">
+      <div class="layer one">z-index: 1</div>
+      <div class="layer two">z-index: 2</div>
+      <div class="layer three">z-index: 3</div>
+    </div>
+
+    <div class="overflow-demo">
+      This text is bigger than the box, so overflow hidden cuts it off.
+    </div>
+  </body>
+</html>

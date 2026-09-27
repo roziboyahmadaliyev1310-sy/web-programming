@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 06 - Pseudo Elements</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 32px;
+      }
+      .quote {
+        position: relative;
+        width: 420px;
+        padding: 20px 24px;
+        background: #f0fdf4;
+        border-left: 6px solid #22c55e;
+        margin-top: 20px;
+      }
+      .quote::before {
+        content: "\201C";
+        font-size: 52px;
+        color: #22c55e;
+        position: absolute;
+        left: 12px;
+        top: 4px;
+      }
+      .quote::after {
+        content: "\201D";
+        font-size: 52px;
+        color: #22c55e;
+        position: absolute;
+        right: 14px;
+        bottom: -8px;
+      }
+      h2::first-letter {
+        color: #0f766e;
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Learning CSS</h2>
+    <p class="quote">CSS makes websites beautiful, responsive, and easy to structure.</p>
+  </body>
+</html>
