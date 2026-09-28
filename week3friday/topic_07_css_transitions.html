@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   Topic 07: CSS Transitions
-  </title>
-  <style>.card {
-    width: 240px;
-    padding: 24px;
-    background: #f0fdfa;
-    border: 2px solid #14b8a6;
-    border-radius: 12px;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-.card:hover {
-    background: #0f766e;
-    color: white;
-    transform: translateY(-6px);
-}</style>
- </head>
- <body>
-  <div class="card">
-   Hover over this card
-  </div>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 07 - CSS Transitions</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+      }
+      .box {
+        width: 160px;
+        height: 160px;
+        background: #0f766e;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        transition: background 0.4s ease, transform 0.4s ease, border-radius 0.4s ease;
+      }
+      .box:hover {
+        background: #14b8a6;
+        transform: translateY(-10px) scale(1.05);
+        border-radius: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">Hover me</div>
+  </body>
 </html>
-

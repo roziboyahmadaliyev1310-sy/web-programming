@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   AKHMADALIEV RUZIBOY - Exercise E2
-  </title>
-  <style>.card {
-    width: 200px;
-    padding: 20px;
-    background: #f0fdfa;
-    border: 2px solid #14b8a6;
-    border-radius: 8px;
-    transition: transform 0.2s, background 0.2s;
-}
-.card:hover {
-    transform: translateY(-4px);
-    background: #ccfbf1;
-}</style>
- </head>
- <body>
-  <div class="card">
-   Hover Card
-  </div>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise E2 - Hover Card</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #ecfeff;
+        font-family: Arial, sans-serif;
+      }
+      .card {
+        width: 220px;
+        padding: 20px;
+        border-radius: 16px;
+        background: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 26px rgba(15, 118, 110, 0.2);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: #0f766e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h3>Hover Card</h3>
+      <p>Move the mouse over this card.</p>
+    </div>
+  </body>
 </html>
-

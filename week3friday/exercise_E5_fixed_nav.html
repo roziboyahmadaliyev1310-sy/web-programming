@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   AKHMADALIEV RUZIBOY - Exercise E5
-  </title>
-  <style>body {
-    margin: 0;
-    font-family: sans-serif;
-    height: 200vh;
-}
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #0f766e;
-    color: white;
-    padding: 15px;
-    z-index: 10;
-}
-.content {
-    margin-top: 60px;
-    padding: 20px;
-}</style>
- </head>
- <body>
-  <nav>
-   Fixed Navigation Bar
-  </nav>
-  <div class="content">
-   Scroll down to see fixed nav.
-  </div>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise E5 - Fixed Nav</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #0f172a;
+        color: white;
+        padding: 14px 20px;
+      }
+      .content {
+        padding-top: 80px;
+        height: 1400px;
+      }
+      .section {
+        margin: 20px;
+        background: #e2e8f0;
+        padding: 18px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">Fixed Navigation</nav>
+    <div class="content">
+      <div class="section">Section 1</div>
+      <div class="section">Section 2</div>
+      <div class="section">Section 3</div>
+    </div>
+  </body>
 </html>
-

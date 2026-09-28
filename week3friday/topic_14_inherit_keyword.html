@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   Topic 14: inherit Keyword
-  </title>
-  <style>.parent {
-    color: #0f766e;
-    border: 2px dashed #0f766e;
-    padding: 16px;
-}
-.child {
-    color: inherit;
-    border: inherit;
-    padding: 10px;
-}</style>
- </head>
- <body>
-  <div class="parent">
-   Parent
-   <div class="child">
-    Child Inheriting Properties
-   </div>
-  </div>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 14 - inherit Keyword</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        color: #0f172a;
+        padding: 32px;
+      }
+      .parent {
+        color: #0f766e;
+        font-weight: 700;
+      }
+      .child {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      Parent color
+      <div class="child">This child inherits the parent color.</div>
+    </div>
+  </body>
 </html>
-

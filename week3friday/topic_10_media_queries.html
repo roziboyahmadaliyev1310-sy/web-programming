@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Topic 10: CSS Media Queries
-  </title>
-  <style>body {
-    background: #f0fdfa;
-    font-family: sans-serif;
-}
-@media (min-width: 640px) {
-    body {
-        background: #ccfbf1;
-    }
-}</style>
- </head>
- <body>
-  <p>
-   Resize browser window to see background change color.
-  </p>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 10 - Media Queries</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .box {
+        background: #0f766e;
+        color: white;
+        padding: 24px;
+        text-align: center;
+      }
+      @media (max-width: 600px) {
+        .box {
+          background: #14b8a6;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">Resize the screen to see the media query in action.</div>
+  </body>
 </html>
-

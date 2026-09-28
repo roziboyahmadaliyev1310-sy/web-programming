@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   Topic 09: CSS Variables
-  </title>
-  <style>:root {
-    --primary: #0f766e;
-    --accent: #14b8a6;
-}
-.btn {
-    background: var(--primary);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-}</style>
- </head>
- <body>
-  <button class="btn">
-   Variable Styled Button
-  </button>
- </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topic 09 - CSS Variables</title>
+    <style>
+      :root {
+        --primary: #0f766e;
+        --secondary: #14b8a6;
+        --bg: #ecfeff;
+        --text: #1f2937;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 32px;
+      }
+      .card {
+        background: white;
+        border: 2px solid var(--primary);
+        border-radius: 12px;
+        padding: 24px;
+        width: 280px;
+      }
+      .card button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Theme Card</h2>
+      <p>Using CSS variables for consistent colors.</p>
+      <button>Click</button>
+    </div>
+  </body>
 </html>
-

@@ -1,78 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <title>
-   AKHMADALIEV RUZIBOY - Profile
-  </title>
-  <style>body {
-    font-family: sans-serif;
-    background: linear-gradient(135deg, #fdf2f8, #f5f3ff, #ecfeff);
-    padding: 20px;
-}
-.profile {
-    max-width: 420px;
-    background: #ffffff;
-    padding: 22px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.12);
-    border: 2px solid #ddd6fe;
-}
-h2 {
-    color: #7c3aed;
-    margin-top: 0;
-    margin-bottom: 18px;
-}
-p {
-    background: #f8fafc;
-    padding: 10px 12px;
-    border-radius: 10px;
-    margin: 10px 0;
-    border-left: 4px solid #f59e0b;
-}</style>
- </head>
- <body>
-  <div class="profile">
-   <h2>
-    AKHMADALIEV RUZIBOY
-   </h2>
-   <p>
-    <strong>
-     University:
-    </strong>
-    Gachon University
-   </p>
-   <p>
-    <strong>
-     Major:
-    </strong>
-    Computer Science / Web Programming
-   </p>
-   <p>
-    <strong>
-     Year:
-    </strong>
-    Second year student
-   </p>
-   <p>
-    <strong>
-     Hobby:
-    </strong>
-    Playing football
-   </p>
-   <p>
-    <strong>
-     Dream:
-    </strong>
-    Making more money
-   </p>
-   <p>
-    <strong>
-     Plan:
-    </strong>
-    Get a job in my subject
-   </p>
-  </div>
- </body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise E7 - Personalized Portfolio</title>
+    <style>
+      :root {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --primary: #0f766e;
+        --accent: #14b8a6;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 24px;
+      }
+      .profile {
+        background: var(--card);
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(15, 118, 110, 0.12);
+        padding: 28px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .tag {
+        background: #ccfbf1;
+        color: var(--primary);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="profile">
+        <div class="top">
+          <div class="avatar">A</div>
+          <div>
+            <h1>A.Ruziboy</h1>
+            <p>Web programmer</p>
+          </div>
+        </div>
 
+        <p>currently i am building personal portfolio with CSS and HTML</p>
+
+        <div class="skills">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
