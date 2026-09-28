@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 10: Event Bubbling & Delegation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Event Bubbling & Delegation</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 10 ════════════════ -->
+<section class="topic" id="t10">
+  <div class="topic-hdr">
+    <span class="t-num">10</span>
+    <h2>Event Bubbling &amp; Delegation</h2>
+    <span class="difficulty diff-med">Intermediate</span>
+  </div>
+  <div class="theory">
+    <p>When you click a button, the click event doesn't stop there — it <strong>bubbles up</strong> through all parent elements to the document. A click on the button also fires click events on its parent <code>div</code>, then <code>body</code>, then <code>html</code>, then <code>document</code>.</p>
+    <p><strong>Event delegation</strong> is a pattern that uses bubbling to your advantage: instead of adding a listener to every child element, add <em>one listener to the parent</em>. Use <code>e.target</code> to know which child was clicked.</p>
+  </div>
+
+  <!-- Bubbling visualization -->
+  <div class="demo-box">
+    <h4>Visual — Click the Button to see bubbling</h4>
+    <div class="bubble-vis">
+      <div class="bv-el bv-window" id="bv-window">window</div>
+      <div class="bubble-arrow">↑ bubbles up</div>
+      <div class="bv-el bv-doc" id="bv-doc">document</div>
+      <div class="bubble-arrow">↑</div>
+      <div class="bv-el bv-body" id="bv-body">body</div>
+      <div class="bubble-arrow">↑</div>
+      <div class="bv-el bv-div" id="bv-div">div#container</div>
+      <div class="bubble-arrow">↑</div>
+      <div class="bv-el bv-btn" id="bv-btn" onclick="startBubble()" style="cursor:pointer">👆 Click me! (button)</div>
+      <div class="bubble-log" id="bubble-log">Click the button to see the event travel up...</div>
+    </div>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript — Event Delegation</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sc">// ❌ Without delegation — a listener on EVERY button</span>
+document.<span class="sf">querySelectorAll</span>(<span class="ss">'button'</span>).<span class="sf">forEach</span>(btn =&gt; {
+  btn.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, handleClick);
+});
+<span class="sc">// Problem: new buttons added later won't have a listener!</span>
+
+<span class="sc">// ✅ With delegation — ONE listener on the parent</span>
+<span class="sk">const</span> list = document.<span class="sf">querySelector</span>(<span class="ss">'#todo-list'</span>);
+list.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, (e) =&gt; {
+  <span class="sc">// e.target is the element that was actually clicked</span>
+  <span class="sk">if</span> (e.target.<span class="sf">matches</span>(<span class="ss">'.delete-btn'</span>)) {
+    e.target.parentElement.<span class="sf">remove</span>();
+  }
+});
+<span class="sc">// Works for existing AND future list items!</span></code></div>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li>Events <strong>bubble up</strong> — a click on a child also fires on all its parents.</li>
+      <li>Event delegation = one listener on the parent, check <code>e.target</code> to know which child.</li>
+      <li>Delegation works for dynamically added elements (existing listeners don't).</li>
+      <li><code>e.target.matches('.class')</code> checks if the clicked element matches a CSS selector.</li>
+    </ul>
+  </div>
+</section>
+
+</main></div><script src="script.js" defer></script></body></html>

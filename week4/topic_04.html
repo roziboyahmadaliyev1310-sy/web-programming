@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 4: textContent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">textContent</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 04 ════════════════ -->
+<section class="topic" id="t04">
+  <div class="topic-hdr">
+    <span class="t-num">04</span>
+    <h2>textContent — Reading &amp; Writing Text</h2>
+    <span class="difficulty diff-easy">Beginner</span>
+  </div>
+  <div class="theory">
+    <p><code>textContent</code> reads or sets the <strong>plain text</strong> content of an element. When you set it, any HTML tags in the string are treated as literal characters — not as HTML. This makes it the <strong>safe</strong> way to insert user-provided text.</p>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sk">const</span> title = document.<span class="sf">querySelector</span>(<span class="ss">'#title'</span>);
+
+<span class="sc">// READ the current text</span>
+<span class="sp">console</span>.<span class="sf">log</span>(title.textContent);  <span class="sc">// "Hello"</span>
+
+<span class="sc">// WRITE new text</span>
+title.textContent = <span class="ss">'Welcome to Web Programming!'</span>;
+
+<span class="sc">// HTML tags are treated as plain text (safe!)</span>
+title.textContent = <span class="ss">'&lt;b&gt;This will NOT be bold&lt;/b&gt;'</span>;
+<span class="sc">// Page shows: &lt;b&gt;This will NOT be bold&lt;/b&gt;</span></code></div>
+  </div>
+
+  <!-- Live sandbox -->
+  <div class="sandbox">
+    <div class="sandbox-bar">
+      <span>Live Editor — edit and run</span>
+      <div style="display:flex;gap:6px">
+        <button class="sandbox-reset" onclick="resetSB('sb04')">Reset</button>
+        <button class="sandbox-run" onclick="runSB('sb04')">▶ Run</button>
+      </div>
+    </div>
+    <div class="sandbox-body">
+      <div class="sandbox-editor">
+        <textarea id="sb04" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;body style="font-family:system-ui;padding:20px"&gt;
+  &lt;h2 id="msg"&gt;Original Text&lt;/h2&gt;
+  &lt;input id="inp" type="text" placeholder="Type new text..." style="padding:8px;font-size:16px;width:200px"&gt;
+  &lt;button onclick="changeText()" style="padding:8px 16px;margin-left:8px;cursor:pointer"&gt;
+    Change Text
+  &lt;/button&gt;
+  &lt;script&gt;
+    function changeText() {
+      const newText = document.getElementById('inp').value;
+      // textContent treats HTML tags as plain text (safe!)
+      document.getElementById('msg').textContent = newText;
+    }
+  &lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea>
+      </div>
+      <div class="sandbox-preview"><iframe id="sb04-frame"></iframe></div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li><code>element.textContent</code> reads the text inside an element.</li>
+      <li>Setting <code>textContent</code> replaces ALL text inside the element.</li>
+      <li>HTML tags in the new string are shown as text — <strong>not parsed as HTML</strong>.</li>
+      <li>Use <code>textContent</code> whenever inserting user input — it's safe.</li>
+    </ul>
+  </div>
+</section>
+
+</main></div><script src="script.js" defer></script></body></html>

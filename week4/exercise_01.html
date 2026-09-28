@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Exercise E1: Click Counter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Click Counter</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+  <!-- E1 -->
+  <div class="exercise" id="ex1">
+    <div class="ex-header">
+      <span class="ex-num">E1</span>
+      <h3>Click Counter with Color Change</h3>
+      <span class="difficulty diff-easy">Beginner</span>
+    </div>
+    <div class="ex-body">
+      <div class="task-box">
+        <strong>Task:</strong> Make the button below count clicks. After 5 clicks, change the button color to green and show a congratulations message.
+        <ul>
+          <li>Select the button with <code>querySelector</code></li>
+          <li>Add a <code>'click'</code> event listener</li>
+          <li>Update the counter text with <code>textContent</code></li>
+          <li>At 5 clicks: use <code>classList.add('done')</code> and update message</li>
+        </ul>
+      </div>
+      <div class="editor-row">
+        <textarea id="ex1-editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;body style="font-family:system-ui;padding:24px;text-align:center"&gt;
+  &lt;style&gt;
+    .done { background: #16a34a !important; }
+  &lt;/style&gt;
+
+  &lt;button id="clicker" style="
+    padding:14px 32px;font-size:18px;border:none;
+    background:#1a56db;color:white;border-radius:10px;
+    cursor:pointer;transition:background .3s"&gt;
+    Click me!
+  &lt;/button&gt;
+
+  &lt;p id="count" style="font-size:32px;font-weight:bold;margin:16px 0"&gt;0&lt;/p&gt;
+  &lt;p id="message" style="font-size:16px;color:#666"&gt;Keep clicking...&lt;/p&gt;
+
+  &lt;script&gt;
+    // YOUR CODE HERE
+    // 1. Select the button, count paragraph, and message paragraph
+    // 2. Create a counter variable starting at 0
+    // 3. Add a click listener to the button
+    // 4. Inside the listener: increment count, update #count text
+    // 5. If count >= 5: add class 'done' to button, update #message
+  &lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea>
+        <iframe id="ex1-frame"></iframe>
+      </div>
+      <div class="ex-btns">
+        <button class="btn-run" onclick="runEx('ex1')">▶ Run</button>
+        <button class="btn-hint" onclick="toggleHint('ex1')">💡 Hint</button>
+        <button class="btn-sol" onclick="toggleSol('ex1')">✅ Solution</button>
+      </div>
+      <div class="hint-box" id="ex1-hint">
+        <strong>Hint:</strong> Use <code>let count = 0;</code> outside the listener so it persists between clicks.
+        Inside the listener: <code>count++;</code> then <code>countEl.textContent = count;</code>
+        Then check <code>if (count >= 5) { btn.classList.add('done'); ... }</code>
+      </div>
+      <div class="sol-box" id="ex1-sol">
+        <div class="code-wrap"><div class="code-bar"><span class="code-lang">Solution</span></div>
+        <div class="code-block"><code><span class="sk">const</span> btn = document.<span class="sf">querySelector</span>(<span class="ss">'#clicker'</span>);
+<span class="sk">const</span> countEl = document.<span class="sf">querySelector</span>(<span class="ss">'#count'</span>);
+<span class="sk">const</span> msg = document.<span class="sf">querySelector</span>(<span class="ss">'#message'</span>);
+<span class="sk">let</span> count = <span class="sn">0</span>;
+
+btn.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, () =&gt; {
+  count++;
+  countEl.textContent = count;
+  <span class="sk">if</span> (count &gt;= <span class="sn">5</span>) {
+    btn.classList.<span class="sf">add</span>(<span class="ss">'done'</span>);
+    msg.textContent = <span class="ss">'🎉 Congratulations! You clicked 5 times!'</span>;
+  }
+});</code></div></div>
+      </div>
+    </div>
+  </div>
+
+</main></div><script src="script.js" defer></script></body></html>

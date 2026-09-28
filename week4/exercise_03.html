@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Exercise E3: Interactive To-Do List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Interactive To-Do List</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+  <!-- E3 -->
+  <div class="exercise" id="ex3">
+    <div class="ex-header">
+      <span class="ex-num">E3</span>
+      <h3>Interactive To-Do List</h3>
+      <span class="difficulty diff-med">Intermediate</span>
+    </div>
+    <div class="ex-body">
+      <div class="task-box">
+        <strong>Task:</strong> Build a working to-do list app. Users should be able to add items by typing and pressing Enter (or clicking Add), and remove items by clicking a delete button.
+        <ul>
+          <li>Use <code>createElement</code> to build each list item</li>
+          <li>Add a "✕" delete button inside each item</li>
+          <li>Listen for <code>'keydown'</code> on input: add item when <code>e.key === 'Enter'</code></li>
+          <li>Clear the input after adding (<code>input.value = ''</code>)</li>
+          <li>Use event delegation on the list for delete buttons</li>
+        </ul>
+      </div>
+      <div class="editor-row">
+        <textarea id="ex3-editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;body style="font-family:system-ui;padding:20px;max-width:400px;margin:auto"&gt;
+  &lt;style&gt;
+    h2 { color: #1a56db; }
+    .add-row { display:flex; gap:8px; margin-bottom:14px; }
+    input { flex:1; padding:8px 12px; border:2px solid #c8d4f0; border-radius:8px; font-size:15px; }
+    button { padding:8px 16px; border:none; border-radius:8px; cursor:pointer; font-size:15px; font-weight:bold; }
+    .add-btn { background:#1a56db; color:white; }
+    #todo-list { list-style:none; padding:0; }
+    .todo-item { display:flex; align-items:center; justify-content:space-between;
+      padding:10px 14px; margin-bottom:6px; background:#f0f4ff;
+      border-radius:8px; border:1px solid #c8d4f0; }
+    .del-btn { background:#dc2626; color:white; padding:4px 10px; font-size:12px; border-radius:6px; }
+    #empty-msg { color:#9ca3af; text-align:center; padding:20px; display:none; }
+  &lt;/style&gt;
+
+  &lt;h2&gt;My To-Do List&lt;/h2&gt;
+  &lt;div class="add-row"&gt;
+    &lt;input id="todo-input" type="text" placeholder="Add a task..."&gt;
+    &lt;button id="add-btn" class="add-btn"&gt;+ Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul id="todo-list"&gt;&lt;/ul&gt;
+  &lt;p id="empty-msg"&gt;No tasks yet! Add one above.&lt;/p&gt;
+
+  &lt;script&gt;
+    // YOUR CODE HERE
+    // 1. Select input, add-btn, todo-list, empty-msg
+    // 2. Write function addTask() that:
+    //    a. Reads input.value (trim it, skip if empty)
+    //    b. Creates an &lt;li&gt; with the text and a delete button
+    //    c. Appends to the list
+    //    d. Clears the input
+    // 3. Add 'click' listener to add-btn → call addTask()
+    // 4. Add 'keydown' listener to input → if e.key === 'Enter', call addTask()
+    // 5. Add 'click' event delegation on todo-list → if .del-btn clicked, remove li
+    // BONUS: Show/hide #empty-msg based on list length
+  &lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea>
+        <iframe id="ex3-frame"></iframe>
+      </div>
+      <div class="ex-btns">
+        <button class="btn-run" onclick="runEx('ex3')">▶ Run</button>
+        <button class="btn-hint" onclick="toggleHint('ex3')">💡 Hint</button>
+        <button class="btn-sol" onclick="toggleSol('ex3')">✅ Solution</button>
+      </div>
+      <div class="hint-box" id="ex3-hint">
+        <strong>Hint:</strong> To build a list item:
+        <code>const li = document.createElement('li'); li.className = 'todo-item';</code>
+        Then use <code>li.innerHTML = `&lt;span&gt;${text}&lt;/span&gt;&lt;button class="del-btn"&gt;✕&lt;/button&gt;`;</code>
+        For deletion use delegation: check <code>e.target.classList.contains('del-btn')</code> then <code>e.target.closest('li').remove()</code>.
+      </div>
+      <div class="sol-box" id="ex3-sol">
+        <div class="code-wrap"><div class="code-bar"><span class="code-lang">Solution</span></div>
+        <div class="code-block"><code><span class="sk">const</span> input = document.<span class="sf">querySelector</span>(<span class="ss">'#todo-input'</span>);
+<span class="sk">const</span> addBtn = document.<span class="sf">querySelector</span>(<span class="ss">'#add-btn'</span>);
+<span class="sk">const</span> list = document.<span class="sf">querySelector</span>(<span class="ss">'#todo-list'</span>);
+<span class="sk">const</span> emptyMsg = document.<span class="sf">querySelector</span>(<span class="ss">'#empty-msg'</span>);
+
+<span class="sk">function</span> <span class="sf">updateEmpty</span>() {
+  emptyMsg.style.display = list.children.length === <span class="sn">0</span> ? <span class="ss">'block'</span> : <span class="ss">'none'</span>;
+}
+
+<span class="sk">function</span> <span class="sf">addTask</span>() {
+  <span class="sk">const</span> text = input.value.<span class="sf">trim</span>();
+  <span class="sk">if</span> (!text) <span class="sk">return</span>;
+  <span class="sk">const</span> li = document.<span class="sf">createElement</span>(<span class="ss">'li'</span>);
+  li.className = <span class="ss">'todo-item'</span>;
+  li.innerHTML = <span class="ss">`&lt;span&gt;</span><span class="sf">${text}</span><span class="ss">&lt;/span&gt;&lt;button class="del-btn"&gt;✕&lt;/button&gt;`</span>;
+  list.<span class="sf">appendChild</span>(li);
+  input.value = <span class="ss">''</span>;
+  <span class="sf">updateEmpty</span>();
+}
+
+addBtn.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, addTask);
+input.<span class="sf">addEventListener</span>(<span class="ss">'keydown'</span>, (e) =&gt; {
+  <span class="sk">if</span> (e.key === <span class="ss">'Enter'</span>) <span class="sf">addTask</span>();
+});
+list.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, (e) =&gt; {
+  <span class="sk">if</span> (e.target.classList.<span class="sf">contains</span>(<span class="ss">'del-btn'</span>)) {
+    e.target.<span class="sf">closest</span>(<span class="ss">'li'</span>).<span class="sf">remove</span>();
+    <span class="sf">updateEmpty</span>();
+  }
+});
+<span class="sf">updateEmpty</span>();</code></div></div>
+      </div>
+    </div>
+  </div>
+
+</main></div><script src="script.js" defer></script></body></html>

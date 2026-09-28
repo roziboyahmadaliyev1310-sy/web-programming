@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Exercise E4: Live Search Filter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Live Search Filter</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+  <!-- E4 -->
+  <div class="exercise" id="ex4">
+    <div class="ex-header">
+      <span class="ex-num">E4</span>
+      <h3>Live Search Filter (Advanced)</h3>
+      <span class="difficulty diff-hard">Advanced</span>
+    </div>
+    <div class="ex-body">
+      <div class="task-box">
+        <strong>Task:</strong> Build a real-time search filter. As the user types, show only the items that match the search text. No page reload, no button — filter as you type using the <code>'input'</code> event.
+        <ul>
+          <li>Listen for <code>'input'</code> event on the search box</li>
+          <li>Get <code>e.target.value.toLowerCase()</code> as the search term</li>
+          <li>Use <code>querySelectorAll('.student')</code> to get all student rows</li>
+          <li>For each: if name includes the term, show it; otherwise hide it (<code>style.display</code>)</li>
+          <li>BONUS: highlight the matching text with <code>innerHTML</code> (it's your content — safe here)</li>
+        </ul>
+      </div>
+      <div class="editor-row">
+        <textarea id="ex4-editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;body style="font-family:system-ui;padding:20px;max-width:420px;margin:auto"&gt;
+  &lt;style&gt;
+    h2 { color: #1a56db; }
+    #search { width:100%; padding:10px 14px; font-size:16px;
+      border:2px solid #1a56db; border-radius:10px; margin-bottom:14px; }
+    .student { padding:10px 14px; margin-bottom:6px; background:#f0f4ff;
+      border-radius:8px; border:1px solid #c8d4f0; font-size:15px; }
+    mark { background: #f7df1e; border-radius: 3px; }
+    #no-results { display:none; color:#9ca3af; text-align:center; padding:20px; }
+  &lt;/style&gt;
+
+  &lt;h2&gt;Student Search&lt;/h2&gt;
+  &lt;input id="search" type="text" placeholder="Search students..."&gt;
+  &lt;div id="student-list"&gt;
+    &lt;div class="student" data-name="Kim Jisoo"&gt;Kim Jisoo — Web Programming&lt;/div&gt;
+    &lt;div class="student" data-name="Park Minjun"&gt;Park Minjun — Computer Science&lt;/div&gt;
+    &lt;div class="student" data-name="Lee Sooyeon"&gt;Lee Sooyeon — Software Engineering&lt;/div&gt;
+    &lt;div class="student" data-name="Choi Hyunwoo"&gt;Choi Hyunwoo — Artificial Intelligence&lt;/div&gt;
+    &lt;div class="student" data-name="Jung Yuna"&gt;Jung Yuna — Data Science&lt;/div&gt;
+    &lt;div class="student" data-name="Kang Seojun"&gt;Kang Seojun — Web Programming&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p id="no-results"&gt;No students found.&lt;/p&gt;
+
+  &lt;script&gt;
+    // YOUR CODE HERE
+    // 1. Select #search and all .student elements
+    // 2. Add 'input' event listener to #search
+    // 3. Inside the listener:
+    //    a. Get the search term: e.target.value.toLowerCase()
+    //    b. For each .student: get data-name attribute, compare with term
+    //    c. Show or hide each student (style.display = '' or 'none')
+    // 4. Show #no-results if all students are hidden
+    // BONUS: wrap matched text in &lt;mark&gt; using innerHTML for highlighting
+  &lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea>
+        <iframe id="ex4-frame"></iframe>
+      </div>
+      <div class="ex-btns">
+        <button class="btn-run" onclick="runEx('ex4')">▶ Run</button>
+        <button class="btn-hint" onclick="toggleHint('ex4')">💡 Hint</button>
+        <button class="btn-sol" onclick="toggleSol('ex4')">✅ Solution</button>
+      </div>
+      <div class="hint-box" id="ex4-hint">
+        <strong>Hint:</strong> Get the name from the data attribute: <code>student.dataset.name.toLowerCase()</code>.
+        Then: <code>student.style.display = name.includes(term) ? '' : 'none';</code>
+        For the bonus highlight, store the original text in <code>data-name</code> and use:
+        <code>student.innerHTML = original.replace(term, '&lt;mark&gt;' + term + '&lt;/mark&gt;')</code>
+      </div>
+      <div class="sol-box" id="ex4-sol">
+        <div class="code-wrap"><div class="code-bar"><span class="code-lang">Solution</span></div>
+        <div class="code-block"><code><span class="sk">const</span> searchInp = document.<span class="sf">querySelector</span>(<span class="ss">'#search'</span>);
+<span class="sk">const</span> students = document.<span class="sf">querySelectorAll</span>(<span class="ss">'.student'</span>);
+<span class="sk">const</span> noResults = document.<span class="sf">querySelector</span>(<span class="ss">'#no-results'</span>);
+
+searchInp.<span class="sf">addEventListener</span>(<span class="ss">'input'</span>, (e) =&gt; {
+  <span class="sk">const</span> term = e.target.value.<span class="sf">toLowerCase</span>();
+  <span class="sk">let</span> visible = <span class="sn">0</span>;
+  students.<span class="sf">forEach</span>(s =&gt; {
+    <span class="sk">const</span> name = s.dataset.name.<span class="sf">toLowerCase</span>();
+    <span class="sk">if</span> (name.<span class="sf">includes</span>(term)) {
+      s.style.display = <span class="ss">''</span>;
+      visible++;
+      <span class="sc">// Bonus: highlight match</span>
+      <span class="sk">if</span> (term) {
+        <span class="sk">const</span> rx = <span class="sk">new</span> <span class="sf">RegExp</span>(<span class="ss">`(</span><span class="sf">${term}</span><span class="ss">)`</span>, <span class="ss">'gi'</span>);
+        s.innerHTML = s.dataset.name.<span class="sf">replace</span>(rx, <span class="ss">'&lt;mark&gt;$1&lt;/mark&gt;'</span>)
+          + <span class="ss">' — '</span> + s.textContent.<span class="sf">split</span>(<span class="ss">'—'</span>)[<span class="sn">1</span>].<span class="sf">trim</span>();
+      } <span class="sk">else</span> {
+        s.textContent = s.dataset.name + <span class="ss">' — '</span>
+          + s.textContent.<span class="sf">split</span>(<span class="ss">'—'</span>)[<span class="sn">1</span>].<span class="sf">trim</span>();
+      }
+    } <span class="sk">else</span> {
+      s.style.display = <span class="ss">'none'</span>;
+    }
+  });
+  noResults.style.display = visible === <span class="sn">0</span> ? <span class="ss">'block'</span> : <span class="ss">'none'</span>;
+});</code></div></div>
+      </div>
+    </div>
+  </div>
+
+</main></div><script src="script.js" defer></script></body></html>

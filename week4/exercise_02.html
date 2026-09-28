@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Exercise E2: Class Toggler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Class Toggler</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+  <!-- E2 -->
+  <div class="exercise" id="ex2">
+    <div class="ex-header">
+      <span class="ex-num">E2</span>
+      <h3>Dark Mode Toggle Card</h3>
+      <span class="difficulty diff-easy">Beginner</span>
+    </div>
+    <div class="ex-body">
+      <div class="task-box">
+        <strong>Task:</strong> Build a profile card with a dark mode toggle button. Clicking the button should toggle a <code>dark</code> class on the card.
+        <ul>
+          <li>Select the card and the toggle button</li>
+          <li>Add a click listener to the button</li>
+          <li>Use <code>classList.toggle('dark')</code> to switch modes</li>
+          <li>Update the button text based on <code>classList.contains('dark')</code></li>
+        </ul>
+      </div>
+      <div class="editor-row">
+        <textarea id="ex2-editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;body style="font-family:system-ui;padding:24px;display:flex;justify-content:center"&gt;
+  &lt;style&gt;
+    .card {
+      padding: 24px; border-radius: 16px; width: 260px;
+      background: #f0f4ff; border: 2px solid #c8d4f0;
+      text-align: center; transition: all 0.3s;
+    }
+    .card.dark {
+      background: #1a2340; border-color: #3a4a70;
+      color: white;
+    }
+    .avatar {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: #1a56db; display: inline-flex;
+      align-items: center; justify-content: center;
+      font-size: 32px; margin-bottom: 12px;
+    }
+    button { padding: 8px 20px; border-radius: 20px; cursor: pointer; border: none; margin-top: 14px; font-weight: bold; }
+  &lt;/style&gt;
+
+  &lt;div id="card" class="card"&gt;
+    &lt;div class="avatar"&gt;👩‍💻&lt;/div&gt;
+    &lt;h2&gt;Kim Jisoo&lt;/h2&gt;
+    &lt;p&gt;Web Programming Student&lt;/p&gt;
+    &lt;button id="toggle-btn"&gt;🌙 Dark Mode&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // YOUR CODE HERE
+    // 1. Select #card and #toggle-btn
+    // 2. Add click listener to toggle-btn
+    // 3. Inside: toggle the 'dark' class on the card
+    // 4. Update button text: '☀️ Light Mode' or '🌙 Dark Mode'
+  &lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;</textarea>
+        <iframe id="ex2-frame"></iframe>
+      </div>
+      <div class="ex-btns">
+        <button class="btn-run" onclick="runEx('ex2')">▶ Run</button>
+        <button class="btn-hint" onclick="toggleHint('ex2')">💡 Hint</button>
+        <button class="btn-sol" onclick="toggleSol('ex2')">✅ Solution</button>
+      </div>
+      <div class="hint-box" id="ex2-hint">
+        <strong>Hint:</strong> After <code>card.classList.toggle('dark')</code>, check <code>card.classList.contains('dark')</code> to set the right button text. If it's dark, show "☀️ Light Mode", otherwise "🌙 Dark Mode".
+      </div>
+      <div class="sol-box" id="ex2-sol">
+        <div class="code-wrap"><div class="code-bar"><span class="code-lang">Solution</span></div>
+        <div class="code-block"><code><span class="sk">const</span> card = document.<span class="sf">querySelector</span>(<span class="ss">'#card'</span>);
+<span class="sk">const</span> btn = document.<span class="sf">querySelector</span>(<span class="ss">'#toggle-btn'</span>);
+
+btn.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, () =&gt; {
+  card.classList.<span class="sf">toggle</span>(<span class="ss">'dark'</span>);
+  <span class="sk">if</span> (card.classList.<span class="sf">contains</span>(<span class="ss">'dark'</span>)) {
+    btn.textContent = <span class="ss">'☀️ Light Mode'</span>;
+  } <span class="sk">else</span> {
+    btn.textContent = <span class="ss">'🌙 Dark Mode'</span>;
+  }
+});</code></div></div>
+      </div>
+    </div>
+  </div>
+
+</main></div><script src="script.js" defer></script></body></html>

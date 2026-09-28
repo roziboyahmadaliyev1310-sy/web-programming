@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 12: Remove Elements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">Remove Elements</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 12 ════════════════ -->
+<section class="topic" id="t12">
+  <div class="topic-hdr">
+    <span class="t-num">12</span>
+    <h2>Removing Elements</h2>
+    <span class="difficulty diff-easy">Beginner</span>
+  </div>
+  <div class="theory">
+    <p>Elements can be removed from the DOM with <code>.remove()</code> — the simplest modern method. The element simply disappears from the page.</p>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sc">// Select and remove an element</span>
+<span class="sk">const</span> item = document.<span class="sf">querySelector</span>(<span class="ss">'.to-delete'</span>);
+item.<span class="sf">remove</span>();    <span class="sc">// gone!</span>
+
+<span class="sc">// Remove when a delete button is clicked (inside list item)</span>
+<span class="sk">const</span> list = document.<span class="sf">querySelector</span>(<span class="ss">'#my-list'</span>);
+list.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, (e) =&gt; {
+  <span class="sk">if</span> (e.target.<span class="sf">matches</span>(<span class="ss">'.delete-btn'</span>)) {
+    e.target.closest(<span class="ss">'li'</span>).<span class="sf">remove</span>();  <span class="sc">// remove the parent li</span>
+  }
+});</code></div>
+  </div>
+
+  <!-- Remove demo -->
+  <div class="demo-box">
+    <h4>Demo — Click × to remove items</h4>
+    <ul id="rm-list" style="padding:0;list-style:none;display:flex;flex-direction:column;gap:6px">
+      <li class="rm-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surf);border:1px solid var(--brd);border-radius:6px">
+        <span>Item One</span><button class="demo-btn red sm rm-btn">✕ Remove</button>
+      </li>
+      <li class="rm-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surf);border:1px solid var(--brd);border-radius:6px">
+        <span>Item Two</span><button class="demo-btn red sm rm-btn">✕ Remove</button>
+      </li>
+      <li class="rm-item" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surf);border:1px solid var(--brd);border-radius:6px">
+        <span>Item Three</span><button class="demo-btn red sm rm-btn">✕ Remove</button>
+      </li>
+    </ul>
+    <button class="demo-btn outline sm" style="margin-top:10px" onclick="resetRemoveDemo()">↺ Restore items</button>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li><code>element.remove()</code> — removes the element from the DOM.</li>
+      <li><code>e.target.closest('li')</code> — finds the nearest ancestor matching a selector (useful in delegation).</li>
+      <li>Removed elements can still be held in JS variables and re-added later.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════ EXERCISES ════════════════ -->
+<section id="exercises">
+  <h1>Practice Exercises</h1>
+  <p class="ex-intro">Write JavaScript in the left panel. Click <strong>Run</strong> to see it live on the right. Use hints if stuck.</p>
+
+</main></div><script src="script.js" defer></script></body></html>

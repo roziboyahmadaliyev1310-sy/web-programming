@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 5: innerHTML</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">innerHTML</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 05 ════════════════ -->
+<section class="topic" id="t05">
+  <div class="topic-hdr">
+    <span class="t-num">05</span>
+    <h2>innerHTML — Power &amp; Danger ⚠️</h2>
+    <span class="difficulty diff-med">Intermediate</span>
+  </div>
+  <div class="theory">
+    <p><code>innerHTML</code> reads or sets the HTML <em>inside</em> an element. Unlike <code>textContent</code>, it <strong>parses and renders HTML tags</strong> — so <code>&lt;b&gt;</code> becomes bold, <code>&lt;img&gt;</code> loads an image, etc.</p>
+    <p>The danger: if you set <code>innerHTML</code> with user-provided text, an attacker can inject malicious JavaScript (<strong>XSS — Cross-Site Scripting</strong>). This is one of the most common web vulnerabilities.</p>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sk">const</span> box = document.<span class="sf">querySelector</span>(<span class="ss">'#box'</span>);
+
+<span class="sc">// ✅ OK — you control the content (no user input)</span>
+box.innerHTML = <span class="ss">'&lt;strong&gt;Bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt;'</span>;
+
+<span class="sc">// ❌ DANGER — never put user input directly into innerHTML!</span>
+<span class="sk">const</span> userInput = prompt(<span class="ss">'Type something:'</span>);
+box.innerHTML = userInput;  <span class="sc">// attacker types: &lt;img src=x onerror="alert('hacked!')"&gt;</span>
+
+<span class="sc">// ✅ Safe alternative for user input:</span>
+box.textContent = userInput;  <span class="sc">// tags shown as text, not executed</span></code></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0">
+    <div style="background:var(--limel);border:2px solid var(--lime);border-radius:10px;padding:16px">
+      <div style="font-weight:700;color:var(--lime);margin-bottom:8px;font-size:14px">✅ textContent (safe)</div>
+      <div id="tc-demo" style="background:var(--surf);border-radius:6px;padding:10px;font-size:14px;min-height:40px">Click button</div>
+      <button class="demo-btn green sm" style="margin-top:8px" onclick="document.getElementById('tc-demo').textContent='&lt;b&gt;Am I bold?&lt;/b&gt; No!'">Set textContent</button>
+      <div style="font-size:12px;color:var(--mu);margin-top:8px">HTML tags show as literal text</div>
+    </div>
+    <div style="background:var(--corl);border:2px solid var(--cor);border-radius:10px;padding:16px">
+      <div style="font-weight:700;color:var(--cor);margin-bottom:8px;font-size:14px">⚠️ innerHTML (powerful but risky)</div>
+      <div id="ih-demo" style="background:var(--surf);border-radius:6px;padding:10px;font-size:14px;min-height:40px">Click button</div>
+      <button class="demo-btn red sm" style="margin-top:8px" onclick="document.getElementById('ih-demo').innerHTML='&lt;b&gt;I AM bold!&lt;/b&gt; ✅'">Set innerHTML</button>
+      <div style="font-size:12px;color:var(--mu);margin-top:8px">HTML tags are rendered — use only with YOUR content</div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="alert-icon">🚨</span>
+    <div><strong>XSS Attack Example</strong><br>
+    If a user types <code>&lt;img src=x onerror="stealCookies()"&gt;</code> and you put that in <code>innerHTML</code>, their script runs. Always use <code>textContent</code> for user input.</div>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li><code>innerHTML</code> reads/writes HTML markup — tags are parsed and rendered.</li>
+      <li><code>textContent</code> treats everything as plain text — tags show literally.</li>
+      <li><strong>Never</strong> put user input directly into <code>innerHTML</code> — XSS risk.</li>
+      <li>Use <code>innerHTML</code> only when YOU control the content (hardcoded templates).</li>
+    </ul>
+  </div>
+</section>
+
+</main></div><script src="script.js" defer></script></body></html>

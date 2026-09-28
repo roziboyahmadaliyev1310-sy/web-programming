@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 8: The Event Object</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">The Event Object</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 08 ════════════════ -->
+<section class="topic" id="t08">
+  <div class="topic-hdr">
+    <span class="t-num">08</span>
+    <h2>The Event Object (e)</h2>
+    <span class="difficulty diff-med">Intermediate</span>
+  </div>
+  <div class="theory">
+    <p>When an event fires, the browser automatically passes an <strong>event object</strong> to your callback. Name it <code>e</code> or <code>event</code>. It contains details about what happened: which element was clicked (<code>e.target</code>), which key was pressed (<code>e.key</code>), mouse position, and more.</p>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sc">// 'e' (or 'event') is the event object passed automatically</span>
+btn.<span class="sf">addEventListener</span>(<span class="ss">'click'</span>, (e) =&gt; {
+  <span class="sp">console</span>.<span class="sf">log</span>(e.type);        <span class="sc">// 'click'</span>
+  <span class="sp">console</span>.<span class="sf">log</span>(e.target);      <span class="sc">// the element that was clicked</span>
+  <span class="sp">console</span>.<span class="sf">log</span>(e.target.id);   <span class="sc">// its id attribute</span>
+});
+
+<span class="sc">// Keyboard events have e.key</span>
+document.<span class="sf">addEventListener</span>(<span class="ss">'keydown'</span>, (e) =&gt; {
+  <span class="sp">console</span>.<span class="sf">log</span>(e.key);         <span class="sc">// 'Enter', 'a', 'ArrowUp' ...</span>
+  <span class="sk">if</span> (e.key === <span class="ss">'Enter'</span>) sendMessage();
+});</code></div>
+  </div>
+
+  <!-- Event explorer demo -->
+  <div class="demo-box">
+    <h4>Event Explorer — click elements or press keys</h4>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <button class="demo-btn" id="eobj-a">Button A</button>
+      <button class="demo-btn yellow" id="eobj-b">Button B</button>
+      <input type="text" id="eobj-inp" placeholder="Type here (keydown)..." style="padding:8px 12px;border:2px solid var(--brd);border-radius:8px;background:var(--surf);color:var(--tx);font-size:14px;flex:1">
+    </div>
+    <div class="demo-label">Event log (last 5 events):</div>
+    <div class="event-log" id="eobj-log">
+      <div style="color:var(--mu);font-size:12px">← Interact with the elements above</div>
+    </div>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li>The event object is automatically passed to your callback as the first argument.</li>
+      <li><code>e.type</code> — event name ('click', 'keydown', etc.)</li>
+      <li><code>e.target</code> — the exact element that triggered the event.</li>
+      <li><code>e.key</code> — the key pressed (for keyboard events).</li>
+    </ul>
+  </div>
+</section>
+
+</main></div><script src="script.js" defer></script></body></html>

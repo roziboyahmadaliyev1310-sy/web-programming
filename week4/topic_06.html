@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Topic 6: classList</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress-bar"></div>
+<header id="site-header">
+<div class="hdr-left"><a class="js-badge" href="index.html">JS</a>
+<div class="hdr-info"><span class="hdr-course">K0126002 · Web Programming · Week 4 Friday</span>
+<span class="hdr-title">classList</span></div></div>
+<button class="theme-btn" id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+</header>
+<div id="layout"><aside id="sidebar"><nav>
+<div class="nav-label">Week 4</div>
+<a href="index.html">← All lessons</a>
+<div class="nav-label">Topics</div>
+<a href="topic_01.html">01. What is the DOM?</a>
+<a href="topic_02.html">02. Selecting Elements</a>
+<a href="topic_03.html">03. querySelector & querySelectorAll</a>
+<a href="topic_04.html">04. textContent</a>
+<a href="topic_05.html">05. innerHTML</a>
+<a href="topic_06.html">06. classList</a>
+<a href="topic_07.html">07. addEventListener</a>
+<a href="topic_08.html">08. The Event Object</a>
+<a href="topic_09.html">09. preventDefault</a>
+<a href="topic_10.html">10. Event Bubbling & Delegation</a>
+<a href="topic_11.html">11. createElement & appendChild</a>
+<a href="topic_12.html">12. Remove Elements</a>
+<div class="nav-label">Practice</div>
+<a href="exercise_01.html">E1. Click Counter</a>
+<a href="exercise_02.html">E2. Class Toggler</a>
+<a href="exercise_03.html">E3. Interactive To-Do List</a>
+<a href="exercise_04.html">E4. Live Search Filter</a>
+</nav></aside><main id="main"><p style="margin-bottom:20px"><a href="index.html">← Back to Week 4</a></p>
+<!-- ════════════════ TOPIC 06 ════════════════ -->
+<section class="topic" id="t06">
+  <div class="topic-hdr">
+    <span class="t-num">06</span>
+    <h2>classList — Styling with JavaScript</h2>
+    <span class="difficulty diff-easy">Beginner</span>
+  </div>
+  <div class="theory">
+    <p><code>classList</code> is how JavaScript toggles visual styles without touching <code>style</code> directly. You define classes in CSS, then add/remove them with JS. The four methods: <code>add()</code>, <code>remove()</code>, <code>toggle()</code>, <code>contains()</code>.</p>
+  </div>
+
+  <div class="code-wrap">
+    <div class="code-bar"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-block"><code><span class="sk">const</span> box = document.<span class="sf">querySelector</span>(<span class="ss">'.card'</span>);
+
+box.classList.<span class="sf">add</span>(<span class="ss">'highlighted'</span>);        <span class="sc">// adds class</span>
+box.classList.<span class="sf">remove</span>(<span class="ss">'highlighted'</span>);     <span class="sc">// removes class</span>
+box.classList.<span class="sf">toggle</span>(<span class="ss">'dark'</span>);            <span class="sc">// adds if absent, removes if present</span>
+box.classList.<span class="sf">contains</span>(<span class="ss">'active'</span>);       <span class="sc">// returns true/false</span>
+
+<span class="sc">// CSS controls what the class LOOKS like:</span>
+<span class="sc">/*</span>
+<span class="sc">.highlighted { background: yellow; font-weight: bold; }</span>
+<span class="sc">.dark         { background: #1a2340; color: #fff; }</span>
+<span class="sc">*/</span></code></div>
+  </div>
+
+  <!-- Interactive classList demo -->
+  <div class="demo-box">
+    <h4>Interactive — classList Demo</h4>
+    <div id="cls-box" class="cls-target">I am the demo box</div>
+    <div style="margin-top:12px">
+      <div class="demo-label">Current classes on the box:</div>
+      <div id="cls-list" style="margin:6px 0 12px;min-height:24px">
+        <span class="cls-badge">cls-target</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="demo-btn yellow sm" onclick="clsAction('add','highlighted')">add('highlighted')</button>
+      <button class="demo-btn outline sm" onclick="clsAction('remove','highlighted')">remove('highlighted')</button>
+      <button class="demo-btn sm" onclick="clsAction('toggle','rounded')">toggle('rounded')</button>
+      <button class="demo-btn sm" onclick="clsAction('toggle','shadowed')">toggle('shadowed')</button>
+      <button class="demo-btn sm" onclick="clsAction('toggle','big')">toggle('big')</button>
+    </div>
+    <div style="margin-top:12px;font-size:13px;color:var(--mu)" id="cls-contains-result"></div>
+  </div>
+
+  <div class="keypoints">
+    <h4>Key Points</h4>
+    <ul>
+      <li><code>classList.add('x')</code> — adds class <code>x</code> (no duplicates).</li>
+      <li><code>classList.remove('x')</code> — removes class <code>x</code> (safe if absent).</li>
+      <li><code>classList.toggle('x')</code> — adds if missing, removes if present.</li>
+      <li><code>classList.contains('x')</code> — returns <code>true</code> / <code>false</code>.</li>
+      <li>Let CSS define what the class looks like; let JS control when it's applied.</li>
+    </ul>
+  </div>
+</section>
+
+</main></div><script src="script.js" defer></script></body></html>
