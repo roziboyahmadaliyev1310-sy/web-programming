@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#204b66">
+  <title>Interactive Color Palette | Week 4</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d303a;
+      --muted: #66777d;
+      --paper: #f1f3ed;
+      --surface: #fffefa;
+      --line: #d8dfd8;
+      --blue: #204b66;
+      --cyan: #22b9c2;
+      --yellow: #e6dc42;
+      --green: #d9e9df;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 20px 48px;
+      background: radial-gradient(ellipse at 50% 0%, #dbe7e5, var(--paper) 68%);
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    }
+
+    main { width: min(100%, 940px); margin: 0 auto; }
+
+    .back {
+      color: var(--blue);
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .masthead {
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+      padding: clamp(24px, 5vw, 48px);
+      border-radius: 7px;
+      background: linear-gradient(115deg, #204b66, #397491);
+      color: white;
+    }
+
+    .masthead::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 7px;
+      background: var(--yellow);
+      content: "";
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #e4eeea;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { margin: 0; }
+    h1 { margin: 28px 0 8px; font: 500 clamp(2.2rem, 6vw, 4.1rem)/1 Georgia, "Times New Roman", serif; }
+    .intro { max-width: 600px; margin: 0; color: #e3eeeb; line-height: 1.6; }
+
+    .levels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 32px;
+    }
+
+    .level { min-height: 116px; overflow: hidden; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+    .level h2 { margin: 0; padding: 10px 14px; font-size: .82rem; font-weight: 750; }
+    .level:nth-child(1) h2 { background: var(--green); }
+    .level:nth-child(2) h2 { background: var(--cyan); color: #103a42; }
+    .level:nth-child(3) h2 { background: var(--yellow); color: #413e18; }
+    .level p { margin: 11px 14px 14px; color: var(--muted); font-size: .87rem; line-height: 1.5; }
+
+    .workspace-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .workspace-heading h2 { margin: 0; font-size: 1.35rem; }
+    .workspace-heading p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .add-form { display: flex; flex: 1 1 300px; gap: 8px; min-width: 0; }
+
+    input, button { min-height: 44px; border-radius: 5px; font: inherit; }
+    input { width: 100%; min-width: 0; padding: 0 12px; border: 1px solid #bbc8c3; background: white; color: var(--ink); }
+    button { padding: 0 15px; border: 0; background: var(--blue); color: white; font-weight: 700; cursor: pointer; transition: background-color 150ms ease, transform 150ms ease; }
+    button:hover { transform: translateY(-1px); background: #17394f; }
+    .export-button { background: #d9e9df; color: #1d4033; }
+    .export-button:hover { background: #c6dfd0; }
+
+    :focus-visible { outline: 3px solid #e1cb32; outline-offset: 3px; }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .swatch {
+      position: relative;
+      display: grid;
+      min-width: 0;
+      min-height: 150px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgb(29 48 58 / 14%);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: min-height 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .swatch:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgb(29 48 58 / 12%); }
+    .swatch.expanded { min-height: 190px; }
+    .swatch-code { opacity: 0; font: 700 1.1rem/1 monospace; transform: translateY(6px); transition: opacity 180ms ease, transform 180ms ease; }
+    .swatch.expanded .swatch-code { opacity: 1; transform: translateY(0); }
+
+    .message { min-height: 1.4em; margin: 12px 0 0; color: var(--muted); font-size: .9rem; }
+    footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+
+    @media (max-width: 650px) {
+      .levels { grid-template-columns: 1fr; gap: 8px; }
+      .level { min-height: 0; }
+      .level p { margin-top: 8px; margin-bottom: 10px; }
+      .workspace-heading { align-items: start; flex-direction: column; }
+      .palette { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .swatch { min-height: 125px; }
+      .swatch.expanded { min-height: 160px; }
+    }
+
+    @media (max-width: 390px) {
+      body { padding-right: 14px; padding-left: 14px; }
+      .topline { align-items: start; flex-direction: column; gap: 5px; }
+      .add-form { flex-basis: 100%; }
+      .add-form button { padding: 0 11px; }
+      .palette { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html">← Week 4 activities</a>
+
+    <header class="masthead">
+      <div class="topline"><p class="eyebrow">Practice assignment</p><span>Week 4 · Friday</span></div>
+      <h1>Interactive Color Palette</h1>
+      <p class="intro">Build a collection of colors, inspect their hex values, and keep your palette ready for the next visit.</p>
+    </header>
+
+    <section class="levels" aria-label="Assignment requirements">
+      <article class="level">
+        <h2>Required · Grade 7/10</h2>
+        <p>Start with six color boxes. Select a box to reveal its hex code.</p>
+      </article>
+      <article class="level">
+        <h2>Challenge · Grade 9/10</h2>
+        <p>Add a color by hex value. Double-click a box to remove it.</p>
+      </article>
+      <article class="level">
+        <h2>Extra credit · 10/10</h2>
+        <p>Your palette is saved automatically and can be exported as a PNG.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="palette-heading">
+      <div class="workspace-heading">
+        <div>
+          <h2 id="palette-heading">Your palette</h2>
+          <p>Select a color to reveal its hex value. Double-click to remove it.</p>
+        </div>
+        <span id="color-count" aria-live="polite">6 colors</span>
+      </div>
+
+      <div class="toolbar">
+        <form class="add-form" id="add-form">
+          <label class="visually-hidden" for="color-input">Hex color value</label>
+          <input id="color-input" type="text" inputmode="text" autocomplete="off" maxlength="7" placeholder="#A34F72" pattern="#?[0-9a-fA-F]{6}" aria-describedby="status-message" required>
+          <button type="submit">Add color</button>
+        </form>
+        <button class="export-button" id="export-button" type="button">Export PNG</button>
+      </div>
+
+      <div class="palette" id="palette" aria-label="Color palette"></div>
+      <p class="message" id="status-message" aria-live="polite"></p>
+    </section>
+
+    <footer><span>Web Programming · Week 4</span><span>DOM &amp; Events</span></footer>
+  </main>
+
+  <script>
+    const startingColors = ['#E7D8C9', '#A8C7BB', '#D56B58', '#E7C84B', '#647C90', '#B7A1C8'];
+    const palette = document.querySelector('#palette');
+    const form = document.querySelector('#add-form');
+    const input = document.querySelector('#color-input');
+    const message = document.querySelector('#status-message');
+    const colorCount = document.querySelector('#color-count');
+    const exportButton = document.querySelector('#export-button');
+
+    function readSavedColors() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('interactive-color-palette') || 'null');
+        if (Array.isArray(saved) && saved.every((color) => /^#[0-9a-f]{6}$/i.test(color))) return saved;
+      } catch {
+        message.textContent = 'Saved colors could not be loaded in this browser.';
+      }
+      return startingColors;
+    }
+
+    let colors = readSavedColors();
+
+    function saveColors() {
+      try {
+        localStorage.setItem('interactive-color-palette', JSON.stringify(colors));
+      } catch {
+        message.textContent = 'This browser could not save your palette.';
+      }
+    }
+
+    function textColorFor(hex) {
+      const channels = hex.slice(1).match(/.{2}/g).map((channel) => Number.parseInt(channel, 16));
+      const brightness = (channels[0] * 299 + channels[1] * 587 + channels[2] * 114) / 1000;
+      return brightness > 150 ? '#17242b' : '#ffffff';
+    }
+
+    function renderPalette() {
+      palette.replaceChildren();
+      colors.forEach((color, index) => {
+        const swatch = document.createElement('div');
+        swatch.className = 'swatch';
+        swatch.style.backgroundColor = color;
+        swatch.setAttribute('role', 'button');
+        swatch.setAttribute('tabindex', '0');
+        swatch.setAttribute('aria-label', `${color}, color ${index + 1}. Select to reveal hex; double-click to remove.`);
+        swatch.setAttribute('aria-pressed', 'false');
+
+        const code = document.createElement('span');
+        code.className = 'swatch-code';
+        code.textContent = color;
+        code.style.color = textColorFor(color);
+        swatch.appendChild(code);
+
+        swatch.addEventListener('click', () => {
+          const expanded = swatch.classList.toggle('expanded');
+          swatch.setAttribute('aria-pressed', String(expanded));
+        });
+        swatch.addEventListener('dblclick', () => {
+          colors.splice(index, 1);
+          saveColors();
+          renderPalette();
+          message.textContent = `${color} removed.`;
+        });
+        swatch.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            swatch.click();
+          } else if (event.key === 'Delete' || event.key === 'Backspace') {
+            colors.splice(index, 1);
+            saveColors();
+            renderPalette();
+            message.textContent = `${color} removed.`;
+          }
+        });
+        palette.appendChild(swatch);
+      });
+
+      colorCount.textContent = `${colors.length} ${colors.length === 1 ? 'color' : 'colors'}`;
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = input.value.trim();
+      const normalized = value.startsWith('#') ? value.toUpperCase() : `#${value.toUpperCase()}`;
+      if (!/^#[0-9A-F]{6}$/.test(normalized)) {
+        message.textContent = 'Enter a valid six-digit hex color, such as #A34F72.';
+        input.focus();
+        return;
+      }
+
+      colors.push(normalized);
+      saveColors();
+      renderPalette();
+      message.textContent = `${normalized} added to your palette.`;
+      input.value = '';
+      input.focus();
+    });
+
+    exportButton.addEventListener('click', () => {
+      if (!colors.length) {
+        message.textContent = 'Add a color before exporting your palette.';
+        return;
+      }
+
+      const columns = Math.min(colors.length, 3);
+      const rows = Math.ceil(colors.length / columns);
+      const cellWidth = 320;
+      const cellHeight = 190;
+      const padding = 24;
+      const canvas = document.createElement('canvas');
+      canvas.width = columns * cellWidth + padding * 2;
+      canvas.height = rows * cellHeight + padding * 2;
+      const context = canvas.getContext('2d');
+      context.fillStyle = '#f1f3ed';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      colors.forEach((color, index) => {
+        const x = padding + (index % columns) * cellWidth;
+        const y = padding + Math.floor(index / columns) * cellHeight;
+        context.fillStyle = color;
+        context.fillRect(x, y, cellWidth - 12, cellHeight - 12);
+        context.fillStyle = textColorFor(color);
+        context.font = '700 22px monospace';
+        context.fillText(color, x + 18, y + cellHeight - 34);
+      });
+
+      const download = document.createElement('a');
+      download.download = 'my-color-palette.png';
+      download.href = canvas.toDataURL('image/png');
+      download.click();
+      message.textContent = 'Palette exported as a PNG.';
+    });
+
+    renderPalette();
+  </script>
+</body>
+</html>
