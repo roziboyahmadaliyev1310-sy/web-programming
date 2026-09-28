@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#204b66">
-  <title>Interactive Color Palette | Week 4</title>
+  <title>Palette Studio</title>
   <style>
     :root {
       color-scheme: light;
@@ -76,20 +76,6 @@
     h1 { margin: 28px 0 8px; font: 500 clamp(2.2rem, 6vw, 4.1rem)/1 Georgia, "Times New Roman", serif; }
     .intro { max-width: 600px; margin: 0; color: #e3eeeb; line-height: 1.6; }
 
-    .levels {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 18px 0 32px;
-    }
-
-    .level { min-height: 116px; overflow: hidden; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
-    .level h2 { margin: 0; padding: 10px 14px; font-size: .82rem; font-weight: 750; }
-    .level:nth-child(1) h2 { background: var(--green); }
-    .level:nth-child(2) h2 { background: var(--cyan); color: #103a42; }
-    .level:nth-child(3) h2 { background: var(--yellow); color: #413e18; }
-    .level p { margin: 11px 14px 14px; color: var(--muted); font-size: .87rem; line-height: 1.5; }
-
     .workspace-heading {
       display: flex;
       align-items: end;
@@ -99,7 +85,6 @@
     }
 
     .workspace-heading h2 { margin: 0; font-size: 1.35rem; }
-    .workspace-heading p { margin: 4px 0 0; color: var(--muted); font-size: .9rem; }
 
     .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .add-form { display: flex; flex: 1 1 300px; gap: 8px; min-width: 0; }
@@ -121,29 +106,54 @@
 
     .swatch {
       position: relative;
-      display: grid;
       min-width: 0;
       min-height: 150px;
-      place-items: center;
       overflow: hidden;
       border: 1px solid rgb(29 48 58 / 14%);
       border-radius: 5px;
-      cursor: pointer;
       transition: min-height 220ms ease, transform 220ms ease, box-shadow 220ms ease;
     }
 
     .swatch:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgb(29 48 58 / 12%); }
     .swatch.expanded { min-height: 190px; }
+    .swatch-color {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: inherit;
+    }
+    .swatch-color:hover { transform: none; background: transparent; }
     .swatch-code { opacity: 0; font: 700 1.1rem/1 monospace; transform: translateY(6px); transition: opacity 180ms ease, transform 180ms ease; }
     .swatch.expanded .swatch-code { opacity: 1; transform: translateY(0); }
+    .swatch-remove {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      z-index: 1;
+      width: 34px;
+      min-height: 34px;
+      padding: 0;
+      border: 1px solid rgb(29 48 58 / 18%);
+      border-radius: 50%;
+      background: rgb(255 255 255 / 88%);
+      color: var(--ink);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .swatch-remove:hover { transform: none; background: white; }
 
     .message { min-height: 1.4em; margin: 12px 0 0; color: var(--muted); font-size: .9rem; }
     footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
 
     @media (max-width: 650px) {
-      .levels { grid-template-columns: 1fr; gap: 8px; }
-      .level { min-height: 0; }
-      .level p { margin-top: 8px; margin-bottom: 10px; }
       .workspace-heading { align-items: start; flex-direction: column; }
       .palette { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
       .swatch { min-height: 125px; }
@@ -166,35 +176,17 @@
 </head>
 <body>
   <main>
-    <a class="back" href="../index.html">← Week 4 activities</a>
+    <a class="back" href="../index.html">← Web Programming</a>
 
     <header class="masthead">
-      <div class="topline"><p class="eyebrow">Practice assignment</p><span>Week 4 · Friday</span></div>
-      <h1>Interactive Color Palette</h1>
-      <p class="intro">Build a collection of colors, inspect their hex values, and keep your palette ready for the next visit.</p>
+      <div class="topline"><p class="eyebrow">Palette Studio</p><span>Local workspace</span></div>
+      <h1>Color palette</h1>
+      <p class="intro">A focused workspace for collecting, refining, and exporting color sets.</p>
     </header>
-
-    <section class="levels" aria-label="Assignment requirements">
-      <article class="level">
-        <h2>Required · Grade 7/10</h2>
-        <p>Start with six color boxes. Select a box to reveal its hex code.</p>
-      </article>
-      <article class="level">
-        <h2>Challenge · Grade 9/10</h2>
-        <p>Add a color by hex value. Double-click a box to remove it.</p>
-      </article>
-      <article class="level">
-        <h2>Extra credit · 10/10</h2>
-        <p>Your palette is saved automatically and can be exported as a PNG.</p>
-      </article>
-    </section>
 
     <section aria-labelledby="palette-heading">
       <div class="workspace-heading">
-        <div>
-          <h2 id="palette-heading">Your palette</h2>
-          <p>Select a color to reveal its hex value. Double-click to remove it.</p>
-        </div>
+        <h2 id="palette-heading">Current palette</h2>
         <span id="color-count" aria-live="polite">6 colors</span>
       </div>
 
@@ -252,41 +244,43 @@
     function renderPalette() {
       palette.replaceChildren();
       colors.forEach((color, index) => {
-        const swatch = document.createElement('div');
+        const swatch = document.createElement('article');
         swatch.className = 'swatch';
         swatch.style.backgroundColor = color;
-        swatch.setAttribute('role', 'button');
-        swatch.setAttribute('tabindex', '0');
-        swatch.setAttribute('aria-label', `${color}, color ${index + 1}. Select to reveal hex; double-click to remove.`);
-        swatch.setAttribute('aria-pressed', 'false');
 
         const code = document.createElement('span');
         code.className = 'swatch-code';
         code.textContent = color;
         code.style.color = textColorFor(color);
-        swatch.appendChild(code);
 
-        swatch.addEventListener('click', () => {
+        const colorButton = document.createElement('button');
+        colorButton.type = 'button';
+        colorButton.className = 'swatch-color';
+        colorButton.setAttribute('aria-label', `Show color value ${color}`);
+        colorButton.setAttribute('aria-expanded', 'false');
+        colorButton.appendChild(code);
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'swatch-remove';
+        removeButton.textContent = '×';
+        removeButton.title = 'Remove color';
+        removeButton.setAttribute('aria-label', `Remove color ${color}`);
+
+        colorButton.addEventListener('click', () => {
           const expanded = swatch.classList.toggle('expanded');
-          swatch.setAttribute('aria-pressed', String(expanded));
+          colorButton.setAttribute('aria-expanded', String(expanded));
+          colorButton.setAttribute('aria-label', `${expanded ? 'Hide' : 'Show'} color value ${color}`);
         });
-        swatch.addEventListener('dblclick', () => {
+
+        removeButton.addEventListener('click', () => {
           colors.splice(index, 1);
           saveColors();
           renderPalette();
           message.textContent = `${color} removed.`;
         });
-        swatch.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            swatch.click();
-          } else if (event.key === 'Delete' || event.key === 'Backspace') {
-            colors.splice(index, 1);
-            saveColors();
-            renderPalette();
-            message.textContent = `${color} removed.`;
-          }
-        });
+
+        swatch.append(colorButton, removeButton);
         palette.appendChild(swatch);
       });
 
