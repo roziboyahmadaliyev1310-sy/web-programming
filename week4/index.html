@@ -1,33 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 4 — JavaScript DOM &amp; Events</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f0f4ff">
+  <title>Week 4 | JavaScript DOM &amp; Events</title>
+  <style>
+    :root{color-scheme:light;--paper:#f0f4ff;--surface:#fff;--ink:#1a2340;--muted:#5a6a8a;--line:#c8d4f0;--blue:#1a56db;--yellow:#f7df1e}
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;padding:48px 20px;background:var(--paper);color:var(--ink);font-family:"Space Grotesk","Trebuchet MS",sans-serif}
+    main{width:min(100%,780px);margin:0 auto}
+    .topline{display:flex;align-items:center;gap:12px}
+    .badge{padding:4px 9px;border-radius:4px;background:var(--yellow);font-size:.85rem;font-weight:800}
+    .course{color:var(--muted);font:.9rem system-ui,sans-serif}
+    h1{max-width:620px;margin:24px 0 8px;font-size:3rem;line-height:1.05}
+    .intro{max-width:620px;margin:0;color:var(--muted);font:1.05rem/1.6 system-ui,sans-serif}
+    h2{margin:36px 0 12px;font-size:1.2rem}
+    ol{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    li{border-bottom:1px solid var(--line)}
+    a{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:14px;padding:17px 12px;color:inherit;text-decoration:none;transition:background-color 150ms ease,padding 150ms ease}
+    a:hover,a:focus-visible{padding-right:18px;padding-left:18px;background:var(--surface)}
+    a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+    .number{color:var(--blue);font:700 .85rem/1 monospace}
+    .title{font-size:1.05rem;font-weight:700}
+    .detail{display:block;margin-top:3px;color:var(--muted);font:.9rem/1.4 system-ui,sans-serif}
+    .arrow{color:var(--blue);font-size:1.3rem}
+    footer{margin-top:32px;color:var(--muted);font:.85rem system-ui,sans-serif}
+    @media(max-width:480px){body{padding:32px 16px}h1{font-size:2.1rem}a{grid-template-columns:32px 1fr auto;gap:10px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
 </head>
 <body>
-<main id="main" style="margin:40px auto">
-<p><a href="../index.html">← Course home</a></p>
-<h1>JavaScript DOM &amp; Events</h1>
-<p class="ex-intro">Week 4 lessons and practice activities.</p>
-<div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
-<section class="demo-box"><h2>Topics</h2><ul>
-<li><a href="topic_01.html">01. What is the DOM?</a></li>
-<li><a href="topic_02.html">02. Selecting Elements</a></li>
-<li><a href="topic_03.html">03. querySelector & querySelectorAll</a></li>
-<li><a href="topic_04.html">04. textContent</a></li>
-<li><a href="topic_05.html">05. innerHTML</a></li>
-<li><a href="topic_06.html">06. classList</a></li>
-<li><a href="topic_07.html">07. addEventListener</a></li>
-<li><a href="topic_08.html">08. The Event Object</a></li>
-<li><a href="topic_09.html">09. preventDefault</a></li>
-<li><a href="topic_10.html">10. Event Bubbling & Delegation</a></li>
-<li><a href="topic_11.html">11. createElement & appendChild</a></li>
-<li><a href="topic_12.html">12. Remove Elements</a></li>
-</ul></section><section class="demo-box"><h2>Exercises</h2><ul>
-<li><a href="exercise_01.html">E1. Click Counter</a></li>
-<li><a href="exercise_02.html">E2. Class Toggler</a></li>
-<li><a href="exercise_03.html">E3. Interactive To-Do List</a></li>
-<li><a href="exercise_04.html">E4. Live Search Filter</a></li>
-</ul></section></div></main><script src="script.js" defer></script></body></html>
+  <main>
+    <div class="topline"><span class="badge">JS</span><span class="course">Web Programming · Week 4</span></div>
+    <h1>JavaScript DOM &amp; Events</h1>
+    <p class="intro">Twelve interactive DOM demonstrations and four practice activities for selecting elements, handling events, and updating the page.</p>
+
+    <h2>Lessons</h2>
+    <ol>
+      <li><a href="lessons/lesson-01-what-is-the-dom.html"><span class="number">01</span><span><span class="title">What is the DOM?</span><span class="detail">The browser's document tree and its nodes.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-02-selecting-elements.html"><span class="number">02</span><span><span class="title">Selecting Elements</span><span class="detail">Find an element by its id.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-03-query-selector.html"><span class="number">03</span><span><span class="title">querySelector and querySelectorAll</span><span class="detail">Select elements with CSS selectors.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-04-text-content.html"><span class="number">04</span><span><span class="title">textContent</span><span class="detail">Read and safely update text.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-05-inner-html.html"><span class="number">05</span><span><span class="title">innerHTML</span><span class="detail">Render markup and understand the XSS risk.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-06-class-list.html"><span class="number">06</span><span><span class="title">classList</span><span class="detail">Add, remove, toggle, and check classes.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-07-add-event-listener.html"><span class="number">07</span><span><span class="title">addEventListener</span><span class="detail">Respond to clicks and other events.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-08-event-object.html"><span class="number">08</span><span><span class="title">The Event Object</span><span class="detail">Read event type, target, and key data.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-09-prevent-default.html"><span class="number">09</span><span><span class="title">preventDefault</span><span class="detail">Handle form submission without reloading.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-10-event-bubbling-delegation.html"><span class="number">10</span><span><span class="title">Event Bubbling and Delegation</span><span class="detail">Handle child events from a parent.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-11-create-and-append.html"><span class="number">11</span><span><span class="title">createElement and appendChild</span><span class="detail">Build and insert new elements.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="lessons/lesson-12-remove-elements.html"><span class="number">12</span><span><span class="title">Removing Elements</span><span class="detail">Remove elements from the document.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+    </ol>
+
+    <h2>Practice</h2>
+    <ol>
+      <li><a href="practice/practice-01-click-counter.html"><span class="number">01</span><span><span class="title">Click Counter</span><span class="detail">Count clicks and celebrate at five.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="practice/practice-02-dark-mode-card.html"><span class="number">02</span><span><span class="title">Dark Mode Profile Card</span><span class="detail">Toggle the profile card between light and dark.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="practice/practice-03-interactive-todo-list.html"><span class="number">03</span><span><span class="title">Interactive To-Do List</span><span class="detail">Add tasks with Enter and remove them when done.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+      <li><a href="practice/practice-04-live-search-filter.html"><span class="number">04</span><span><span class="title">Web Programming Directory</span><span class="detail">Search student names and departments.</span></span><span class="arrow" aria-hidden="true">→</span></a></li>
+    </ol>
+    <footer>K0126002 · Web Programming</footer>
+  </main>
+</body>
+</html>

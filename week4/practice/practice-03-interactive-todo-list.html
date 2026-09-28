@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 3 - Ruziboy's To-Do List</title>
+  <style>
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;padding:48px 20px;background:#f0f4ff;color:#1a2340;font-family:system-ui,sans-serif}
+    main{width:min(100%,520px);margin:0 auto}
+    .back{color:#1a56db;font-weight:700;text-decoration:none}
+    .eyebrow{margin:24px 0 6px;color:#1a56db;font-size:.8rem;font-weight:700;text-transform:uppercase}
+    h1{margin:8px 0;font-size:2rem}
+    .intro{margin:0 0 22px;color:#5a6a8a}
+    .add-row{display:flex;gap:8px}
+    #todo-input{min-width:0;flex:1;padding:11px 12px;border:1px solid #aebddd;border-radius:6px;background:#fff;color:#1a2340;font:inherit}
+    button{font:inherit;font-weight:700;cursor:pointer}
+    #add-btn{padding:10px 16px;border:0;border-radius:6px;background:#1a56db;color:#fff}
+    #add-btn:hover{background:#1240b0}
+    button:focus-visible,input:focus-visible,.back:focus-visible{outline:3px solid #f7df1e;outline-offset:2px}
+    #todo-list{display:grid;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+    .todo-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #c8d4f0;border-radius:6px;background:#fff;overflow-wrap:anywhere}
+    .del-btn{flex:0 0 auto;padding:6px 10px;border:0;border-radius:4px;background:#fee2e2;color:#b91c1c}
+    .del-btn:hover{background:#fecaca}
+    #empty-msg{padding:20px 0;color:#5a6a8a;text-align:center}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:420px){body{padding:32px 16px}.add-row{align-items:stretch;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html">← Week 4 activities</a>
+    <p class="eyebrow">Week 4 · Exercise 3</p>
+    <h1>Ruziboy's To-Do List</h1>
+    <p class="intro">Add a task with the button or Enter. Remove it when it is done.</p>
+    <div class="add-row">
+      <label for="todo-input" class="visually-hidden">New task</label>
+      <input id="todo-input" type="text" placeholder="Add a task..." autocomplete="off">
+      <button id="add-btn" type="button">Add task</button>
+    </div>
+    <ul id="todo-list" aria-label="Tasks"></ul>
+    <p id="empty-msg" aria-live="polite">No tasks yet. Add one above.</p>
+  </main>
+  <script>
+    const input = document.querySelector('#todo-input');
+    const addButton = document.querySelector('#add-btn');
+    const list = document.querySelector('#todo-list');
+    const emptyMessage = document.querySelector('#empty-msg');
+
+    function updateEmptyMessage() {
+      emptyMessage.hidden = list.children.length > 0;
+    }
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) {
+        input.focus();
+        return;
+      }
+
+      const item = document.createElement('li');
+      item.className = 'todo-item';
+      const taskText = document.createElement('span');
+      taskText.textContent = text;
+      const deleteButton = document.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.className = 'del-btn';
+      deleteButton.textContent = 'Remove';
+      deleteButton.setAttribute('aria-label', `Remove task: ${text}`);
+      item.append(taskText, deleteButton);
+      list.appendChild(item);
+      input.value = '';
+      input.focus();
+      updateEmptyMessage();
+    }
+
+    addButton.addEventListener('click', addTask);
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') addTask();
+    });
+    list.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const deleteButton = event.target.closest('.del-btn');
+      if (!deleteButton) return;
+      deleteButton.closest('.todo-item').remove();
+      updateEmptyMessage();
+    });
+    updateEmptyMessage();
+  </script>
+</body>
+</html>

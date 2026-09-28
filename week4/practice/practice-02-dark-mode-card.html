@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 2 - Ruziboy's Dark Mode Profile</title>
+  <style>
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;background:#f0f4ff;color:#1a2340;font-family:system-ui,sans-serif}
+    main{width:min(100%,380px)}
+    .back{display:inline-block;margin-bottom:20px;color:#1a56db;font-weight:700;text-decoration:none}
+    .profile-card{padding:28px;border:2px solid #c8d4f0;border-radius:12px;background:#fff;text-align:center;transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease}
+    .eyebrow{color:#1a56db;font-size:.8rem;font-weight:700;text-transform:uppercase}
+    .avatar{width:76px;height:76px;margin:18px auto 12px;display:grid;place-items:center;border-radius:50%;background:#1a56db;font-size:2rem}
+    h1{margin:8px 0 4px;font-size:1.6rem}
+    .role{margin:0;color:#5a6a8a}
+    #toggle-btn{margin-top:22px;padding:9px 16px;border:1px solid #c8d4f0;border-radius:6px;background:#e8eefa;color:#1a2340;font:inherit;font-weight:700;cursor:pointer}
+    #toggle-btn:focus-visible,.back:focus-visible{outline:3px solid #f7df1e;outline-offset:3px}
+    .profile-card.dark{border-color:#3a4a70;background:#1a2340;color:#fff}
+    .profile-card.dark .role{color:#c8d4f0}
+    .profile-card.dark #toggle-btn{border-color:#f7df1e;background:#f7df1e;color:#3a3000}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html">← Week 4 activities</a>
+    <section id="card" class="profile-card">
+      <span class="eyebrow">Week 4 · Exercise 2</span>
+      <div class="avatar" aria-hidden="true">👩‍💻</div>
+      <h1>Ruziboy</h1>
+      <p class="role">Web Programming Department</p>
+      <button id="toggle-btn" type="button" aria-pressed="false">Dark Mode</button>
+    </section>
+  </main>
+  <script>
+    const card = document.querySelector('#card');
+    const toggleButton = document.querySelector('#toggle-btn');
+
+    toggleButton.addEventListener('click', () => {
+      card.classList.toggle('dark');
+      const isDark = card.classList.contains('dark');
+      toggleButton.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      toggleButton.setAttribute('aria-pressed', String(isDark));
+    });
+  </script>
+</body>
+</html>

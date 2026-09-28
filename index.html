@@ -15,6 +15,7 @@
       --line: #dce2df;
       --accent: #26715f;
       --accent-soft: #e4f0eb;
+      --feature: #174d43;
     }
 
     * { box-sizing: border-box; }
@@ -22,17 +23,15 @@
     body {
       min-height: 100vh;
       margin: 0;
-      padding: 32px 20px;
-      display: grid;
-      place-items: center;
+      padding: 64px 24px;
       color: var(--ink);
-      background: radial-gradient(ellipse at 50% 0%, #e3ece7 0%, var(--paper) 58%);
+      background: radial-gradient(ellipse at 50% 0%, #e3ece7 0%, var(--paper) 64%);
       font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
     }
 
     main {
-      width: min(100%, 560px);
-      text-align: center;
+      width: min(100%, 1040px);
+      margin: 0 auto;
       animation: arrive 550ms ease-out both;
     }
 
@@ -48,56 +47,131 @@
     h1 {
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.2rem, 8vw, 3.5rem);
+      font-size: clamp(2.5rem, 6vw, 4.4rem);
       font-weight: 500;
       line-height: 1.08;
     }
 
     .intro {
-      margin: 14px 0 30px;
+      margin: 14px 0 34px;
       color: var(--muted);
       line-height: 1.6;
     }
 
     nav {
       display: grid;
-      gap: 11px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
     }
 
     nav a {
-      min-height: 58px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      gap: 8px;
+      padding: 0 14px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 6px;
       background: var(--surface);
       color: var(--ink);
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 650;
       text-align: left;
       text-decoration: none;
       transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
     }
 
-    nav a::after {
+    nav a::after, .feature::after {
       content: "→";
-      color: var(--accent);
+      color: inherit;
       font-size: 1.2rem;
     }
 
-    nav a:hover, nav a:focus-visible {
+    nav a:hover, nav a:focus-visible, .feature:hover, .feature:focus-visible {
       transform: translateY(-2px);
       border-color: #9bbcaf;
       background: var(--accent-soft);
+      color: var(--ink);
       outline: none;
     }
 
+    .feature {
+      min-height: 310px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+      padding: clamp(26px, 5vw, 52px);
+      border: 1px solid var(--feature);
+      border-radius: 8px;
+      background: linear-gradient(125deg, #174d43, #26715f 72%, #43806b);
+      color: #fff;
+      text-decoration: none;
+      transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+    }
+
+    .feature:hover, .feature:focus-visible {
+      background: var(--feature);
+    }
+
+    .feature-copy { max-width: 700px; }
+
+    .feature-label {
+      margin: 0 0 14px;
+      color: #c5e3d5;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .feature h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.03;
+    }
+
+    .feature p:not(.feature-label) {
+      max-width: 540px;
+      margin: 16px 0 0;
+      color: #e1eee8;
+      line-height: 1.6;
+    }
+
+    .feature::after {
+      flex: 0 0 auto;
+      font-size: 2rem;
+    }
+
+    .other-weeks-title {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     footer {
-      margin-top: 28px;
+      margin-top: 30px;
       color: var(--muted);
       font-size: 0.82rem;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 38px 18px; }
+      nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature { min-height: 270px; }
+    }
+
+    @media (max-width: 440px) {
+      nav { grid-template-columns: 1fr; }
+      .feature { min-height: 250px; padding: 26px; }
+      .feature::after { align-self: flex-end; }
     }
 
     @keyframes arrive {
@@ -119,12 +193,20 @@
     <h1>Web Programming</h1>
     <p class="intro">My Web Programming assignments and class exercises</p>
 
+    <a class="feature" href="week4/index.html">
+      <span class="feature-copy">
+        <span class="feature-label">Featured · Week 4</span>
+        <h2>JavaScript DOM &amp; Events</h2>
+        <p>Explore interactive lessons and practice activities for selecting elements, handling events, and updating the page.</p>
+      </span>
+    </a>
+
+    <p class="other-weeks-title">Earlier weeks</p>
     <nav aria-label="Course weeks">
       <a href="week1/index.html">Week 1</a>
       <a href="week2/index.html">Week 2</a>
       <a href="week3/index.html">Week 3</a>
       <a href="week3friday/index.html">Week 3 Friday</a>
-      <a href="week4/index.html">Week 4 — JavaScript DOM &amp; Events</a>
     </nav>
 
   </main>

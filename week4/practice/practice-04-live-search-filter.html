@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 4 - Web Programming Directory</title>
+  <style>
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;padding:48px 20px;background:#f0f4ff;color:#1a2340;font-family:system-ui,sans-serif}
+    main{width:min(100%,560px);margin:0 auto}
+    .back{color:#1a56db;font-weight:700;text-decoration:none}
+    .eyebrow{display:block;margin:24px 0 6px;color:#1a56db;font-size:.8rem;font-weight:700;text-transform:uppercase}
+    h1{margin:8px 0;font-size:2rem}
+    .intro{margin:0 0 22px;color:#5a6a8a}
+    #search{width:100%;padding:12px 14px;border:2px solid #1a56db;border-radius:6px;background:#fff;color:#1a2340;font:inherit}
+    #search:focus-visible,.back:focus-visible{outline:3px solid #f7df1e;outline-offset:2px}
+    #student-list{display:grid;gap:8px;margin-top:16px}
+    .student{padding:12px 14px;border:1px solid #c8d4f0;border-radius:6px;background:#fff}
+    mark{border-radius:2px;background:#f7df1e;color:#1a2340}
+    #no-results{display:none;padding:18px 0;color:#5a6a8a;text-align:center}
+    #result-count{margin:12px 0 0;color:#5a6a8a;font-size:.9rem}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:420px){body{padding:32px 16px}}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html">← Week 4 activities</a>
+    <span class="eyebrow">Week 4 · Exercise 4</span>
+    <h1>Web Programming Directory</h1>
+    <p class="intro">Search by student name or department. Results update as you type.</p>
+    <label for="search" class="visually-hidden">Search students or departments</label>
+    <input id="search" type="search" placeholder="Search a name or department..." autocomplete="off">
+    <div id="student-list">
+      <div class="student" data-name="Ruziboy" data-department="Web Programming Department">Ruziboy — Web Programming Department</div>
+      <div class="student" data-name="Amina Rahman" data-department="Software Engineering Department">Amina Rahman — Software Engineering Department</div>
+      <div class="student" data-name="Jasur Karimov" data-department="Computer Science Department">Jasur Karimov — Computer Science Department</div>
+      <div class="student" data-name="Madina Ismoilova" data-department="Data Science Department">Madina Ismoilova — Data Science Department</div>
+      <div class="student" data-name="Dilnoza Saidova" data-department="Information Systems Department">Dilnoza Saidova — Information Systems Department</div>
+      <div class="student" data-name="Kamron Yusupov" data-department="Cybersecurity Department">Kamron Yusupov — Cybersecurity Department</div>
+    </div>
+    <p id="no-results" role="status">No students found.</p>
+    <p id="result-count" aria-live="polite"></p>
+  </main>
+  <script>
+    const searchInput = document.querySelector('#search');
+    const students = document.querySelectorAll('.student');
+    const noResults = document.querySelector('#no-results');
+    const resultCount = document.querySelector('#result-count');
+
+    students.forEach((student) => {
+      student.dataset.originalText = student.textContent;
+    });
+
+    function renderHighlightedName(student, term) {
+      const name = student.dataset.name;
+      const nameStart = name.toLowerCase().indexOf(term);
+      student.replaceChildren();
+      if (nameStart < 0 || !term) {
+        student.textContent = student.dataset.originalText;
+        return;
+      }
+
+      const matchEnd = nameStart + term.length;
+      student.append(document.createTextNode(name.slice(0, nameStart)));
+      const highlight = document.createElement('mark');
+      highlight.textContent = name.slice(nameStart, matchEnd);
+      student.append(highlight);
+      student.append(document.createTextNode(student.dataset.originalText.slice(name.length)));
+    }
+
+    searchInput.addEventListener('input', (event) => {
+      const term = event.target.value.trim().toLowerCase();
+      let visibleCount = 0;
+      students.forEach((student) => {
+        const matches = student.dataset.name.toLowerCase().includes(term)
+          || student.dataset.department.toLowerCase().includes(term);
+        student.hidden = !matches;
+        if (matches) {
+          visibleCount++;
+          renderHighlightedName(student, term);
+        }
+      });
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      resultCount.textContent = `${visibleCount} student${visibleCount === 1 ? '' : 's'} found`;
+    });
+
+    resultCount.textContent = `${students.length} students found`;
+  </script>
+</body>
+</html>

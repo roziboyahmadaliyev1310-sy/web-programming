@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 1 - Ruziboy's Click Counter</title>
+  <style>
+    *{box-sizing:border-box}
+    body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;background:#f0f4ff;color:#1a2340;font-family:system-ui,sans-serif}
+    main{width:min(100%,440px);padding:32px;border:1px solid #c8d4f0;border-radius:12px;background:#fff;text-align:center}
+    .back{display:block;margin-bottom:24px;color:#1a56db;text-align:left;font-weight:700;text-decoration:none}
+    .eyebrow{color:#1a56db;font-size:.8rem;font-weight:700;text-transform:uppercase}
+    h1{margin:8px 0;font-size:1.8rem}
+    p{color:#5a6a8a}
+    #clicker{margin-top:12px;padding:13px 26px;border:0;border-radius:8px;background:#1a56db;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+    #clicker:hover{background:#1240b0}
+    #clicker:focus-visible,.back:focus-visible{outline:3px solid #f7df1e;outline-offset:3px}
+    #clicker.done{background:#16a34a}
+    #count{margin:20px 0 4px;color:#1a56db;font-size:3rem;font-weight:800;line-height:1}
+    #message{min-height:1.7em;margin-bottom:0}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html">← Week 4 activities</a>
+    <span class="eyebrow">Week 4 · Exercise 1</span>
+    <h1>Ruziboy's Click Counter</h1>
+    <p>Ruziboy, click the button five times to complete the challenge.</p>
+    <button id="clicker" type="button">Click me!</button>
+    <p id="count" aria-live="polite">0</p>
+    <p id="message" aria-live="polite">Keep clicking...</p>
+  </main>
+  <script>
+    const button = document.querySelector('#clicker');
+    const countDisplay = document.querySelector('#count');
+    const message = document.querySelector('#message');
+    let count = 0;
+
+    button.addEventListener('click', () => {
+      count++;
+      countDisplay.textContent = count;
+      if (count >= 5) {
+        button.classList.add('done');
+        message.textContent = 'Congratulations! You clicked five times!';
+      }
+    });
+  </script>
+</body>
+</html>

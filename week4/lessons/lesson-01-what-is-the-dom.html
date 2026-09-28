@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is the DOM?</title>
+<style>
+  :root{color-scheme:light;--paper:#f0f4ff;--surface:#fff;--ink:#1a2340;--muted:#5a6a8a;--line:#c8d4f0}
+  *{box-sizing:border-box}
+  body{min-height:100vh;margin:0;padding:34px 24px;background-color:var(--paper);background-image:linear-gradient(rgba(26,35,64,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(26,35,64,.035) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:system-ui,sans-serif}
+  .lesson-shell{width:min(100%,1320px);margin:0 auto}
+  .lesson-nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .back{display:inline-flex;align-items:center;gap:8px;color:#1a56db;font-size:1rem;font-weight:750;text-decoration:none}
+  .back:hover{text-decoration:underline}
+  .back:focus-visible{outline:3px solid #f7df1e;outline-offset:4px}
+  .lesson-index{padding:7px 11px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--muted);font:700 .72rem/1 ui-monospace,monospace;letter-spacing:.08em}
+  .topic-label{display:flex;align-items:center;gap:9px;margin:54px 0 12px;color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .topic-label::before{width:9px;height:9px;border-radius:2px;background:var(--accent);content:"";transform:rotate(45deg)}
+  h1{margin:0 0 26px;font-size:3rem;line-height:1.08;letter-spacing:0}
+  .example-card{overflow:hidden;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;background:var(--surface);box-shadow:0 14px 30px rgba(26,35,64,.08)}
+  .example-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 20px;border-bottom:1px solid var(--line);color:var(--muted);font:700 .72rem/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
+  .toolbar-left{display:flex;align-items:center;gap:12px}
+  .window-dots{display:flex;gap:5px}
+  .window-dots i{width:8px;height:8px;border-radius:50%;background:#e57a73}
+  .window-dots i:nth-child(2){background:#e9b54b}
+  .window-dots i:nth-child(3){background:#61a987}
+  .language-tag{color:var(--accent)}
+  pre{max-width:100%;margin:0;padding:32px;overflow:auto;color:var(--ink);font:16px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+  pre code{font:inherit}
+  @media(max-width:640px){body{padding:24px 16px}.topic-label{margin-top:40px}h1{font-size:2.1rem}pre{padding:20px;font-size:13px}.example-toolbar{padding:12px 15px}}
+.demo-panel{margin-top:26px;overflow:hidden;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;background:var(--surface);box-shadow:0 10px 24px rgba(26,35,64,.06)}
+.demo-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.demo-heading h2{margin:0;font-size:1rem}
+.demo-mark{color:var(--accent);font:700 .68rem/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
+.demo-content{padding:18px}
+.demo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.demo-box{min-width:0;padding:16px;border:1px solid var(--line);border-radius:7px;background:#f8faff}
+.demo-label{display:block;margin-bottom:9px;color:var(--muted);font:700 .68rem/1.2 ui-monospace,monospace;letter-spacing:.07em;text-transform:uppercase}
+.demo-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.demo-input{min-width:0;flex:1;padding:10px 12px;border:1px solid #aebddd;border-radius:5px;background:#fff;color:var(--ink);font:inherit}
+.demo-button{padding:9px 13px;border:0;border-radius:5px;background:var(--accent);color:#fff;font:700 .86rem system-ui,sans-serif;cursor:pointer}
+.demo-button:hover{filter:brightness(.92)}
+.demo-button:focus-visible,.demo-input:focus-visible{outline:3px solid #f7df1e;outline-offset:2px}
+.demo-button.secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.demo-output{min-height:46px;margin:12px 0 0;padding:12px;border:1px solid var(--line);border-radius:5px;background:#fff;overflow-wrap:anywhere}
+.demo-note{margin:10px 0 0;color:var(--muted);font-size:.82rem;line-height:1.5}
+.demo-list{display:grid;gap:7px;margin:10px 0 0;padding:0;list-style:none}
+.demo-item{padding:10px 12px;border:1px solid var(--line);border-radius:5px;background:#fff;transition:background-color 140ms ease,border-color 140ms ease}
+.demo-item.is-selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,white)}
+.demo-log{display:grid;gap:6px;max-height:150px;overflow:auto;margin:10px 0 0;padding:0;list-style:none}
+.demo-log li{padding:7px 9px;border-left:3px solid var(--accent);background:#fff;color:var(--muted);font: .8rem/1.4 ui-monospace,monospace}
+.demo-tree{padding:14px;border-radius:6px;background:#17233d;color:#d8e4ff;font: .82rem/1.7 ui-monospace,monospace;white-space:pre-wrap}
+.demo-status{margin:10px 0 0;color:var(--accent);font-weight:700}
+.demo-bubble{padding:16px;border:1px solid #93a5c5;border-radius:8px;background:#e8eefb;text-align:center}
+.demo-bubble-inner{margin:10px 0;padding:13px;border:1px solid #93a5c5;border-radius:6px;background:#fff}
+.demo-bubble-button{margin-top:8px}
+@media(max-width:640px){.demo-grid{grid-template-columns:1fr}.demo-content{padding:14px}.demo-heading{padding:12px 14px}}
+</style>
+
+</head>
+<body style="--accent:#0f766e">
+  <main class="lesson-shell">
+    <nav class="lesson-nav"><a class="back" href="../index.html">← Week 4 activities</a><span class="lesson-index">LESSON 01 / 12</span></nav>
+    <p class="topic-label">LIVE DOM DEMO</p>
+    <h1>What is the DOM?</h1>
+<section class="demo-panel">
+  <div class="demo-heading"><h2>The document as a live tree</h2><span class="demo-mark">DOM · 01</span></div>
+  <div class="demo-content">
+    <div class="demo-grid">
+      <div class="demo-box"><span class="demo-label">Rendered page</span><h2 id="dom-heading" style="margin:0 0 8px">Hello</h2><p id="dom-copy">World</p><button id="dom-change" class="demo-button" type="button">Change heading</button></div>
+      <div class="demo-box"><span class="demo-label">Tree structure</span><div class="demo-tree">document
+└─ html
+   ├─ head
+   │  └─ title
+   └─ body
+      ├─ h1#title
+      └─ p</div></div>
+    </div>
+    <p id="dom-status" class="demo-status" aria-live="polite">The heading and paragraph are separate DOM elements.</p>
+  </div>
+</section>
+  </main>
+  <script>
+document.querySelector('#dom-change').addEventListener('click', () => {
+  const heading = document.getElementById('dom-heading');
+  heading.textContent = 'The DOM changed!';
+  document.getElementById('dom-status').textContent = `Updated ${heading.tagName.toLowerCase()}#${heading.id}`;
+});
+  </script>
+</body>
+</html>
