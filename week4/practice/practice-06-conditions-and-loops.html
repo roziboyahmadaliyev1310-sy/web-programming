@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions and Loops | Week 4</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;padding:40px 20px;background:#f5f5f3;color:#272727;font-family:system-ui,sans-serif}
+    main{width:min(100%,850px);margin:0 auto}
+    a{color:#1a56db;font-weight:700;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid #1a56db;outline-offset:3px}
+    h1{margin:28px 0 16px;font-family:Georgia,serif;font-size:2.3rem}
+    h2{margin:0 0 10px;font-family:Georgia,serif;font-weight:500}
+    .examples{margin:0 0 20px;color:#555;line-height:1.6}
+    form{display:flex;align-items:end;gap:10px;margin-bottom:22px}
+    .loop-section{margin-top:28px}
+    label{display:grid;flex:1;gap:6px;font-weight:700}
+    input{width:100%;padding:10px 12px;border:1px solid #b8b8b2;border-radius:5px;background:white;color:inherit;font:inherit}
+    input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #1a56db;outline-offset:3px}
+    button{padding:11px 16px;border:0;border-radius:5px;background:#1a56db;color:white;font:inherit;font-weight:700;cursor:pointer}
+    #output{margin:0;padding:16px;border:1px solid #d5d5d0;border-radius:5px;background:white;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.7;white-space:pre-line}
+    @media(max-width:420px){form{align-items:stretch;flex-direction:column}}
+  </style>
+  <link rel="stylesheet" href="../../navigation.css">
+</head>
+<body>
+  <main>
+    <a href="../index.html">← Week 4 activities</a>
+    <h1>Conditions and Loops</h1>
+    <p class="examples"><strong>Grade examples:</strong> 95 → A · 85 → B · 75 → C · 65 → D · 50 → F</p>
+    <form id="grade-form">
+      <label for="score">Enter a score (0–100)
+        <input id="score" name="score" type="number" min="0" max="100" step="any" required>
+      </label>
+      <button type="submit">Check grade</button>
+    </form>
+    <section aria-labelledby="output-heading">
+      <h2 id="output-heading">Output</h2>
+      <div id="output" role="status" aria-live="polite">Enter a score to see your letter grade.</div>
+    </section>
+    <section class="loop-section" aria-labelledby="loop-heading">
+      <h2 id="loop-heading">Loop output</h2>
+      <p class="examples">Example: entering 3 shows Step 1, Step 2, and Step 3.</p>
+      <form id="loop-form">
+        <label for="loop-count">Number of steps (1–100)
+          <input id="loop-count" name="count" type="number" min="1" max="100" step="1" required>
+        </label>
+        <button type="submit">Run loop</button>
+      </form>
+      <div id="loop-output" role="status" aria-live="polite">Enter a number to see the steps.</div>
+    </section>
+  </main>
+  <script>
+    const output = document.querySelector('#output');
+    const form = document.querySelector('#grade-form');
+
+    function showGrade() {
+      if (form.elements.score.value === '') {
+        output.textContent = 'Enter a score to see your letter grade.';
+        return;
+      }
+
+      const score = Number(form.elements.score.value);
+      let grade;
+
+      if (!Number.isFinite(score) || score < 0 || score > 100) {
+        output.textContent = 'Please enter a score from 0 to 100.';
+        return;
+      }
+
+      if (score >= 90) {
+        grade = 'A';
+      } else if (score >= 80) {
+        grade = 'B';
+      } else if (score >= 70) {
+        grade = 'C';
+      } else if (score >= 60) {
+        grade = 'D';
+      } else {
+        grade = 'F';
+      }
+
+      output.textContent = `Score: ${score}\nGrade: ${grade}`;
+    }
+
+    form.addEventListener('input', showGrade);
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      showGrade();
+    });
+
+    const loopOutput = document.querySelector('#loop-output');
+    const loopForm = document.querySelector('#loop-form');
+    function showLoop() {
+      if (loopForm.elements.count.value === '') {
+        loopOutput.textContent = 'Enter a number to see the steps.';
+        return;
+      }
+
+      const count = Number(loopForm.elements.count.value);
+
+      if (!Number.isInteger(count) || count < 1 || count > 100) {
+        loopOutput.textContent = 'Please enter a whole number from 1 to 100.';
+        return;
+      }
+
+      const steps = [];
+      for (let i = 1; i <= count; i++) {
+        steps.push(`Step ${i}`);
+      }
+      loopOutput.textContent = steps.join('\n');
+    }
+
+    loopForm.addEventListener('input', showLoop);
+    loopForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      showLoop();
+    });
+  </script>
+</body>
+</html>

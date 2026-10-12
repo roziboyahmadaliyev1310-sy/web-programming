@@ -12,10 +12,4 @@ Open `index.html` in a browser to view the catalog. The individual lesson exampl
 - `lessons/` — 12 topic-specific interactive demos
 - `practice/` — 6 standalone interactive exercises
 
-## Terminal conditions and loops example
-
-From the `week4` directory, run the example with Node.js:
-
-```sh
-node practice/practice-06-conditions-and-loops.js
-```
+Open `practice/practice-06-conditions-and-loops.html` in a browser and click **Run examples** to see the output.
