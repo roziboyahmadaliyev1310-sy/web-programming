@@ -15,12 +15,15 @@
     .examples{margin:0 0 20px;color:#555;line-height:1.6}
     form{display:flex;align-items:end;gap:10px;margin-bottom:22px}
     .loop-section{margin-top:28px}
+    .math-section{margin-top:28px}
+    .math-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
     label{display:grid;flex:1;gap:6px;font-weight:700}
     input{width:100%;padding:10px 12px;border:1px solid #b8b8b2;border-radius:5px;background:white;color:inherit;font:inherit}
     input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #1a56db;outline-offset:3px}
     button{padding:11px 16px;border:0;border-radius:5px;background:#1a56db;color:white;font:inherit;font-weight:700;cursor:pointer}
     #output{margin:0;padding:16px;border:1px solid #d5d5d0;border-radius:5px;background:white;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.7;white-space:pre-line}
-    @media(max-width:420px){form{align-items:stretch;flex-direction:column}}
+    #math-output{margin:0;padding:16px;border:1px solid #d5d5d0;border-radius:5px;background:white;line-height:1.8;white-space:pre-line}
+    @media(max-width:420px){form{align-items:stretch;flex-direction:column}.math-inputs{grid-template-columns:1fr}}
   </style>
   <link rel="stylesheet" href="../../navigation.css">
 </head>
@@ -49,6 +52,19 @@
         <button type="submit">Run loop</button>
       </form>
       <div id="loop-output" role="status" aria-live="polite">Enter a number to see the steps.</div>
+    </section>
+    <section class="math-section" aria-labelledby="math-heading">
+      <h2 id="math-heading">Math examples</h2>
+      <p class="examples">Enter two numbers to calculate their sum, difference, product, and quotient. Example: 8 and 2 gives 10, 6, 16, and 4.</p>
+      <div class="math-inputs">
+        <label for="first-number">First number
+          <input id="first-number" type="number" step="any">
+        </label>
+        <label for="second-number">Second number
+          <input id="second-number" type="number" step="any">
+        </label>
+      </div>
+      <div id="math-output" role="status" aria-live="polite">Enter two numbers to see the calculations.</div>
     </section>
   </main>
   <script>
@@ -117,6 +133,31 @@
       event.preventDefault();
       showLoop();
     });
+
+    const firstNumber = document.querySelector('#first-number');
+    const secondNumber = document.querySelector('#second-number');
+    const mathOutput = document.querySelector('#math-output');
+
+    function showMathExamples() {
+      if (firstNumber.value === '' || secondNumber.value === '') {
+        mathOutput.textContent = 'Enter two numbers to see the calculations.';
+        return;
+      }
+
+      const first = Number(firstNumber.value);
+      const second = Number(secondNumber.value);
+      mathOutput.textContent = [
+        `Addition: ${first} + ${second} = ${first + second}`,
+        `Subtraction: ${first} - ${second} = ${first - second}`,
+        `Multiplication: ${first} × ${second} = ${first * second}`,
+        second === 0
+          ? 'Division: Cannot divide by zero.'
+          : `Division: ${first} ÷ ${second} = ${first / second}`
+      ].join('\n');
+    }
+
+    firstNumber.addEventListener('input', showMathExamples);
+    secondNumber.addEventListener('input', showMathExamples);
   </script>
 </body>
 </html>
