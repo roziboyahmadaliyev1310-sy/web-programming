@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice 6 | Async/Await</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Practice 6</span>
+        <h1>Async/await checkpoints</h1>
+        <p class="meta">Choose the keywords that make this request function work.</p>
+      </div>
+      <form id="asyncQuiz">
+        <fieldset class="quiz-question">
+          <legend>1. Which keyword belongs before the function declaration so it can use await?</legend>
+          <label><input type="radio" name="q1" value="async"> async</label>
+          <label><input type="radio" name="q1" value="await"> await</label>
+          <label><input type="radio" name="q1" value="then"> then</label>
+          <p class="quiz-feedback" id="feedback-q1" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>2. Where should await go when requesting a response?</legend>
+          <label><input type="radio" name="q2" value="before"> Before fetch(url)</label>
+          <label><input type="radio" name="q2" value="after"> After fetch(url)</label>
+          <label><input type="radio" name="q2" value="never"> Nowhere; fetch is synchronous</label>
+          <p class="quiz-feedback" id="feedback-q2" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>3. Does await response.json() also wait for an asynchronous result?</legend>
+          <label><input type="radio" name="q3" value="yes"> Yes</label>
+          <label><input type="radio" name="q3" value="no"> No</label>
+          <p class="quiz-feedback" id="feedback-q3" aria-live="polite"></p>
+        </fieldset>
+        <button class="action-button" type="submit">Check answers</button>
+        <p id="asyncScore" class="status" aria-live="polite"></p>
+      </form>
+      <div class="code-block"><pre>async function loadData() {
+  const response = await fetch(url);
+  const data = await response.json();
+  render(data);
+}</pre></div>
+      <nav class="lesson-nav" aria-label="Practice navigation">
+        <a href="practice-05-fetch-sequence.html">← Fetch steps</a>
+        <a href="practice-07-then-return.html">.then() returns →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    const asyncQuiz = document.getElementById('asyncQuiz');
+    const asyncAnswers = { q1: 'async', q2: 'before', q3: 'yes' };
+
+    asyncQuiz.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let score = 0;
+      Object.entries(asyncAnswers).forEach(([question, answer]) => {
+        const selected = asyncQuiz.querySelector(`input[name="${question}"]:checked`);
+        const feedback = document.getElementById(`feedback-${question}`);
+        const correct = selected?.value === answer;
+        if (correct) score += 1;
+        feedback.className = `quiz-feedback ${correct ? 'correct' : 'incorrect'}`;
+        feedback.textContent = selected
+          ? (correct ? 'Correct.' : 'Try again.')
+          : 'Choose an answer.';
+      });
+      const scoreElement = document.getElementById('asyncScore');
+      scoreElement.className = `status ${score === 3 ? 'correct' : 'incorrect'}`;
+      scoreElement.textContent = `You got ${score} out of 3 correct.`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice 3 | Request Journey</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Practice 3</span>
+        <h1>Follow a request</h1>
+        <p class="meta">Put the browser, server, and page updates in context while a fetch request runs.</p>
+      </div>
+      <div class="journey-track" aria-label="Steps in a fetch request">
+        <div class="journey-step" data-step="1"><strong>1 · Browser</strong><span><code>fetch(url)</code> sends a request.</span></div>
+        <div class="journey-step" data-step="2"><strong>2 · Server</strong><span>The server finds and returns a response.</span></div>
+        <div class="journey-step" data-step="3"><strong>3 · JavaScript</strong><span><code>response.json()</code> reads the data.</span></div>
+        <div class="journey-step" data-step="4"><strong>4 · Page</strong><span>Your code updates the page with the data.</span></div>
+      </div>
+      <div class="demo-box">
+        <button id="playJourney" class="action-button" type="button">▶ Play request journey</button>
+        <p id="journeyStatus" class="status" aria-live="polite">Press play to follow the request.</p>
+      </div>
+      <div class="note"><strong>Think about it:</strong> Does the page have to reload when the request returns? No—JavaScript can update just the relevant part of the page.</div>
+      <nav class="lesson-nav" aria-label="Practice navigation">
+        <a href="practice-02-fetch-error-checker.html">← Error checker</a>
+        <a href="practice-04-promise-states.html">Promise states →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    const journeySteps = [...document.querySelectorAll('.journey-step')];
+    const journeyStatus = document.getElementById('journeyStatus');
+    const journeyButton = document.getElementById('playJourney');
+    const stepMessages = [
+      'The browser sends a request with fetch().',
+      'The server receives the request and sends a response.',
+      'JavaScript reads the response body as JSON.',
+      'JavaScript updates the page. The page did not reload.'
+    ];
+    let journeyTimer;
+
+    journeyButton.addEventListener('click', () => {
+      clearInterval(journeyTimer);
+      journeySteps.forEach((step) => step.classList.remove('active'));
+      journeyButton.disabled = true;
+      let currentStep = 0;
+
+      const advanceJourney = () => {
+        if (currentStep === journeySteps.length) {
+          clearInterval(journeyTimer);
+          journeyButton.disabled = false;
+          journeyButton.textContent = '▶ Play again';
+          return;
+        }
+        journeySteps.forEach((step, index) => step.classList.toggle('active', index === currentStep));
+        journeyStatus.textContent = stepMessages[currentStep];
+        currentStep += 1;
+      };
+
+      advanceJourney();
+      journeyTimer = setInterval(advanceJourney, 1100);
+    });
+  </script>
+</body>
+</html>

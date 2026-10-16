@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice 7 | Return Values in .then()</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Practice 7</span>
+        <h1>Return values in .then()</h1>
+        <p class="meta">A Promise chain passes each callback’s return value to the next callback.</p>
+      </div>
+      <div class="code-block"><pre>fetch(url)
+  .then(response =&gt; {
+    response.json();
+  })
+  .then(data =&gt; render(data));</pre></div>
+      <form id="returnQuiz">
+        <fieldset class="quiz-question">
+          <legend>The first callback does not return response.json(). What does the next .then() receive?</legend>
+          <label><input type="radio" name="returnAnswer" value="json"> The parsed JSON data</label>
+          <label><input type="radio" name="returnAnswer" value="undefined"> undefined</label>
+          <label><input type="radio" name="returnAnswer" value="error"> An automatic HTTP error</label>
+          <p id="returnFeedback" class="quiz-feedback" aria-live="polite"></p>
+        </fieldset>
+        <button class="action-button" type="submit">Check answer</button>
+      </form>
+      <details class="demo-box">
+        <summary><strong>Show the corrected chain</strong></summary>
+        <div class="code-block"><pre>fetch(url)
+  .then(response =&gt; {
+    return response.json();
+  })
+  .then(data =&gt; render(data));</pre></div>
+        <p>Returning the Promise from <code>response.json()</code> lets the next <code>.then()</code> receive its parsed value.</p>
+      </details>
+      <nav class="lesson-nav" aria-label="Practice navigation">
+        <a href="practice-06-async-await.html">← Async/await</a>
+        <a href="practice-08-joke-app-challenge.html">Joke app challenge →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    document.getElementById('returnQuiz').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const selected = document.querySelector('input[name="returnAnswer"]:checked');
+      const feedback = document.getElementById('returnFeedback');
+      const correct = selected?.value === 'undefined';
+      feedback.className = `quiz-feedback ${correct ? 'correct' : 'incorrect'}`;
+      feedback.textContent = correct
+        ? 'Correct. A callback without a return value passes undefined to the next .then().'
+        : selected ? 'Not quite. Check whether the first callback returns anything.' : 'Choose an answer.';
+    });
+  </script>
+</body>
+</html>

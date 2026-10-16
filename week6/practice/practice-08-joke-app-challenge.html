@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice 8 | Build a Joke Fetcher</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Practice 8</span>
+        <h1>Build a Joke Fetcher</h1>
+        <p class="meta">Your project challenge: combine this week’s fetch, async/await, and error-handling practice.</p>
+      </div>
+      <section class="demo-box">
+        <h2>Build requirements</h2>
+        <p>Create your own page with a “Load Joke” button. Check each requirement as you complete and test it.</p>
+        <ul class="checklist" id="challengeChecklist">
+          <li><label><input type="checkbox"> Fetch a joke from <code>https://official-joke-api.appspot.com/random_joke</code>.</label></li>
+          <li><label><input type="checkbox"> Show a loading message while the request is in progress.</label></li>
+          <li><label><input type="checkbox"> Check <code>response.ok</code> before parsing the response.</label></li>
+          <li><label><input type="checkbox"> Await <code>response.json()</code> and display setup and punchline separately.</label></li>
+          <li><label><input type="checkbox"> Catch failures and show a friendly error message.</label></li>
+          <li><label><input type="checkbox"> Use <code>finally</code> to stop loading and re-enable the button.</label></li>
+          <li><label><input type="checkbox"> Challenge: add a loading spinner and save favourites in localStorage.</label></li>
+        </ul>
+        <p id="challengeProgress" class="status" aria-live="polite">0 of 7 requirements checked.</p>
+      </section>
+      <details class="demo-box">
+        <summary><strong>Need a starting point?</strong></summary>
+        <p>Use these elements in your HTML and connect them to JavaScript with <code>getElementById</code>:</p>
+        <div class="code-block"><pre>&lt;button id="loadButton"&gt;Load a joke&lt;/button&gt;
+&lt;p id="status" aria-live="polite"&gt;&lt;/p&gt;
+&lt;p id="setup"&gt;&lt;/p&gt;
+&lt;p id="punchline"&gt;&lt;/p&gt;</pre></div>
+        <p>Start with the async function, then add the request, status check, JSON parsing, DOM updates, and error handling.</p>
+      </details>
+      <p><a class="action-button" href="practice-01-random-joke-fetcher.html">Open the working example</a></p>
+      <nav class="lesson-nav" aria-label="Practice navigation">
+        <a href="practice-07-then-return.html">← .then() returns</a>
+        <a href="../index.html">Week 6 home →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+  <script>
+    const challengeBoxes = [...document.querySelectorAll('#challengeChecklist input[type="checkbox"]')];
+    const challengeProgress = document.getElementById('challengeProgress');
+
+    function updateProgress() {
+      const checkedCount = challengeBoxes.filter((checkbox) => checkbox.checked).length;
+      challengeProgress.textContent = `${checkedCount} of ${challengeBoxes.length} requirements checked.`;
+      challengeProgress.className = `status ${checkedCount === challengeBoxes.length ? 'correct' : ''}`;
+    }
+
+    challengeBoxes.forEach((checkbox) => checkbox.addEventListener('change', updateProgress));
+  </script>
+</body>
+</html>
