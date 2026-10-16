@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lesson 6 | Fetch API Quiz</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Lesson 6</span>
+        <h1>Quick quiz</h1>
+        <p class="meta">Check what you remember about Fetch API and asynchronous JavaScript.</p>
+      </div>
+      <form id="quizForm">
+        <fieldset class="quiz-question">
+          <legend>1. What does fetch(url) return immediately?</legend>
+          <label><input type="radio" name="q1" value="a"> The parsed JSON</label>
+          <label><input type="radio" name="q1" value="b"> A Promise</label>
+          <label><input type="radio" name="q1" value="c"> A DOM element</label>
+          <p class="quiz-feedback" id="feedback-q1" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>2. What should you do when a server responds with HTTP 404?</legend>
+          <label><input type="radio" name="q2" value="a"> Assume fetch rejected automatically</label>
+          <label><input type="radio" name="q2" value="b"> Check response.ok and handle a false value</label>
+          <label><input type="radio" name="q2" value="c"> Parse the page as HTML</label>
+          <p class="quiz-feedback" id="feedback-q2" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>3. Which keyword allows await inside a function?</legend>
+          <label><input type="radio" name="q3" value="a"> promise</label>
+          <label><input type="radio" name="q3" value="b"> async</label>
+          <label><input type="radio" name="q3" value="c"> request</label>
+          <p class="quiz-feedback" id="feedback-q3" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>4. Which block runs whether the request succeeds or fails?</legend>
+          <label><input type="radio" name="q4" value="a"> try</label>
+          <label><input type="radio" name="q4" value="b"> catch</label>
+          <label><input type="radio" name="q4" value="c"> finally</label>
+          <p class="quiz-feedback" id="feedback-q4" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz-question">
+          <legend>5. What is passed to the next .then() when a callback has no return value?</legend>
+          <label><input type="radio" name="q5" value="a"> undefined</label>
+          <label><input type="radio" name="q5" value="b"> The original Promise</label>
+          <label><input type="radio" name="q5" value="c"> An automatic error</label>
+          <p class="quiz-feedback" id="feedback-q5" aria-live="polite"></p>
+        </fieldset>
+        <button class="action-button" type="submit">Check answers</button>
+        <p id="quizScore" class="status" aria-live="polite"></p>
+      </form>
+      <nav class="lesson-nav" aria-label="Lesson navigation">
+        <a href="lesson-05-build-joke-app.html">← Build the joke app</a>
+        <a href="lesson-07-summary.html">Summary →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+  <script src="lesson-06.js"></script>
+</body>
+</html>

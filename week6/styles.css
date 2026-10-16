@@ -217,6 +217,109 @@ button, input {
   font-weight: 600;
 }
 
+.button-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.journey-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.journey-step {
+  min-height: 112px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel-soft);
+  opacity: 0.55;
+  transition: opacity 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.journey-step.active {
+  opacity: 1;
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.journey-step strong { color: var(--accent); }
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.lesson-nav a {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-soft);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.quiz-question {
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel-soft);
+}
+
+.quiz-question legend {
+  padding: 0 5px;
+  font-weight: 700;
+}
+
+.quiz-question label {
+  display: block;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.quiz-feedback {
+  min-height: 24px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.quiz-feedback.correct { color: var(--success); }
+.quiz-feedback.incorrect { color: var(--error); }
+.status.correct { color: var(--success); }
+.status.incorrect { color: var(--error); }
+
+.favorite-list {
+  margin: 12px 0 0;
+  padding-left: 22px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.hidden { display: none !important; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
 #jokeOut {
   margin-top: 16px;
   display: none;
@@ -255,4 +358,13 @@ ul.checklist {
   .container { padding-left: 14px; padding-right: 14px; }
   .lesson-wrap { padding: 18px 16px; }
   .theme-toggle { float: none; margin-bottom: 16px; }
+  .journey-track { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

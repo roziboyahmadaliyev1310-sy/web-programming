@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lesson 7 | Summary and Assignment</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Lesson 7</span>
+        <h1>Summary and assignment</h1>
+        <p class="meta">Keep these core ideas close while building your own data-driven page.</p>
+      </div>
+      <div class="grid">
+        <section class="panel"><h2>fetch(url)</h2><p>Sends an HTTP request and immediately returns a Promise.</p></section>
+        <section class="panel"><h2>response.json()</h2><p>Reads and parses the response body as JSON; it also returns a Promise.</p></section>
+        <section class="panel"><h2>response.ok</h2><p>Is true for successful HTTP status codes. Check it because a 404 does not automatically reject fetch.</p></section>
+        <section class="panel"><h2>async / await</h2><p>Lets you write Promise-based work in a clear, sequential style without freezing the page.</p></section>
+        <section class="panel"><h2>try / catch</h2><p>Handle network, parsing, and explicitly thrown HTTP errors.</p></section>
+        <section class="panel"><h2>finally</h2><p>Runs after success or failure. Use it to reset buttons and stop loading indicators.</p></section>
+      </div>
+      <section class="demo-box">
+        <h2>Assignment · Random Joke Fetcher</h2>
+        <p>Build and test the app. The practice page provides a working example to study and extend.</p>
+        <ul class="checklist">
+          <li>Fetch a joke from <code>official-joke-api.appspot.com/random_joke</code>.</li>
+          <li>Show a loading message or spinner while waiting.</li>
+          <li>Display the setup and punchline separately.</li>
+          <li>Show a friendly error or fallback if the request fails.</li>
+          <li>Challenge: save favourite jokes in localStorage.</li>
+        </ul>
+        <p><a class="action-button" href="../practice/practice-01-random-joke-fetcher.html">Open the Joke Fetcher practice</a></p>
+      </section>
+      <nav class="lesson-nav" aria-label="Lesson navigation">
+        <a href="lesson-06-quick-quiz.html">← Quick quiz</a>
+        <a href="../index.html">Week 6 home →</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../script.js"></script>
+</body>
+</html>
