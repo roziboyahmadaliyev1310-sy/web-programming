@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lesson 3 | Error Handling</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Lesson 3</span>
+        <h1>Error handling with fetch()</h1>
+        <p class="meta">A failed server response is not the same as a broken network.</p>
+      </div>
+
+      <p>The big gotcha in fetch() is this: <strong>fetch resolves even when the server responds with 404 or 500.</strong> You must check <code>response.ok</code>.</p>
+
+      <div class="code-block">
+<pre>async function loadUser() {
+  try {
+    const response = await fetch('https://example.com/missing-page');
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Something went wrong:', error.message);
+  } finally {
+    console.log('This always runs');
+  }
+}</pre>
+      </div>
+
+      <div class="alert">
+        <strong>Quick rule:</strong> no internet → fetch rejects automatically. 404/500 → fetch resolves, so check <code>response.ok</code> yourself.
+      </div>
+
+      <h2>Common pattern</h2>
+      <ul>
+        <li>try: code that may fail</li>
+        <li>catch: show the error to the user</li>
+        <li>finally: hide loading spinners or reset buttons</li>
+      </ul>
+    </main>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

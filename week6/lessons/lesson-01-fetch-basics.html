@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Lesson 1 | Fetch Basics</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <a class="back-link" href="../index.html">← Week 6</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+    </header>
+
+    <main class="lesson-wrap">
+      <div class="lesson-header">
+        <span class="page-badge">Lesson 1</span>
+        <h1>What is fetch()?</h1>
+        <p class="meta">The browser sends a request to a server and waits for data without reloading the page.</p>
+      </div>
+
+      <p><strong>fetch()</strong> is JavaScript's built-in way to request data from an API or server. It returns a <strong>Promise</strong>, which means the browser keeps working while the request finishes in the background.</p>
+
+      <div class="code-block">
+<pre>fetch('https://official-joke-api.appspot.com/random_joke')
+  .then(response =&gt; response.json())
+  .then(data =&gt; console.log(data))
+  .catch(error =&gt; console.error(error));</pre>
+      </div>
+
+      <div class="note">
+        <strong>Key idea:</strong> your page stays interactive while waiting. The request happens asynchronously.
+      </div>
+
+      <h2>Request journey</h2>
+      <ul>
+        <li>Browser sends a request</li>
+        <li>Server finds the data</li>
+        <li>Data comes back as JSON</li>
+        <li>JavaScript updates the page</li>
+      </ul>
+
+      <div class="success">
+        <strong>Result:</strong> the page can show updates without full reloads. This is one of the foundations of modern web apps.
+      </div>
+    </main>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

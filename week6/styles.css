@@ -1,0 +1,258 @@
+
+:root {
+  --bg: #f3f7ff;
+  --panel: #ffffff;
+  --panel-soft: #edf4ff;
+  --line: #d9e3f5;
+  --ink: #1c2740;
+  --muted: #53627d;
+  --accent: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --gold: #facc15;
+  --success: #16a34a;
+  --error: #dc2626;
+  --shadow: 0 18px 38px rgba(31, 52, 93, 0.09);
+}
+
+body.dark {
+  --bg: #0f172a;
+  --panel: #111f38;
+  --panel-soft: #1e2d4d;
+  --line: #2b4066;
+  --ink: #e5edf9;
+  --muted: #adc0df;
+  --accent: #93c5fd;
+  --accent-soft: #162d52;
+  --gold: #facc15;
+  --success: #86efac;
+  --error: #fca5a5;
+  --shadow: 0 18px 38px rgba(2, 8, 20, 0.4);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+a { color: var(--accent); }
+
+.container {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 24px 20px 72px;
+}
+
+.site-header {
+  padding: 20px 0 6px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.page-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #1a1b1d;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin-top: 14px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 12px 0 26px;
+}
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  float: right;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.link-list a {
+  display: block;
+  text-decoration: none;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.link-list a:hover {
+  border-color: var(--accent);
+}
+
+.lesson-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 22px;
+  box-shadow: var(--shadow);
+}
+
+.lesson-header {
+  margin-bottom: 18px;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.code-block {
+  background: #111827;
+  color: #dbeafe;
+  padding: 18px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 18px 0;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.note, .alert, .success, .warning {
+  border-left: 4px solid var(--accent);
+  background: var(--panel-soft);
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin: 18px 0;
+}
+
+.success { border-color: var(--success); }
+.warning { border-color: var(--gold); }
+.alert { border-color: var(--error); }
+
+button, input {
+  font: inherit;
+}
+
+.demo-box {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.action-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action-button.secondary {
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.status {
+  min-height: 24px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#jokeOut {
+  margin-top: 16px;
+  display: none;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+#jokeSetup {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+#jokePunch {
+  font-size: 1.05rem;
+  margin-top: 12px;
+}
+
+input[type="text"] {
+  width: 100%;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+}
+
+ul.checklist {
+  margin: 18px 0 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 640px) {
+  .container { padding-left: 14px; padding-right: 14px; }
+  .lesson-wrap { padding: 18px 16px; }
+  .theme-toggle { float: none; margin-bottom: 16px; }
+}
