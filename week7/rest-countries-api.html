@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REST Countries API | Week 7</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="site-header project-header">
+      <a class="back-link" href="index.html">← All API projects</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+      <span class="page-badge">API project 6 of 6</span>
+      <h1>REST Countries API</h1>
+      <p class="subtitle">Look up Korea to see its flag, capital, population, and region.</p>
+    </header>
+    <section class="api-card api-countries project-card">
+      <p class="api-notice">The updated API now requires an API key. Get one from REST Countries and enter it here; the key is only used for this request and is not saved.</p>
+      <label class="key-label" for="countriesApiKey">API key</label>
+      <input class="api-key-input" id="countriesApiKey" type="password" autocomplete="off" data-api-key />
+      <button class="action-button" type="button" data-api="countries">Fetch country data</button>
+      <pre class="api-result" id="result-countries" aria-live="polite">Enter your API key, then select “Fetch country data”.</pre>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

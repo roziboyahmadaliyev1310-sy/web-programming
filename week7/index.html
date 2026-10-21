@@ -2,35 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Week 7 | Fetch API Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Six separate API projects for practicing JavaScript Fetch." />
+  <title>Week 7 | API Exercises</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
+  <main class="container">
     <header class="site-header">
       <a class="back-link" href="../index.html">← Home</a>
       <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
       <span class="page-badge">Week 7</span>
-      <h1>Fetch API &amp; Async/Await</h1>
-      <p class="subtitle">Practice Fetch API, Promises, error handling, and async/await with these six activities.</p>
+      <h1>Free API Exercises</h1>
+      <p class="subtitle">Select an API name to open its exercise.</p>
     </header>
 
-    <main>
-      <section class="panel">
-        <h2>Six Practice Activities</h2>
-        <ul class="link-list">
-          <li><a href="practice/practice-01-random-joke-fetcher.html">Practice 1 · Random Joke Fetcher</a></li>
-          <li><a href="practice/practice-02-fetch-error-checker.html">Practice 2 · Fetch error checker</a></li>
-          <li><a href="practice/practice-03-request-journey.html">Practice 3 · Follow a request</a></li>
-          <li><a href="practice/practice-04-promise-states.html">Practice 4 · Promise states</a></li>
-          <li><a href="practice/practice-05-fetch-sequence.html">Practice 5 · Order the fetch steps</a></li>
-          <li><a href="practice/practice-06-async-await.html">Practice 6 · Async/await checkpoints</a></li>
-        </ul>
-      </section>
-    </main>
-  </div>
-
+    <section class="api-grid" aria-label="Six API projects">
+      <a class="api-card api-joke" href="official-joke-api.html" aria-label="Official Joke API">
+        <h2>Official Joke API</h2>
+      </a>
+      <a class="api-card api-posts" href="jsonplaceholder-api.html" aria-label="JSONPlaceholder">
+        <h2>JSONPlaceholder</h2>
+      </a>
+      <a class="api-card api-weather" href="open-meteo-api.html" aria-label="Open-Meteo Weather API">
+        <h2>Open-Meteo Weather API</h2>
+      </a>
+      <a class="api-card api-user" href="random-user-api.html" aria-label="Random User API">
+        <h2>Random User API</h2>
+      </a>
+      <a class="api-card api-pokemon" href="pokeapi.html" aria-label="PokéAPI">
+        <h2>PokéAPI</h2>
+      </a>
+      <a class="api-card api-countries" href="rest-countries-api.html" aria-label="REST Countries API">
+        <h2>REST Countries API</h2>
+      </a>
+    </section>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
