@@ -288,33 +288,6 @@ body.dark .api-countries { --api-color: #9bbcff; --api-background: #202e49; }
   color: #fff;
 }
 
-.country-api-settings {
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.country-api-settings summary {
-  width: fit-content;
-  cursor: pointer;
-}
-
-.country-api-settings .api-notice {
-  margin: 10px 0;
-  padding: 0;
-  background: transparent;
-}
-
-.country-api-settings .api-notice a {
-  color: var(--accent);
-}
-
-.country-api-settings .key-label {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--ink);
-}
-
 .country-result:empty {
   display: none;
 }

@@ -49,16 +49,13 @@ const apiConfigs = {
     }
   },
   countries: {
-    url: 'https://api.restcountries.com/countries/v5/names.common/',
+    url: 'https://countries.trevorblades.com/',
     summarize: (payload) => {
-      if (payload.success === false || payload.errors?.length) {
-        throw new Error(payload.errors?.map((entry) => entry.message).join('; ') || 'The API returned an error');
+      if (payload.errors?.length) {
+        throw new Error(payload.errors.map((entry) => entry.message).join('; ') || 'Country search failed');
       }
-      const data = payload.data ?? payload;
-      const countries = Array.isArray(data.objects)
-        ? data.objects
-        : Array.isArray(data) ? data : [data];
-      if (countries.length === 0) {
+      const countries = payload.data?.countries;
+      if (!Array.isArray(countries) || countries.length === 0) {
         throw new Error('No countries matched that name');
       }
       return countries[0];
@@ -73,8 +70,8 @@ function renderCountry(result, country) {
     ? capitals.map((entry) => typeof entry === 'string' ? entry : entry.name).filter(Boolean).join(', ')
     : capitals?.primary || capitals?.name || capitals || 'Not listed';
   const population = country.population?.total ?? country.population;
-  const region = country.region?.name || country.region || 'Not listed';
-  const code = country.codes?.alpha_2 || country.cca2 || 'Not listed';
+  const region = country.region?.name || country.region || country.continent?.name || 'Not listed';
+  const code = country.codes?.alpha_2 || country.cca2 || country.code || 'Not listed';
   const flagUrl = country.flag?.url_png || country.flag?.url_svg || country.flags?.png || country.flags?.svg;
 
   result.replaceChildren();
@@ -89,17 +86,17 @@ function renderCountry(result, country) {
     flag.src = flagUrl;
     flag.alt = `${name} flag`;
     result.append(flag);
-  } else if (country.flag?.emoji) {
+  } else if (country.flag?.emoji || country.emoji) {
     const flag = document.createElement('p');
     flag.className = 'country-flag-emoji';
-    flag.textContent = country.flag.emoji;
+    flag.textContent = country.flag?.emoji || country.emoji;
     flag.setAttribute('aria-label', `${name} flag`);
     result.append(flag);
   }
 
   const details = [
     ['Capital', capital || 'Not listed'],
-    ['Population', population == null ? 'Not listed' : population.toLocaleString()],
+    ...(population == null ? [] : [['Population', population.toLocaleString()]]),
     ['Region', region],
     ['Country code', code]
   ];
@@ -125,6 +122,8 @@ async function loadApi(apiName, button) {
 
   const headers = {};
   let url = config.url;
+  let method;
+  let body;
   if (apiName === 'countries') {
     const countryName = document.getElementById('countryName')?.value.trim();
     if (!countryName) {
@@ -132,14 +131,14 @@ async function loadApi(apiName, button) {
       result.textContent = 'Enter a country name to search.';
       return;
     }
-    const apiKey = document.querySelector('[data-api-key]')?.value.trim();
-    if (!apiKey) {
-      result.className = 'country-result api-result is-error';
-      result.textContent = 'Add your REST Countries API key in “API key settings” to search.';
-      return;
-    }
-    headers.Authorization = apiKey;
-    url = `${config.url}${encodeURIComponent(countryName)}`;
+    const regex = countryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/[a-z]/gi, (letter) => `[${letter.toLowerCase()}${letter.toUpperCase()}]`);
+    method = 'POST';
+    headers['Content-Type'] = 'application/json';
+    body = JSON.stringify({
+      query: 'query CountryLookup($name: String!) { countries(filter: { name: { regex: $name } }) { name capital code emoji continent { name } } }',
+      variables: { name: `^${regex}$` }
+    });
   }
 
   button.disabled = true;
@@ -148,7 +147,7 @@ async function loadApi(apiName, button) {
   result.textContent = 'Loading…';
 
   try {
-    const response = await fetch(url, { headers });
+    const response = await fetch(url, { method, headers, body });
     const data = await response.json();
     if (!response.ok) {
       const details = data.errors?.map((entry) => entry.message).join('; ');

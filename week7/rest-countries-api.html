@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>REST Countries API | Week 7</title>
+  <title>Country Search | Week 7</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="container country-page">
     <section class="country-search-card" aria-labelledby="page-title">
       <header class="country-header">
-        <a class="back-link" href="index.html">← All API projects</a>
+        <a class="back-link" href="index.html">← All projects</a>
         <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
         <h1 id="page-title">Country Search</h1>
       </header>
@@ -21,12 +21,6 @@
           <button class="action-button country-search-button" type="submit" data-api="countries">Search</button>
         </div>
       </form>
-      <details class="country-api-settings">
-        <summary>API key settings</summary>
-        <p class="api-notice">REST Countries v5 requires an API key. Get one from <a href="https://restcountries.com/sign-up" target="_blank" rel="noopener noreferrer">REST Countries</a>. It is only used for this request and is not saved.</p>
-        <label class="key-label" for="countriesApiKey">API key</label>
-        <input class="api-key-input" id="countriesApiKey" type="password" autocomplete="off" data-api-key />
-      </details>
       <div class="country-result api-result" id="result-countries" aria-live="polite" aria-atomic="true"></div>
     </section>
   </main>
