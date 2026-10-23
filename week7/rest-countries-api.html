@@ -7,20 +7,27 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="site-header project-header">
-      <a class="back-link" href="index.html">← All API projects</a>
-      <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
-      <span class="page-badge">API project 6 of 6</span>
-      <h1>REST Countries API</h1>
-      <p class="subtitle">Look up Korea to see its flag, capital, population, and region.</p>
-    </header>
-    <section class="api-card api-countries project-card">
-      <p class="api-notice">The updated API now requires an API key. Get one from REST Countries and enter it here; the key is only used for this request and is not saved.</p>
-      <label class="key-label" for="countriesApiKey">API key</label>
-      <input class="api-key-input" id="countriesApiKey" type="password" autocomplete="off" data-api-key />
-      <button class="action-button" type="button" data-api="countries">Fetch country data</button>
-      <pre class="api-result" id="result-countries" aria-live="polite">Enter your API key, then select “Fetch country data”.</pre>
+  <main class="container country-page">
+    <section class="country-search-card" aria-labelledby="page-title">
+      <header class="country-header">
+        <a class="back-link" href="index.html">← All API projects</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙 Dark</button>
+        <h1 id="page-title">Country Search</h1>
+      </header>
+      <form class="country-search-form" data-country-search>
+        <label class="key-label" for="countryName">Country name</label>
+        <div class="country-search-controls">
+          <input class="api-key-input country-name-input" id="countryName" name="country" type="search" placeholder="e.g. China" autocomplete="off" required />
+          <button class="action-button country-search-button" type="submit" data-api="countries">Search</button>
+        </div>
+      </form>
+      <details class="country-api-settings">
+        <summary>API key settings</summary>
+        <p class="api-notice">REST Countries v5 requires an API key. Get one from <a href="https://restcountries.com/sign-up" target="_blank" rel="noopener noreferrer">REST Countries</a>. It is only used for this request and is not saved.</p>
+        <label class="key-label" for="countriesApiKey">API key</label>
+        <input class="api-key-input" id="countriesApiKey" type="password" autocomplete="off" data-api-key />
+      </details>
+      <div class="country-result api-result" id="result-countries" aria-live="polite" aria-atomic="true"></div>
     </section>
   </main>
   <script src="script.js"></script>
