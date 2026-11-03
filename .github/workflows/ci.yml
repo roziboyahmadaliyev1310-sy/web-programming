@@ -27,7 +27,7 @@ jobs:
 
           const html = readFileSync('index.html', 'utf8');
           const links = [...html.matchAll(/href=["']([^"'#]+)["']/g)]
-            .map(([, href]) => href)
+            .map(([, href]) => decodeURIComponent(href.split(/[?#]/, 1)[0]))
             .filter((href) => !/^[a-z][a-z\d+.-]*:/i.test(href) && !href.startsWith('/'));
           const missing = links.filter((href) => !existsSync(resolve(href)));
 

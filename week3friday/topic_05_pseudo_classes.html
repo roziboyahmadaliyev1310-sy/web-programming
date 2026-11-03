@@ -31,9 +31,15 @@
         display: block;
         margin-top: 20px;
       }
-      input:focus {
+      input:focus-visible, .btn:focus-visible {
         border-color: #0f766e;
-        outline: none;
+        outline: 3px solid #0f766e;
+        outline-offset: 3px;
+      }
+      label {
+        display: block;
+        margin-top: 20px;
+        font-weight: 700;
       }
       li:first-child {
         color: #0f766e;
@@ -45,8 +51,9 @@
     </style>
   </head>
   <body>
-    <button class="btn">Hover me</button>
-    <input type="text" placeholder="Focus here" />
+    <button class="btn" type="button">Hover me</button>
+    <label for="focus-demo">Focus the text field</label>
+    <input id="focus-demo" type="text" placeholder="Type here" />
 
     <ul>
       <li>First child</li>
