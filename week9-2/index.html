@@ -104,7 +104,7 @@
       <p class="eyebrow">Week 9-2 · Accessibility practice</p>
       <h1>Three checks, three code changes</h1>
       <p>This report covers only the three pages in the Lighthouse screenshots: Week 1 Image Gallery, Week 3 Friday Pseudo Classes, and Week 8-2 Register.</p>
-      <p class="note"><strong>How to read the scores:</strong> These are the historical scores shown in the supplied Lighthouse screenshots, captured before the latest accessibility fixes. The Week 3 Friday code has since been updated to address its reported contrast and landmark issues, along with keyboard focus and input labeling. Lighthouse has not been rerun, so these are not post-fix scores.</p>
+      <p class="note"><strong>How to read the scores:</strong> The first scores are the original Lighthouse runs. The latest scores and screenshots were supplied after the accessibility fixes: Week 3 Friday and Week 8-2 each reached 100. Week 1 scored 94 and reported a missing main landmark; that landmark has now been added, but Lighthouse has not been rerun since that final change.</p>
     </header>
 
     <section class="results" aria-label="Three accessibility checks">
@@ -114,30 +114,37 @@
             <h2>1. Week 1 · Image Gallery</h2>
             <p class="file"><a href="../week1/ex04_image_gallarey.html">week1/ex04_image_gallarey.html</a></p>
           </div>
-          <div class="score" aria-label="Lighthouse accessibility score 76 out of 100">76 / 100</div>
+          <div class="score" aria-label="Lighthouse score changed from 76 to 94 out of 100">76 → 94</div>
         </div>
         <div class="card-body">
           <figure>
             <img src="screenshots/week1-gallery-lighthouse.png" alt="Lighthouse accessibility audit screenshot for the Week 1 image gallery showing a score of 76 out of 100.">
-            <figcaption>Lighthouse result supplied: 76. The screenshot shows the Names and Labels audit section.</figcaption>
+            <figcaption>Original Lighthouse result: 76. The screenshot shows the Names and Labels audit section.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/week1-gallery-lighthouse-94.png" alt="Updated Lighthouse screenshot for the Week 1 image gallery showing a score of 94 and a missing main landmark warning.">
+            <figcaption>Latest supplied result: 94. Lighthouse reported the missing main landmark; the landmark has now been added.</figcaption>
           </figure>
           <div class="change">
             <div>
-              <h3>Restored image alternative text</h3>
-              <p>The test version omitted the image description. It has been restored in the current file.</p>
+              <h3>Restored image text and added a main landmark</h3>
+              <p>The image alternative text was restored, and the gallery content is now inside a main landmark with a level-one heading.</p>
             </div>
             <figure class="code-shot">
-              <img src="screenshots/week1-gallery-restored-code.png" alt="Screenshot of the restored image gallery source showing alt text for the first image.">
-              <figcaption>Screenshot of the restored source code.</figcaption>
+              <img src="screenshots/week1-gallery-current-code.png" alt="Screenshot of the current image gallery source showing a main landmark, level-one heading, and descriptive alternative text for each image.">
+              <figcaption>Screenshot of the current source, including the landmark fix.</figcaption>
             </figure>
             <details>
-              <summary>View before and restored code</summary>
+              <summary>View current landmark and image code</summary>
               <pre><code>Before:
 &lt;img src="https://via.placeholder.com/150"&gt;
 
-Restored:
+Current:
+&lt;main&gt;
+  &lt;h1&gt;Nature Gallery&lt;/h1&gt;
 &lt;img src="https://via.placeholder.com/150"
-     alt="A green forest during sunrise"&gt;</code></pre>
+       alt="A green forest during sunrise"&gt;
+&lt;/main&gt;</code></pre>
             </details>
           </div>
         </div>
@@ -149,12 +156,16 @@ Restored:
             <h2>2. Week 3 Friday · Pseudo Classes</h2>
             <p class="file"><a href="../week3friday/topic_05_pseudo_classes.html">week3friday/topic_05_pseudo_classes.html</a></p>
           </div>
-          <div class="score" aria-label="Lighthouse accessibility score 89 out of 100">89 / 100</div>
+          <div class="score" aria-label="Lighthouse score changed from 89 to 100 out of 100">89 → 100</div>
         </div>
         <div class="card-body">
           <figure>
             <img src="screenshots/week3-friday-lighthouse.png" alt="Lighthouse accessibility audit screenshot for the Week 3 Friday pseudo-classes page showing a score of 89 out of 100 and a contrast warning.">
-            <figcaption>Lighthouse result supplied: 89. The screenshot shows a contrast warning.</figcaption>
+            <figcaption>Original Lighthouse result: 89. The screenshot shows a contrast warning.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/week3-friday-lighthouse-100.png" alt="Updated Lighthouse screenshot for the Week 3 Friday pseudo-classes page showing a score of 100 out of 100.">
+            <figcaption>Latest supplied result after fixes: 100.</figcaption>
           </figure>
           <div class="change">
             <div>
@@ -196,12 +207,16 @@ li:last-child {
             <h2>3. Week 8-2 · Register</h2>
             <p class="file"><a href="../week8-2/index.html">week8-2/index.html</a></p>
           </div>
-          <div class="score" aria-label="Lighthouse accessibility score 92 out of 100">92 / 100</div>
+          <div class="score" aria-label="Lighthouse score changed from 92 to 100 out of 100">92 → 100</div>
         </div>
         <div class="card-body">
           <figure>
             <img src="screenshots/week8-2-lighthouse.png" alt="Lighthouse accessibility audit screenshot for the Week 8-2 registration page showing a score of 92 out of 100 and a contrast warning.">
-            <figcaption>Lighthouse result supplied: 92. The screenshot shows a contrast warning.</figcaption>
+            <figcaption>Original Lighthouse result: 92. The screenshot shows a contrast warning.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/week8-2-lighthouse-100.png" alt="Updated Lighthouse screenshot for the Week 8-2 registration page showing a score of 100 out of 100.">
+            <figcaption>Latest supplied result after fixes: 100.</figcaption>
           </figure>
           <div class="change">
             <div>
