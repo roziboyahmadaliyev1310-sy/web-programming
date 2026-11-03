@@ -9,8 +9,11 @@
         font-family: Arial, sans-serif;
         padding: 32px;
       }
+      h1 {
+        margin-top: 0;
+      }
       .btn {
-        background: #14b8a6;
+        background: #0f766e;
         color: white;
         border: none;
         padding: 12px 20px;
@@ -19,7 +22,7 @@
         transition: 0.2s ease;
       }
       .btn:hover {
-        background: #14b8a6;
+        background: #0b5d56;
       }
       .btn:active {
         transform: scale(0.97);
@@ -29,29 +32,38 @@
         border: 2px solid #cbd5e1;
         border-radius: 8px;
         display: block;
-        margin-top: 20px;
+        margin-top: 6px;
       }
-      input:focus {
+      input:focus-visible, .btn:focus-visible {
         border-color: #0f766e;
-        outline: none;
+        outline: 3px solid #b45309;
+        outline-offset: 3px;
+      }
+      label {
+        display: block;
+        margin-top: 20px;
       }
       li:first-child {
         color: #0f766e;
         font-weight: bold;
       }
       li:last-child {
-        color: #ea580c;
+        color: #b93800;
       }
     </style>
   </head>
   <body>
-    <button class="btn">Hover me</button>
-    <input type="text" placeholder="Focus here" />
+    <main>
+      <h1>Pseudo Classes</h1>
+      <button class="btn" type="button">Hover me</button>
+      <label for="focus-demo">Focus here</label>
+      <input id="focus-demo" type="text" />
 
-    <ul>
-      <li>First child</li>
-      <li>Second child</li>
-      <li>Third child</li>
-    </ul>
+      <ul>
+        <li>First child</li>
+        <li>Second child</li>
+        <li>Third child</li>
+      </ul>
+    </main>
   </body>
 </html>
