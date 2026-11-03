@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="API Atlas is a travel discovery toolkit for finding destinations, planning trips, checking weather, and preparing a budget.">
+  <meta name="theme-color" content="#f5f1e9">
+  <title>API Atlas | Group Project</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182522;
+      --muted: #58655f;
+      --paper: #f5f1e9;
+      --surface: #fffdf8;
+      --line: #d9ded7;
+      --coral: #b64932;
+      --sea: #b9d9d4;
+      --night: #1d3b3b;
+      --sun: #f0cf72;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 92% 3%, #f0cf7240, transparent 26rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .page { width: min(100% - 40px, 1080px); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      min-height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      color: var(--night);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--coral); }
+
+    .top-link {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      margin: 34px 0 0;
+      padding: clamp(30px, 7vw, 76px);
+      background: var(--night);
+      color: white;
+    }
+
+    .hero::after {
+      position: absolute;
+      top: -150px;
+      right: -80px;
+      width: 420px;
+      height: 420px;
+      border: 1px solid #ffffff20;
+      border-radius: 50%;
+      box-shadow: 0 0 0 34px #ffffff08, 0 0 0 72px #ffffff06;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--sun);
+      font-size: .73rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font: 600 clamp(3.2rem, 11vw, 7.5rem)/.95 Georgia, "Times New Roman", serif;
+      letter-spacing: -.065em;
+    }
+
+    .hero-copy {
+      max-width: 590px;
+      margin: 22px 0 0;
+      color: #d4e0dc;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      background: var(--coral);
+      color: white;
+      font-size: .88rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: background-color 150ms ease, transform 150ms ease;
+    }
+
+    .button:hover { transform: translateY(-2px); background: #a8402c; }
+
+    .button.secondary { border: 1px solid #ffffff66; background: transparent; }
+    .button.secondary:hover { background: #ffffff16; }
+
+    .section { padding: 66px 0 0; }
+
+    .section-kicker {
+      margin: 0 0 8px;
+      color: var(--coral);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font: 600 clamp(1.8rem, 4vw, 2.6rem)/1.1 Georgia, "Times New Roman", serif;
+      letter-spacing: -.04em;
+    }
+
+    .section-intro { max-width: 690px; margin: 12px 0 0; color: var(--muted); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .feature {
+      min-height: 190px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .feature-number { color: var(--coral); font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
+    .feature h3 { margin: 20px 0 7px; font-size: 1.08rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .87rem; }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 24px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .journey article { padding: 22px; background: var(--surface); }
+    .journey h3 { margin: 0 0 8px; font-size: 1rem; }
+    .journey p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .member {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .avatar {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--sea);
+      color: var(--night);
+      font: 700 1.2rem Georgia, "Times New Roman", serif;
+    }
+
+    .member h3 { margin: 0; font-size: 1rem; }
+    .member p { margin: 3px 0 0; color: var(--muted); font-size: .84rem; }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 22px;
+      padding: 26px;
+      background: #e8eee8;
+    }
+
+    .details h3 { margin: 0 0 8px; font-size: .98rem; }
+    .details p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .stack { color: var(--night) !important; font-weight: 700; }
+
+    .closing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 66px 0 0;
+      padding: clamp(24px, 5vw, 42px);
+      background: var(--sea);
+    }
+
+    .closing h2 { font-size: clamp(1.55rem, 3vw, 2rem); }
+    .closing p { margin: 8px 0 0; color: #38554d; }
+    .closing .button { flex: 0 0 auto; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 30px;
+      padding: 20px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    a:focus-visible { outline: 3px solid var(--sun); outline-offset: 4px; }
+
+    @media (max-width: 760px) {
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .journey { grid-template-columns: 1fr; }
+      .closing { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 32px, 1080px); }
+      .topbar { min-height: 64px; }
+      .hero { margin-top: 20px; }
+      .feature-grid, .team, .details { grid-template-columns: 1fr; }
+      .feature { min-height: 0; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="API Atlas project home">API <span>ATLAS</span></a>
+      <a class="top-link" href="../index.html">← Back to course homepage</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="project-title">
+        <div class="hero-content">
+          <p class="eyebrow">Group Project · Web Programming</p>
+          <h1 id="project-title">API Atlas</h1>
+          <p class="hero-copy">Discover somewhere new, plan what to do, and get ready to go. API Atlas brings travel inspiration and practical trip tools together in one place.</p>
+          <div class="hero-actions">
+            <a class="button" href="test/index.html">Explore API Atlas <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="test/README.md">Project information</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="features-title">
+        <p class="section-kicker">One travel toolkit</p>
+        <h2 id="features-title">From first idea to trip details.</h2>
+        <p class="section-intro">The project homepage introduces destinations and connects travelers to four focused tools for planning and preparing a journey.</p>
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="feature-number">01 / PLAN</span>
+            <h3>Trip planner</h3>
+            <p>Search for a city or country, explore nearby places, and shape a seven-day itinerary.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">02 / WEATHER</span>
+            <h3>Weather guide</h3>
+            <p>Check local conditions and a five-day forecast to help decide what to pack.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">03 / BUDGET</span>
+            <h3>Currency converter</h3>
+            <p>Convert fiat and crypto currencies and compare costs in local money.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-number">04 / DISCOVER</span>
+            <h3>Media library</h3>
+            <p>Search for films and books that add a little context and inspiration to a trip.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="journey-title">
+        <p class="section-kicker">How to use it</p>
+        <h2 id="journey-title">A simple travel-planning flow.</h2>
+        <div class="journey">
+          <article>
+            <h3>01. Pick a place</h3>
+            <p>Browse featured destinations or search for a city or country that interests you.</p>
+          </article>
+          <article>
+            <h3>02. Build an outline</h3>
+            <p>Use the trip planner to find nearby attractions and organize a week of ideas.</p>
+          </article>
+          <article>
+            <h3>03. Get prepared</h3>
+            <p>Check the forecast, estimate currency costs, and find books or films about the destination.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="team-title">
+        <p class="section-kicker">The people behind the project</p>
+        <h2 id="team-title">Our team</h2>
+        <div class="team">
+          <article class="member">
+            <div class="avatar" aria-hidden="true">R</div>
+            <div><h3>Ruziboy</h3><p>Student ID: 202539434</p></div>
+          </article>
+          <article class="member">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div><h3>Akhmadjon</h3><p>Student ID: 202539468</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="build-title">
+        <p class="section-kicker">Project notes</p>
+        <h2 id="build-title">Built for the browser.</h2>
+        <div class="details">
+          <div>
+            <h3>Technology</h3>
+            <p class="stack">HTML · CSS · Vanilla JavaScript · ES modules</p>
+            <p>The apps use public data services for weather, destinations, books, movies, and exchange rates. Some services need an API key; details are in the project README.</p>
+          </div>
+          <div>
+            <h3>Run the project</h3>
+            <p>Because the tools use JavaScript modules, serve the repository over HTTP rather than opening the files directly. The README in the app folder has setup notes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-label="Open the project">
+        <div>
+          <h2>Ready to explore?</h2>
+          <p>Open the API Atlas homepage and start planning your next trip.</p>
+        </div>
+        <a class="button" href="test/index.html">Visit API Atlas <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <span>API Atlas · Group Project</span>
+      <span>Ruziboy &amp; Akhmadjon</span>
+    </footer>
+  </div>
+</body>
+</html>

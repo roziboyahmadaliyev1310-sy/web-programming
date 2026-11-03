@@ -8,13 +8,14 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #27313a;
-      --muted: #65717b;
-      --paper: #f3f5f4;
-      --surface: #ffffff;
-      --line: #dce2df;
-      --accent: #26715f;
-      --accent-soft: #e4f0eb;
+      --ink: #182b36;
+      --muted: #64737a;
+      --paper: #f5f3ed;
+      --surface: #fffefa;
+      --line: #dce2db;
+      --accent: #286957;
+      --accent-soft: #e6f0e9;
+      --sun: #f3d37a;
     }
 
     * { box-sizing: border-box; }
@@ -22,9 +23,12 @@
     body {
       min-height: 100vh;
       margin: 0;
-      padding: 64px 24px;
+      padding: 32px 24px 64px;
       color: var(--ink);
-      background: radial-gradient(ellipse at 50% 0%, #e3ece7 0%, var(--paper) 64%);
+      background:
+        radial-gradient(ellipse at 12% 0%, #e0ebe3 0%, transparent 36%),
+        radial-gradient(ellipse at 95% 22%, #f7e9c5 0%, transparent 24%),
+        var(--paper);
       font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
     }
 
@@ -34,65 +38,187 @@
       animation: arrive 550ms ease-out both;
     }
 
-    .eyebrow {
-      margin: 0 0 12px;
+    .site-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 38px;
       color: var(--accent);
-      font-size: 0.76rem;
-      font-weight: 700;
+      font-size: 0.78rem;
+      font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+    }
+
+    .site-mark::before {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px 4px 4px 1px;
+      background: var(--accent);
+      content: "";
+      transform: rotate(-12deg);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(30px, 7vw, 72px);
+      border: 1px solid #d5e0d7;
+      border-radius: 18px;
+      background: linear-gradient(120deg, #fffefa 15%, #edf4ed 100%);
+      box-shadow: 0 22px 60px #253c3012;
+    }
+
+    .hero::after {
+      position: absolute;
+      top: -88px;
+      right: -54px;
+      width: 260px;
+      height: 260px;
+      border: 1px solid #2869571a;
+      border-radius: 50%;
+      box-shadow: 0 0 0 26px #28695708, 0 0 0 54px #28695706;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 7px 11px;
+      border: 1px solid #cbded2;
+      border-radius: 999px;
+      background: #f5faf5;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #73a887;
+      content: "";
     }
 
     h1 {
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.5rem, 6vw, 4.4rem);
+      font-size: clamp(3rem, 8vw, 5.7rem);
       font-weight: 500;
-      line-height: 1.08;
+      letter-spacing: -0.055em;
+      line-height: 1;
     }
 
     .intro {
-      margin: 14px 0 30px;
+      max-width: 580px;
+      margin: 20px 0 0;
       color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      line-height: 1.75;
+    }
+
+    .about {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 22px 0 44px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffffa8;
+    }
+
+    .about-avatar {
+      display: grid;
+      width: 52px;
+      height: 52px;
+      flex: 0 0 52px;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--accent);
+      color: white;
+      font: 600 1.2rem Georgia, "Times New Roman", serif;
+      box-shadow: 4px 4px 0 var(--sun);
+    }
+
+    .about h2 {
+      margin: 0 0 5px;
+      font: 700 0.9rem "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    }
+
+    .about p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
       line-height: 1.6;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 16px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font: 500 clamp(1.7rem, 4vw, 2.2rem) Georgia, "Times New Roman", serif;
+      letter-spacing: -0.035em;
+    }
+
+    .section-heading p {
+      margin: 0 0 3px;
+      color: var(--muted);
+      font-size: 0.8rem;
     }
 
     nav {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     nav a {
-      min-height: 112px;
+      min-height: 120px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 7px;
-      padding: 18px;
+      padding: 20px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 10px;
       background: var(--surface);
       color: var(--ink);
       text-align: left;
       text-decoration: none;
-      transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+      box-shadow: 0 5px 16px #253c3008;
+      transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
     }
 
     nav a::after {
       content: "→";
       align-self: flex-end;
-      margin-top: -25px;
+      margin-top: -27px;
       color: var(--accent);
       font-size: 1.4rem;
     }
 
     nav a:hover, nav a:focus-visible {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: #9bbcaf;
       background: var(--accent-soft);
       color: var(--ink);
       outline: none;
+      box-shadow: 0 12px 24px #253c3012;
     }
 
     .week-name {
@@ -110,13 +236,23 @@
     }
 
     footer {
-      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
       font-size: 0.82rem;
     }
 
     @media (max-width: 700px) {
-      body { padding: 38px 18px; }
+      body { padding: 24px 18px 42px; }
+      .site-mark { margin-bottom: 22px; }
+      .hero { border-radius: 14px; }
+      .about { align-items: flex-start; margin-bottom: 34px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+      footer { flex-direction: column; }
     }
 
     @media (max-width: 440px) {
@@ -138,9 +274,27 @@
 </head>
 <body>
   <main>
-    <p class="eyebrow">Class exercises · 2026</p>
-    <h1>Web Programming</h1>
-    <p class="intro">Choose a week to open its lessons and practice files.</p>
+    <div class="site-mark">Ruziboy's learning space</div>
+    <header class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">Class exercises · 2026</p>
+        <h1>Web Programming</h1>
+        <p class="intro">A collection of the things I’m learning and building as I explore the web, one project at a time.</p>
+      </div>
+    </header>
+
+    <section class="about" aria-labelledby="about-heading">
+      <div class="about-avatar" aria-hidden="true">R</div>
+      <div>
+        <h2 id="about-heading">A little about me</h2>
+        <p>I’m Ruziboy, a web programming student learning to create useful, interactive experiences with HTML, CSS, and JavaScript.</p>
+      </div>
+    </section>
+
+    <div class="section-heading">
+      <h2>Explore my work</h2>
+      <p>Choose a week or project to take a look.</p>
+    </div>
 
     <nav aria-label="Course weeks">
       <a href="week1/index.html"><span class="week-name">Week 1</span><span class="week-detail">HTML basics, structure, and page exercises.</span></a>
@@ -153,8 +307,13 @@
       <a href="week8/index.html"><span class="week-name">Week 8</span><span class="week-detail">HTML form controls and student registration practice.</span></a>
       <a href="week8-2/index.html"><span class="week-name">Week 8-2</span><span class="week-detail">Create an account with username, email, and password validation.</span></a>
       <a href="week9/index.html"><span class="week-name">Week 9</span><span class="week-detail">Team 9's Lighthouse accessibility audit report.</span></a>
+      <a href="group%20project/index.html"><span class="week-name">Group Project</span><span class="week-detail">API Atlas — travel discovery, planning, and tools.</span></a>
     </nav>
 
+    <footer>
+      <span>Built while learning, one page at a time.</span>
+      <span>HTML · CSS · JavaScript</span>
+    </footer>
   </main>
 </body>
 </html>
