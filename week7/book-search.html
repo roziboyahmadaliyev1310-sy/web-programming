@@ -46,18 +46,6 @@
 
     .back-link:hover { text-decoration: underline; }
 
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
     .eyebrow {
       margin: 0 0 8px;
       color: var(--accent);
@@ -195,7 +183,7 @@
     </header>
 
     <form id="search-form">
-      <label for="query" class="visually-hidden">Book title, author, or keyword</label>
+      <label for="query" hidden>Book title, author, or keyword</label>
       <input id="query" name="query" type="search" placeholder="Try “The Hobbit” or “Ursula Le Guin”" required>
       <button id="search-button" type="submit">Search books</button>
     </form>
