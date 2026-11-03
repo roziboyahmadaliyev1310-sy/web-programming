@@ -221,12 +221,59 @@
       box-shadow: 0 12px 24px #253c3012;
     }
 
+    nav a.group-project-link {
+      position: relative;
+      overflow: hidden;
+      border-color: #ddc9aa;
+      border-left: 5px solid #b64932;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 95% 8%, #f0cf7270, transparent 7rem),
+        linear-gradient(120deg, #fffdf8, #f8eee0);
+      box-shadow: 0 10px 24px #7c513012;
+    }
+
+    nav a.group-project-link::after {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      margin-top: -39px;
+      border-radius: 50%;
+      background: #1d3b3b;
+      color: #f0cf72;
+      font-size: 1.5rem;
+      transition: transform 160ms ease, background-color 160ms ease;
+    }
+
+    nav a.group-project-link:hover,
+    nav a.group-project-link:focus-visible {
+      border-color: #b64932;
+      background:
+        radial-gradient(circle at 95% 8%, #f0cf7280, transparent 7rem),
+        linear-gradient(120deg, #fffdf8, #f6e5d1);
+      box-shadow: 0 15px 30px #7c513020;
+    }
+
+    nav a.group-project-link:hover::after,
+    nav a.group-project-link:focus-visible::after { transform: translateX(3px); background: #b64932; }
+
+    .project-kicker {
+      color: #a8402c;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .week-name {
       display: block;
       padding-right: 26px;
       font-family: Georgia, "Times New Roman", serif;
       font-size: 1.45rem;
     }
+
+    .group-project-link .week-name { color: #1d3b3b; font-size: 1.65rem; }
 
     .week-detail {
       padding-right: 26px;
@@ -308,7 +355,7 @@
       <a href="week8-2/index.html"><span class="week-name">Week 8-2</span><span class="week-detail">Create an account with username, email, and password validation.</span></a>
       <a href="week9/index.html"><span class="week-name">Week 9</span><span class="week-detail">Team 9's Lighthouse accessibility audit report.</span></a>
       <a href="week9-2/index.html"><span class="week-name">Week 9-2</span><span class="week-detail">Three accessibility checks, Lighthouse screenshots, and restored code.</span></a>
-      <a href="group%20project/index.html"><span class="week-name">Group Project</span><span class="week-detail">API Atlas — travel discovery, planning, and tools.</span></a>
+      <a class="group-project-link" href="group%20project/index.html"><span class="project-kicker">Featured project · API Atlas</span><span class="week-name">Group Project</span><span class="week-detail">Travel discovery, planning, and tools.</span></a>
     </nav>
 
     <footer>
