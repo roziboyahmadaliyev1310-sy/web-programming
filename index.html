@@ -187,13 +187,17 @@
       gap: 12px;
     }
 
-    nav a {
+    nav .course-card {
+      position: relative;
+    }
+
+    nav a.course-link {
       min-height: 120px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 7px;
-      padding: 20px;
+      padding: 20px 58px 20px 20px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: var(--surface);
@@ -204,7 +208,7 @@
       transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
     }
 
-    nav a::after {
+    nav a.course-link::after {
       content: "→";
       align-self: flex-end;
       margin-top: -27px;
@@ -212,13 +216,59 @@
       font-size: 1.4rem;
     }
 
-    nav a:hover, nav a:focus-visible {
+    nav a.course-link:hover, nav a.course-link:focus-visible {
       transform: translateY(-3px);
       border-color: #9bbcaf;
       background: var(--accent-soft);
       color: var(--ink);
       outline: none;
       box-shadow: 0 12px 24px #253c3012;
+    }
+
+    nav .download-button {
+      position: absolute;
+      z-index: 2;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--accent);
+      cursor: pointer;
+      transition: background-color 160ms ease, border-color 160ms ease;
+    }
+
+    .download-button svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .download-button:hover,
+    .download-button:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .download-button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .download-button:disabled {
+      cursor: wait;
+      opacity: .6;
+    }
+
+    .download-status {
+      min-height: 1.4em;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: .85rem;
     }
 
     nav a.group-project-link {
@@ -344,24 +394,27 @@
     </div>
 
     <nav aria-label="Course weeks">
-      <a href="week1/index.html"><span class="week-name">Week 1</span><span class="week-detail">HTML basics, structure, and page exercises.</span></a>
-      <a href="week2/index.html"><span class="week-name">Week 2</span><span class="week-detail">Semantic HTML and page layout elements.</span></a>
-      <a href="week3/index.html"><span class="week-name">Week 3</span><span class="week-detail">CSS fundamentals, selectors, and styling exercises.</span></a>
-      <a href="week3friday/index.html"><span class="week-name">Week 3 Friday</span><span class="week-detail">Advanced CSS topics and practice activities.</span></a>
-      <a href="week4/index.html"><span class="week-name">Week 4</span><span class="week-detail">JavaScript DOM and event lessons and practice.</span></a>
-      <a href="week6/index.html"><span class="week-name">Week 6</span><span class="week-detail">Fetch API and async/await practice activities.</span></a>
-      <a href="week7/book-search.html"><span class="week-name">Week 7</span><span class="week-detail">Search the Open Library catalog by title, author, or keyword.</span></a>
-      <a href="week8/index.html"><span class="week-name">Week 8</span><span class="week-detail">HTML form controls and student registration practice.</span></a>
-      <a href="week8-2/index.html"><span class="week-name">Week 8-2</span><span class="week-detail">Create an account with username, email, and password validation.</span></a>
-      <a href="week9/index.html"><span class="week-name">Week 9</span><span class="week-detail">Team 9's Lighthouse accessibility audit report.</span></a>
-      <a href="week9-2/index.html"><span class="week-name">Week 9-2</span><span class="week-detail">Three accessibility checks, Lighthouse screenshots, and restored code.</span></a>
-      <a class="group-project-link" href="group%20project/index.html"><span class="project-kicker">Featured project · API Atlas</span><span class="week-name">Group Project</span><span class="week-detail">Travel discovery, planning, and tools.</span></a>
+      <div class="course-card"><a class="course-link" href="week1/index.html"><span class="week-name">Week 1</span><span class="week-detail">HTML basics, structure, and page exercises.</span></a><button class="download-button" type="button" data-folder="week1" aria-label="Download Week 1 as a ZIP file" title="Download Week 1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week2/index.html"><span class="week-name">Week 2</span><span class="week-detail">Semantic HTML and page layout elements.</span></a><button class="download-button" type="button" data-folder="week2" aria-label="Download Week 2 as a ZIP file" title="Download Week 2"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week3/index.html"><span class="week-name">Week 3</span><span class="week-detail">CSS fundamentals, selectors, and styling exercises.</span></a><button class="download-button" type="button" data-folder="week3" aria-label="Download Week 3 as a ZIP file" title="Download Week 3"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week3friday/index.html"><span class="week-name">Week 3 Friday</span><span class="week-detail">Advanced CSS topics and practice activities.</span></a><button class="download-button" type="button" data-folder="week3friday" aria-label="Download Week 3 Friday as a ZIP file" title="Download Week 3 Friday"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week4/index.html"><span class="week-name">Week 4</span><span class="week-detail">JavaScript DOM and event lessons and practice.</span></a><button class="download-button" type="button" data-folder="week4" aria-label="Download Week 4 as a ZIP file" title="Download Week 4"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week6/index.html"><span class="week-name">Week 6</span><span class="week-detail">Fetch API and async/await practice activities.</span></a><button class="download-button" type="button" data-folder="week6" aria-label="Download Week 6 as a ZIP file" title="Download Week 6"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week7/book-search.html"><span class="week-name">Week 7</span><span class="week-detail">Search the Open Library catalog by title, author, or keyword.</span></a><button class="download-button" type="button" data-folder="week7" aria-label="Download Week 7 as a ZIP file" title="Download Week 7"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week8/index.html"><span class="week-name">Week 8</span><span class="week-detail">HTML form controls and student registration practice.</span></a><button class="download-button" type="button" data-folder="week8" aria-label="Download Week 8 as a ZIP file" title="Download Week 8"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week8-2/index.html"><span class="week-name">Week 8-2</span><span class="week-detail">Create an account with username, email, and password validation.</span></a><button class="download-button" type="button" data-folder="week8-2" aria-label="Download Week 8-2 as a ZIP file" title="Download Week 8-2"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week9/index.html"><span class="week-name">Week 9</span><span class="week-detail">Team 9's Lighthouse accessibility audit report.</span></a><button class="download-button" type="button" data-folder="week9" aria-label="Download Week 9 as a ZIP file" title="Download Week 9"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link" href="week9-2/index.html"><span class="week-name">Week 9-2</span><span class="week-detail">Three accessibility checks, Lighthouse screenshots, and restored code.</span></a><button class="download-button" type="button" data-folder="week9-2" aria-label="Download Week 9-2 as a ZIP file" title="Download Week 9-2"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
+      <div class="course-card"><a class="course-link group-project-link" href="group%20project/index.html"><span class="project-kicker">Featured project · API Atlas</span><span class="week-name">Group Project</span><span class="week-detail">Travel discovery, planning, and tools.</span></a><button class="download-button" type="button" data-folder="group project" aria-label="Download Group Project as a ZIP file" title="Download Group Project"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 10.5v3h11v-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></button></div>
     </nav>
+    <p class="download-status" id="download-status" role="status" aria-live="polite"></p>
 
     <footer>
       <span>Built while learning, one page at a time.</span>
       <span>HTML · CSS · JavaScript</span>
     </footer>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="folder-downloads.js"></script>
 </body>
 </html>
