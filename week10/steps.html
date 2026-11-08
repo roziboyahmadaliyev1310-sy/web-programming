@@ -294,7 +294,7 @@
         <div class="status-line" aria-label="Completion status">
           <span class="status">✓ App works and is live</span>
           <span class="status">✓ Custom 404 deployed and tested</span>
-          <span class="status pending">! Standalone repo setup needs GitHub account access</span>
+          <span class="status">✓ Standalone repository and Pages site published</span>
         </div>
       </header>
 
@@ -316,6 +316,8 @@
         <div class="links">
           <a class="button live" href="https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/">Live Week 10 app ↗</a>
           <a class="button" href="https://github.com/roziboyahmadaliyev1310-sy/web-programming">Course repository ↗</a>
+          <a class="button live" href="https://roziboyahmadaliyev1310-sy.github.io/webpro-book-search/">Standalone app ↗</a>
+          <a class="button" href="https://github.com/roziboyahmadaliyev1310-sy/webpro-book-search">Standalone repository ↗</a>
         </div>
       </section>
 
@@ -404,25 +406,27 @@
         <article class="step">
           <div class="step-heading">
             <span class="number">6</span>
-            <h3>Verify the published app and finish repository setup</h3>
+            <h3>Publish and verify the standalone repository</h3>
           </div>
           <p>
-            The Book Search app is already published at
-            <a href="https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/">
-              <code>roziboyahmadaliyev1310-sy.github.io/web-programming/week10/</code>
+            Published the Week 10 files at the root of the public
+            <a href="https://github.com/roziboyahmadaliyev1310-sy/webpro-book-search">
+              <code>webpro-book-search</code>
             </a>
-            and was checked for an HTTP 200 response.
+            repository and enabled GitHub Pages from its <code>main</code> branch.
+            The standalone app returned HTTP 200, and a missing route returned HTTP
+            404 with the custom error page.
           </p>
           <figure>
             <img src="./screenshots/book-search-live.png" alt="The deployed Week 10 Book Search app opened at its GitHub Pages URL." />
-            <figcaption>Evidence: the app opened from its published GitHub Pages URL.</figcaption>
+            <figcaption>Evidence: the app opened from the course site; the standalone live URL was also verified.</figcaption>
           </figure>
           <div class="note">
-            The assignment also calls for a separate public repository named
-            <code>webpro-book-search</code>. That repository does not exist yet, and
-            GitHub is signed out in the available browser and no authenticated GitHub
-            CLI is installed. The app files are ready; sign in to GitHub in the browser
-            to create and publish that separate repository.
+            Standalone live site:
+            <a href="https://roziboyahmadaliyev1310-sy.github.io/webpro-book-search/">
+              <code>roziboyahmadaliyev1310-sy.github.io/webpro-book-search/</code>
+            </a>.
+            Its Pages build and deployment workflow completed successfully.
           </div>
         </article>
       </section>
