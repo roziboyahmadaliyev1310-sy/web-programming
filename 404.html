@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The requested page could not be found." />
+    <title>404 | Page Not Found</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --text: #edf7ff;
+        --muted: #b9d0e7;
+        --line: rgba(140, 170, 210, 0.3);
+        --accent: #b9c9ff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        padding: 24px;
+        place-items: center;
+        background: linear-gradient(180deg, #081b2a, #020d18);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      main {
+        width: min(680px, 100%);
+        padding: clamp(28px, 6vw, 56px);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(17, 37, 53, 0.96);
+        text-align: center;
+      }
+
+      .code {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+      }
+
+      p {
+        margin: 14px auto 0;
+        max-width: 500px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      a {
+        display: inline-block;
+        padding: 13px 20px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #d8d7ff, #a9b6ff);
+        color: #102438;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      a.secondary {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+      }
+
+      a:focus-visible {
+        outline: 3px solid #9be7ff;
+        outline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="code">ERROR 404</p>
+      <h1>Page not found</h1>
+      <p>
+        This address does not match a page in the course site. Return to the Book
+        Search app and continue exploring.
+      </p>
+      <div class="actions">
+        <a class="secondary" href="/web-programming/">Course home</a>
+        <a href="/web-programming/week10/index.html">Back to Book Search</a>
+      </div>
+    </main>
+  </body>
+</html>

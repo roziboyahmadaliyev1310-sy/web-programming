@@ -36,6 +36,22 @@
         margin: 28px auto 44px;
       }
 
+      .page-links {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+      }
+
+      .page-links a {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .page-links a:hover {
+        text-decoration: underline;
+      }
+
       .hero {
         padding: 26px 30px 18px;
         border: 1px solid var(--line);
@@ -218,6 +234,9 @@
   </head>
   <body>
     <main>
+      <nav class="page-links" aria-label="Week 10 links">
+        <a href="./steps.html">Week 10 steps &amp; evidence →</a>
+      </nav>
       <section class="hero">
         <p class="eyebrow">Week 10 · Deploy</p>
         <h1>Search for your next favorite book.</h1>
