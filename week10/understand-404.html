@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Understand what happens when a page doesn't exist on GitHub Pages." />
+    <title>E2 | Find and Understand a 404 Page</title>
+    <style>
+      :root {
+        --bg: #071c2d;
+        --bg-deep: #051923;
+        --panel: #0d243b;
+        --panel-2: #112f4f;
+        --line: rgba(124, 158, 204, 0.35);
+        --text: #edf8ff;
+        --muted: #b8cfe0;
+        --soft: #9fb7d3;
+        --cyan: #99ebff;
+        --note: #0b3348;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #071d2e 0%, #051722 100%);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page {
+        width: min(1360px, calc(100% - 18px));
+        margin: 22px auto 40px;
+      }
+
+      .header-box {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 18px 22px;
+        border: 1px solid var(--line);
+        border-radius: 18px 18px 0 0;
+        background: rgba(9, 23, 35, 0.95);
+      }
+
+      .badge {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #f5dc72, #d5a93a);
+        color: #0f2135;
+        font-weight: 800;
+      }
+
+      .header-box h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 2.6vw, 3rem);
+        letter-spacing: -0.04em;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-top: none;
+        border-radius: 0 0 18px 18px;
+        background: rgba(13, 35, 57, 0.96);
+        padding: 24px 28px 18px;
+      }
+
+      .goal {
+        padding: 26px 20px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(17, 41, 65, 0.88);
+        color: var(--text);
+        font-size: clamp(1.2rem, 2.2vw, 2.4rem);
+        line-height: 1.45;
+      }
+
+      .steps {
+        list-style: none;
+        margin: 22px 0 0;
+        padding: 0;
+      }
+
+      .steps li {
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.8vw, 1.7rem);
+        line-height: 1.5;
+      }
+
+      .steps strong {
+        color: var(--text);
+      }
+
+      .url-box {
+        display: block;
+        margin-top: 10px;
+        padding: 18px 16px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: rgba(17, 39, 60, 0.85);
+        color: var(--cyan);
+        font-family: "Consolas", "SFMono-Regular", monospace;
+        font-size: clamp(0.9rem, 1.7vw, 1.18rem);
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .note {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 18px;
+        padding: 18px 18px;
+        border: 1px solid rgba(153, 235, 255, 0.32);
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(11, 51, 72, 0.92), rgba(14, 46, 59, 0.9));
+      }
+
+      .bulb {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 1.8rem;
+      }
+
+      .note p {
+        margin: 0;
+        color: #edf9ff;
+        font-size: clamp(1.1rem, 2vw, 2rem);
+        line-height: 1.45;
+      }
+
+      code {
+        font-family: "Consolas", "SFMono-Regular", monospace;
+        color: var(--cyan);
+      }
+
+      @media (max-width: 720px) {
+        .header-box {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .panel {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="header-box">
+        <div class="badge">E2</div>
+        <h1>Find and Understand a 404 Page</h1>
+      </div>
+
+      <div class="panel">
+        <div class="goal">
+          Goal: Understand what happens when a visitor goes to a URL that doesn't exist on your site.
+        </div>
+
+        <ol class="steps">
+          <li><strong>1.</strong> Visit your GitHub Pages site URL with a path that doesn't exist:</li>
+          <li><span class="url-box">https://YOUR-USERNAME.github.io/webpro-w9/this-does-not-exist.html</span></li>
+          <li><strong>2.</strong> You should see GitHub's default 404 page. Note what it looks like.</li>
+          <li><strong>3.</strong> Question: Is this a good user experience? What would you improve?</li>
+          <li><strong>4.</strong> On your local computer, check: do you have a <code>404.html</code> file? (Probably not yet.)</li>
+        </ol>
+
+        <div class="note">
+          <div class="bulb" aria-hidden="true">💡</div>
+          <p>GitHub Pages automatically serves <code>404.html</code> when a page isn't found — if that file exists in your repo. If it doesn't exist, GitHub shows its generic error page. Exercise 3 fixes this!</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
