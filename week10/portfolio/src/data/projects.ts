@@ -89,11 +89,11 @@ export const projects: Project[] = [
     id: "observatory",
     number: "04",
     name: "Midnight Observatory",
-    kind: "In progress · personal portfolio",
+    kind: "Personal portfolio · published",
     description:
-      "An interactive portfolio where each skill points back to real work.",
+      "An interactive portfolio connecting skills, projects, and the work behind them.",
     details:
-      "This Next.js portfolio is being built with TypeScript and Tailwind CSS. Its constellation view connects skills to projects, and its daybreak theme, keyboard-friendly controls, and illustrated portrait give the site its own visual identity.",
+      "A Next.js portfolio built with TypeScript and Tailwind CSS. Its constellation view connects skills to projects, and its daybreak theme, keyboard-friendly controls, and illustrated portrait give the site its own visual identity.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
     skills: [
       "nextjs",
@@ -102,9 +102,10 @@ export const projects: Project[] = [
       "accessible-ui",
       "responsive-ui",
     ],
+    liveUrl: "https://roziboyahmadaliyev1310-sy.github.io/Portfolio/",
     sourceUrl:
-      "https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/midnight-observatory",
-    status: "in-progress",
+      "https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio",
+    status: "live",
     visual: "stars",
   },
 ];

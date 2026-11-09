@@ -1,8 +1,12 @@
-# Midnight Observatory
+# Midnight Observatory · Week 10 Portfolio
 
 A personal portfolio built with Next.js, TypeScript, and Tailwind CSS. Its
 midnight sky, daybreak theme, interactive skill map, and illustrated portrait
 make the site feel like an observatory rather than a template.
+
+The published portfolio is available at
+[roziboyahmadaliyev1310-sy.github.io/Portfolio](https://roziboyahmadaliyev1310-sy.github.io/Portfolio/).
+This folder keeps the portfolio source together with the Week 10 coursework.
 
 ## Run locally
 
@@ -38,5 +42,5 @@ npm run build
 
 ## Deploy
 
-This Next.js app is ready to deploy as a separate project on Vercel. Import this
+This Next.js app can be deployed as a separate project on Vercel. Import this
 folder as the project root and use the standard Next.js build settings.
