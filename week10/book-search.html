@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Book Search app built with the Open Library API." />
+    <title>Week 10 | Book Search</title>
+    <style>
+      :root {
+        --bg: #0b1d2d;
+        --bg-2: #11293d;
+        --panel: rgba(15, 33, 49, 0.96);
+        --panel-soft: rgba(23, 42, 62, 0.95);
+        --line: rgba(140, 170, 210, 0.28);
+        --text: #edf7ff;
+        --muted: #b9d0e7;
+        --soft: #8ea8c4;
+        --accent: #c5d5ff;
+        --accent-strong: #9ea7ff;
+        --highlight: #9be7ff;
+        --shadow: rgba(0, 0, 0, 0.24);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #081b2a, #020d18 100%);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 28px auto 44px;
+      }
+
+      .page-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+      }
+
+      .page-links a {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .page-links a:hover {
+        text-decoration: underline;
+      }
+
+      .hero {
+        padding: 26px 30px 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px 18px 0 0;
+        background: rgba(14, 31, 46, 0.97);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+      }
+
+      .intro {
+        margin: 14px 0 0;
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-top: none;
+        border-radius: 0 0 18px 18px;
+        background: rgba(17, 37, 53, 0.96);
+        padding: 24px 28px 28px;
+      }
+
+      form {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 8px 12px 8px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(22, 40, 58, 0.9);
+      }
+
+      label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        min-height: 52px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+      }
+
+      input::placeholder {
+        color: #8faacd;
+      }
+
+      input:focus,
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid rgba(155, 231, 255, 0.8);
+        outline-offset: 3px;
+      }
+
+      button {
+        min-height: 52px;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #d8d7ff, #a9b6ff);
+        color: #102438;
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        opacity: 0.7;
+        cursor: wait;
+      }
+
+      #status {
+        min-height: 28px;
+        margin: 22px 0 16px;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      #status.error {
+        color: #ffb5b5;
+      }
+
+      .results {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 18px;
+      }
+
+      .book {
+        display: grid;
+        grid-template-columns: 90px minmax(0, 1fr);
+        gap: 16px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(18, 39, 57, 0.9);
+      }
+
+      .cover,
+      .cover-placeholder {
+        width: 90px;
+        height: 132px;
+        border-radius: 8px;
+        object-fit: cover;
+        background: rgba(143, 168, 196, 0.16);
+      }
+
+      .cover-placeholder {
+        display: grid;
+        place-items: center;
+        padding: 10px;
+        color: var(--soft);
+        font-size: 0.75rem;
+        text-align: center;
+      }
+
+      .book h2 {
+        margin: 2px 0 8px;
+        font-size: 1.12rem;
+        line-height: 1.35;
+      }
+
+      .book p {
+        margin: 6px 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          width: min(100% - 14px, 1120px);
+        }
+
+        .hero,
+        .panel {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        form {
+          flex-direction: column;
+          align-items: stretch;
+          padding: 12px;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="page-links" aria-label="Week 10 links">
+        <a href="https://roziboyahmadaliyev1310-sy.github.io/Portfolio/" target="_blank" rel="noreferrer">Visit my portfolio ↗</a>
+        <a href="./index.html">Week 10 overview →</a>
+      </nav>
+      <section class="hero">
+        <p class="eyebrow">Week 10 · Deploy</p>
+        <h1>Search for your next favorite book.</h1>
+        <p class="intro">
+          This app uses the Open Library API so visitors can search by title, author, or keyword.
+          It is ready to be published on GitHub Pages.
+        </p>
+      </section>
+
+      <section class="panel">
+        <form id="search-form">
+          <label for="query">Book title, author, or keyword</label>
+          <input id="query" name="query" type="search" placeholder="Try “The Hobbit” or “Ursula K. Le Guin”" required />
+          <button id="search-button" type="submit">Search books</button>
+        </form>
+
+        <p id="status" role="status" aria-live="polite">Enter a title, author, or keyword to get started.</p>
+        <section id="results" class="results" aria-label="Book search results"></section>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById('search-form');
+      const queryInput = document.getElementById('query');
+      const searchButton = document.getElementById('search-button');
+      const status = document.getElementById('status');
+      const results = document.getElementById('results');
+
+      function buildBookCard(book) {
+        const card = document.createElement('article');
+        card.className = 'book';
+
+        if (book.cover_i) {
+          const image = document.createElement('img');
+          image.className = 'cover';
+          image.src = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+          image.alt = `Cover of ${book.title || 'book'}`;
+          image.loading = 'lazy';
+          image.onerror = () => {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'cover-placeholder';
+            placeholder.textContent = 'No cover';
+            image.replaceWith(placeholder);
+          };
+          card.appendChild(image);
+        } else {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'cover-placeholder';
+          placeholder.textContent = 'No cover';
+          card.appendChild(placeholder);
+        }
+
+        const details = document.createElement('div');
+
+        const title = document.createElement('h2');
+        title.textContent = book.title || 'Untitled book';
+        details.appendChild(title);
+
+        const author = document.createElement('p');
+        author.textContent = book.author_name?.join(', ') || 'Author unknown';
+        details.appendChild(author);
+
+        if (book.first_publish_year) {
+          const year = document.createElement('p');
+          year.textContent = `First published: ${book.first_publish_year}`;
+          details.appendChild(year);
+        }
+
+        card.appendChild(details);
+        return card;
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const query = queryInput.value.trim();
+
+        if (!query) {
+          queryInput.focus();
+          return;
+        }
+
+        searchButton.disabled = true;
+        status.className = '';
+        status.textContent = 'Searching the catalog…';
+        results.replaceChildren();
+
+        try {
+          const response = await fetch(
+            `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=12`
+          );
+
+          if (!response.ok) {
+            throw new Error('Search request failed.');
+          }
+
+          const data = await response.json();
+          const books = data.docs || [];
+
+          if (!books.length) {
+            status.className = 'error';
+            status.textContent = 'No books found for that search. Try a different keyword.';
+            return;
+          }
+
+          status.textContent = `Showing ${books.length} result${books.length === 1 ? '' : 's'} for “${query}”.`;
+          books.forEach((book) => results.appendChild(buildBookCard(book)));
+        } catch (error) {
+          status.className = 'error';
+          status.textContent = 'Something went wrong while fetching book data. Please try again.';
+        } finally {
+          searchButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
