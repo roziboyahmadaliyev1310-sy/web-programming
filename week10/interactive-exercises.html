@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Week 10 interactive exercises for GitHub Pages and custom 404 pages." />
+    <title>Week 10 | Interactive Exercises</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --page: #060d15;
+        --panel: #0d1b2b;
+        --panel-top: #13243a;
+        --line: #203d63;
+        --text: #d7e5f8;
+        --muted: #9bb6d7;
+        --blue: #8bc2ff;
+        --yellow: #ffc933;
+        --note: #003531;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+
+      a { color: var(--blue); }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+
+      .topbar a {
+        color: var(--muted);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        line-height: 1.15;
+      }
+
+      .intro {
+        margin: 14px 0 34px;
+        color: #7395c2;
+        font-size: 1.12rem;
+      }
+
+      .status {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 4px 10px;
+        border: 1px solid #176a54;
+        border-radius: 999px;
+        background: #06362d;
+        color: #8df0c6;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      code {
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+        background: #14283e;
+        color: var(--blue);
+        font-family: "SFMono-Regular", Consolas, monospace;
+        overflow-wrap: anywhere;
+      }
+
+      .exercise {
+        margin-top: 24px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: var(--panel);
+      }
+
+      .exercise header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 17px 22px;
+        border-bottom: 1px solid var(--line);
+        background: var(--panel-top);
+      }
+
+      .badge {
+        flex: 0 0 auto;
+        padding: 3px 11px;
+        border-radius: 6px;
+        background: #211700;
+        color: var(--yellow);
+        font-weight: 800;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.1rem, 3vw, 1.45rem);
+      }
+
+      .content { padding: 22px; }
+
+      .goal {
+        margin: 0 0 20px;
+        padding: 17px 19px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: var(--panel-top);
+        font-size: 1.08rem;
+      }
+
+      .url {
+        display: block;
+        margin-top: 8px;
+        padding: 12px;
+        border-radius: 6px;
+        background: #14283e;
+        overflow-wrap: anywhere;
+      }
+
+      .note {
+        margin-top: 18px;
+        padding: 15px 18px;
+        border-left: 5px solid #08c8d3;
+        border-radius: 8px;
+        background: var(--note);
+      }
+
+      .note p { margin: 0; }
+
+      footer {
+        margin-top: 28px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        main { width: min(100% - 22px, 1120px); padding-top: 18px; }
+        .topbar { flex-direction: column; }
+        .exercise header, .content { padding: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="topbar" aria-label="Week 10 navigation">
+        <a href="./index.html">← Week 10 overview</a>
+        <a href="../index.html">Course home</a>
+      </nav>
+
+      <h1>Interactive Exercises</h1>
+      <p class="intro">
+        Week 10 GitHub Pages exercises are complete. Here are the live deployment and 404-page results.
+      </p>
+
+      <section class="exercise" aria-labelledby="exercise-1-title">
+        <header>
+          <span class="badge">E1</span>
+          <h2 id="exercise-1-title">Enable and Verify GitHub Pages</h2>
+        </header>
+        <div class="content">
+          <span class="status">Verified live</span>
+          <p class="goal"><strong>Result:</strong> GitHub Pages is serving this repository successfully.</p>
+          <p>The published Week 10 site is available at <a href="https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/">https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/</a>.</p>
+        </div>
+      </section>
+
+      <section class="exercise" aria-labelledby="exercise-2-title">
+        <header>
+          <span class="badge">E2</span>
+          <h2 id="exercise-2-title">Find and Understand a 404 Page</h2>
+        </header>
+        <div class="content">
+          <span class="status">Tested</span>
+          <p class="goal"><strong>Result:</strong> A nonexistent Week 10 URL displays the site's custom 404 page rather than GitHub's generic error.</p>
+          <p>Tested URL: <a class="url" href="https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/this-does-not-exist.html">https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/this-does-not-exist.html</a></p>
+          <div class="note">
+            <p>The custom error page gives visitors a clear explanation and links back to both the course home and Book Search. The original <a href="./understand-404.html">404 exercise notes</a> are also available.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="exercise" aria-labelledby="exercise-3-title">
+        <header>
+          <span class="badge">E3</span>
+          <h2 id="exercise-3-title">Create a Custom 404 Page</h2>
+        </header>
+        <div class="content">
+          <span class="status">Deployed</span>
+          <p class="goal"><strong>Result:</strong> A friendly custom error page is present at the published site root and appears for missing pages.</p>
+          <p><a href="../404.html">View the custom 404 page</a>. It includes a clear “Page not found” message, a course-home link, and a link back to the Week 10 Book Search page.</p>
+          <div class="note">
+            <p>The deployed custom 404 was verified by opening the missing-page URL above. Its navigation returns visitors to valid pages in the course site.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>Week 10 · Git, GitHub Pages, and custom error pages</footer>
+    </main>
+  </body>
+</html>
