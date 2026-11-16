@@ -11,15 +11,14 @@
         --line: rgba(159, 174, 211, 0.25);
         --text: #f5f6ff;
         --muted: #a7aec6;
-        --accent: #55c5ff;
-        --accent-soft: rgba(56, 186, 252, 0.16);
+        --accent: #5bd6b6;
+        --accent-soft: rgba(91, 214, 182, 0.16);
         --card: rgba(255, 255, 255, 0.04);
         --card-hover: rgba(255, 255, 255, 0.08);
-        --card-active: rgba(56, 186, 252, 0.12);
-        --success: #6ee7b7;
+        --card-active: rgba(91, 214, 182, 0.12);
+        --success: #82e6a8;
         --warning: #fbbf24;
         --danger: #f87171;
-        --purple: #a78bfa;
       }
 
       * { box-sizing: border-box; }
@@ -39,8 +38,8 @@
         justify-content: center;
         padding: 42px 18px 40px;
         background:
-          radial-gradient(ellipse at 10% 5%, rgba(35, 120, 166, 0.16), transparent 32%),
-          radial-gradient(ellipse at 90% 30%, rgba(130, 76, 195, 0.13), transparent 34%),
+          radial-gradient(ellipse at 10% 5%, rgba(36, 152, 120, 0.2), transparent 32%),
+          radial-gradient(ellipse at 90% 30%, rgba(50, 133, 111, 0.17), transparent 34%),
           var(--bg);
       }
 
@@ -66,16 +65,16 @@
         right: 34px;
         width: 120px;
         height: 120px;
-        border: 1px solid rgba(85, 197, 255, 0.17);
+        border: 1px solid rgba(91, 214, 182, 0.2);
         border-radius: 50%;
-        box-shadow: 0 0 0 18px rgba(85, 197, 255, 0.035), 0 0 0 38px rgba(85, 197, 255, 0.025);
+        box-shadow: 0 0 0 18px rgba(91, 214, 182, 0.04), 0 0 0 38px rgba(91, 214, 182, 0.025);
         content: "";
         pointer-events: none;
       }
 
       .eyebrow {
         margin: 0 0 10px;
-        color: #b6a4ff;
+        color: #a4ead3;
         font-size: 0.73rem;
         font-weight: 800;
         letter-spacing: 0.15em;
@@ -174,11 +173,11 @@
         pointer-events: none;
       }
 
-      .card:nth-child(6n + 2) { --tile-color: #f0ad57; --tile-tint: rgba(240,173,87,0.12); }
-      .card:nth-child(6n + 3) { --tile-color: #81d6b3; --tile-tint: rgba(129,214,179,0.11); }
-      .card:nth-child(6n + 4) { --tile-color: #b6a4ff; --tile-tint: rgba(182,164,255,0.12); }
-      .card:nth-child(6n + 5) { --tile-color: #ff83b7; --tile-tint: rgba(255,131,183,0.1); }
-      .card:nth-child(6n) { --tile-color: #f4d36a; --tile-tint: rgba(244,211,106,0.1); }
+      .card:nth-child(6n + 2) { --tile-color: #8fe1ac; --tile-tint: rgba(143,225,172,0.12); }
+      .card:nth-child(6n + 3) { --tile-color: #55d5c2; --tile-tint: rgba(85,213,194,0.11); }
+      .card:nth-child(6n + 4) { --tile-color: #95d7a5; --tile-tint: rgba(149,215,165,0.12); }
+      .card:nth-child(6n + 5) { --tile-color: #54c6a9; --tile-tint: rgba(84,198,169,0.1); }
+      .card:nth-child(6n) { --tile-color: #b3e586; --tile-tint: rgba(179,229,134,0.1); }
 
       .card:hover,
       .card:focus-visible {
@@ -241,16 +240,16 @@
         gap: 12px;
         margin: 0 26px 16px;
         padding: 13px 15px;
-        border: 1px solid rgba(182, 164, 255, 0.22);
+        border: 1px solid rgba(91, 214, 182, 0.24);
         border-radius: 12px;
-        background: linear-gradient(105deg, rgba(182,164,255,0.08), rgba(85,197,255,0.04));
+        background: linear-gradient(105deg, rgba(91,214,182,0.09), rgba(91,214,182,0.035));
         color: var(--muted);
         line-height: 1.55;
       }
 
       .task-intro strong {
         flex: 0 0 auto;
-        color: #d7ceff;
+        color: #b6f1dc;
         font-size: 0.76rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -315,7 +314,7 @@
         border-radius: 50%;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, var(--accent), #7dd3fc);
+        background: linear-gradient(135deg, var(--accent), #a4edcf);
         color: #03131d;
         font-size: 1.7rem;
         font-weight: 800;
@@ -340,8 +339,8 @@
 
       .tag {
         border-radius: 999px;
-        border: 1px solid rgba(56, 186, 252, 0.35);
-        background: rgba(56, 186, 252, 0.1);
+        border: 1px solid rgba(91, 214, 182, 0.35);
+        background: rgba(91, 214, 182, 0.1);
         color: var(--text);
         padding: 6px 10px;
         font-size: 0.75rem;
@@ -398,8 +397,8 @@
       }
 
       button.task-item.is-answer-selected {
-        border-color: rgba(85, 197, 255, 0.7);
-        background: rgba(85, 197, 255, 0.1);
+        border-color: rgba(91, 214, 182, 0.7);
+        background: rgba(91, 214, 182, 0.1);
       }
 
       .notification-item.unread {
@@ -438,10 +437,10 @@
       }
 
       .action-btn {
-        background: rgba(56, 186, 252, 0.14);
+        background: rgba(91, 214, 182, 0.14);
         color: var(--text);
         padding: 8px 10px;
-        border: 1px solid rgba(56, 186, 252, 0.4);
+        border: 1px solid rgba(91, 214, 182, 0.4);
       }
 
       .ghost-btn {
@@ -452,7 +451,7 @@
       }
 
       .primary-btn {
-        background: linear-gradient(135deg, var(--accent), #7dd3fc);
+        background: linear-gradient(135deg, var(--accent), #a4edcf);
         color: #03131d;
         padding: 10px 14px;
         font-weight: 800;
@@ -524,8 +523,8 @@
       }
 
       .filter-row button.active {
-        background: rgba(56, 186, 252, 0.18);
-        border-color: rgba(56, 186, 252, 0.6);
+        background: rgba(91, 214, 182, 0.18);
+        border-color: rgba(91, 214, 182, 0.6);
       }
 
       .course-item strong, .student-item strong, .project-item strong, .task-item strong {
@@ -585,8 +584,8 @@
       }
 
       .tab.active {
-        background: rgba(56, 186, 252, 0.14);
-        border-color: rgba(56, 186, 252, 0.6);
+        background: rgba(91, 214, 182, 0.14);
+        border-color: rgba(91, 214, 182, 0.6);
       }
 
       .tab-panel {
@@ -666,15 +665,15 @@
         place-items: center;
         gap: 16px;
         min-height: 240px;
-        border: 1px solid rgba(85,197,255,0.24);
+        border: 1px solid rgba(91,214,182,0.24);
         border-radius: 16px;
         background:
-          radial-gradient(circle at 50% 25%, rgba(85,197,255,0.16), transparent 42%),
+          radial-gradient(circle at 50% 25%, rgba(91,214,182,0.16), transparent 42%),
           rgba(255,255,255,0.02);
       }
 
       .react-counter-value {
-        color: #b6eaff;
+        color: #b6f1dc;
         font-size: 4.2rem;
         font-weight: 850;
         letter-spacing: -0.08em;
@@ -819,7 +818,7 @@
         reactQuizAnswer: '',
         reactQuizChecked: false,
         counter: 0,
-        color: '#38bafc',
+        color: '#5bd6b6',
         directoryQuery: '',
         students: [
           { name: 'Alicia Reed', track: 'Design' },
@@ -1015,7 +1014,7 @@
 
       const renderInteractivePractice = () => {
         const count = state.counter || 0;
-        const color = state.color || '#38bafc';
+        const color = state.color || '#5bd6b6';
         taskOutput.innerHTML = `
           <div class="task-header">
             <h2>Interactive Practice</h2>
