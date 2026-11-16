@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 11</title>
+    <style>
+      :root {
+        --bg: #080b16;
+        --panel: rgba(16, 20, 34, 0.94);
+        --line: rgba(159, 174, 211, 0.25);
+        --text: #f5f6ff;
+        --muted: #a7aec6;
+        --accent: #55c5ff;
+        --accent-soft: rgba(56, 186, 252, 0.16);
+        --card: rgba(255, 255, 255, 0.04);
+        --card-hover: rgba(255, 255, 255, 0.08);
+        --card-active: rgba(56, 186, 252, 0.12);
+        --success: #6ee7b7;
+        --warning: #fbbf24;
+        --danger: #f87171;
+        --purple: #a78bfa;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 42px 18px 40px;
+        background:
+          radial-gradient(ellipse at 10% 5%, rgba(35, 120, 166, 0.16), transparent 32%),
+          radial-gradient(ellipse at 90% 30%, rgba(130, 76, 195, 0.13), transparent 34%),
+          var(--bg);
+      }
+
+      .frame {
+        width: min(100%, 1500px);
+        min-height: 420px;
+        padding: 0 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        box-shadow: 0 28px 80px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+        overflow: hidden;
+      }
+
+      .hero {
+        position: relative;
+        padding: 28px 28px 0;
+      }
+
+      .hero::after {
+        position: absolute;
+        top: 24px;
+        right: 34px;
+        width: 120px;
+        height: 120px;
+        border: 1px solid rgba(85, 197, 255, 0.17);
+        border-radius: 50%;
+        box-shadow: 0 0 0 18px rgba(85, 197, 255, 0.035), 0 0 0 38px rgba(85, 197, 255, 0.025);
+        content: "";
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: #b6a4ff;
+        font-size: 0.73rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        margin: 0;
+        color: var(--accent);
+        font-size: clamp(2.5rem, 3vw, 4.2rem);
+        font-weight: 800;
+        letter-spacing: -0.06em;
+        line-height: 1;
+      }
+
+      .hero-copy {
+        max-width: 700px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 30px 26px 14px;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .section-heading::after {
+        height: 1px;
+        flex: 1;
+        background: var(--line);
+        content: "";
+      }
+
+      .selection-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 26px 20px;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .selection-bar strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 18px;
+        padding: 0 26px;
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        min-height: 145px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: linear-gradient(145deg, var(--tile-tint, rgba(85,197,255,0.11)), rgba(255,255,255,0.025) 72%);
+        color: var(--text);
+        text-align: left;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+        transition: transform 180ms ease, border-color 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+        cursor: pointer;
+      }
+
+      .card::after {
+        position: absolute;
+        top: -25px;
+        right: -28px;
+        width: 82px;
+        height: 82px;
+        border: 1px solid color-mix(in srgb, var(--tile-color, var(--accent)) 35%, transparent);
+        border-radius: 50%;
+        content: "";
+        pointer-events: none;
+      }
+
+      .card:nth-child(6n + 2) { --tile-color: #f0ad57; --tile-tint: rgba(240,173,87,0.12); }
+      .card:nth-child(6n + 3) { --tile-color: #81d6b3; --tile-tint: rgba(129,214,179,0.11); }
+      .card:nth-child(6n + 4) { --tile-color: #b6a4ff; --tile-tint: rgba(182,164,255,0.12); }
+      .card:nth-child(6n + 5) { --tile-color: #ff83b7; --tile-tint: rgba(255,131,183,0.1); }
+      .card:nth-child(6n) { --tile-color: #f4d36a; --tile-tint: rgba(244,211,106,0.1); }
+
+      .card:hover,
+      .card:focus-visible {
+        transform: translateY(-4px);
+        filter: brightness(1.16);
+        border-color: color-mix(in srgb, var(--tile-color, var(--accent)) 60%, white);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22);
+        outline: none;
+      }
+
+      .card.is-active {
+        border-color: var(--tile-color, var(--accent));
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--tile-color, var(--accent)) 55%, transparent), 0 12px 28px color-mix(in srgb, var(--tile-color, var(--accent)) 13%, transparent);
+      }
+
+      .card-icon {
+        display: block;
+        color: var(--tile-color, var(--accent));
+        font-size: 1.35rem;
+        line-height: 1;
+      }
+
+      .card-copy {
+        display: block;
+        width: 100%;
+      }
+
+      .card-title {
+        display: block;
+        font-size: clamp(1rem, 1.25vw, 1.3rem);
+        font-weight: 750;
+        letter-spacing: -0.035em;
+      }
+
+      .card-description {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 450;
+        line-height: 1.4;
+      }
+
+      .task-panel {
+        margin: 26px 26px 0;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,0.02);
+        padding: 22px;
+      }
+
+      .task-shell {
+        display: grid;
+        gap: 18px;
+      }
+
+      .task-intro {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin: 0 26px 16px;
+        padding: 13px 15px;
+        border: 1px solid rgba(182, 164, 255, 0.22);
+        border-radius: 12px;
+        background: linear-gradient(105deg, rgba(182,164,255,0.08), rgba(85,197,255,0.04));
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .task-intro strong {
+        flex: 0 0 auto;
+        color: #d7ceff;
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .task-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .task-header h2 {
+        margin: 0;
+        font-size: clamp(1.4rem, 2vw, 2.2rem);
+        letter-spacing: -0.04em;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(110, 231, 183, 0.6);
+        background: rgba(110, 231, 183, 0.12);
+        color: var(--success);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .status-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .panel-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .mini-card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(10, 18, 26, 0.85);
+        padding: 18px;
+      }
+
+      .profile-card {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+
+      .avatar {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--accent), #7dd3fc);
+        color: #03131d;
+        font-size: 1.7rem;
+        font-weight: 800;
+      }
+
+      .profile-meta h3, .mini-card h3 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .profile-meta p, .mini-card p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .tag {
+        border-radius: 999px;
+        border: 1px solid rgba(56, 186, 252, 0.35);
+        background: rgba(56, 186, 252, 0.1);
+        color: var(--text);
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255,255,255,0.02);
+        padding: 14px 12px;
+        text-align: center;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.6rem;
+        letter-spacing: -0.06em;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+      }
+
+      .notification-list, .course-list, .student-list, .project-list, .task-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .notification-item, .course-item, .student-item, .project-item, .task-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        padding: 12px 14px;
+      }
+
+      button.task-item {
+        width: 100%;
+        color: var(--text);
+        text-align: left;
+      }
+
+      button.task-item.is-answer-selected {
+        border-color: rgba(85, 197, 255, 0.7);
+        background: rgba(85, 197, 255, 0.1);
+      }
+
+      .notification-item.unread {
+        border-color: rgba(251, 191, 36, 0.5);
+        background: rgba(251, 191, 36, 0.08);
+      }
+
+      .notification-main {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--warning);
+        display: inline-block;
+      }
+
+      .notification-item.unread .dot { background: var(--warning); }
+      .notification-item.read .dot { background: rgba(255,255,255,0.3); }
+
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .action-btn {
+        background: rgba(56, 186, 252, 0.14);
+        color: var(--text);
+        padding: 8px 10px;
+        border: 1px solid rgba(56, 186, 252, 0.4);
+      }
+
+      .ghost-btn {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--text);
+        padding: 8px 10px;
+      }
+
+      .primary-btn {
+        background: linear-gradient(135deg, var(--accent), #7dd3fc);
+        color: #03131d;
+        padding: 10px 14px;
+        font-weight: 800;
+      }
+
+      .product-box {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .product-visual {
+        height: 180px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        font-size: 4rem;
+        background: linear-gradient(135deg, rgba(56,186,252,0.2), rgba(167,139,250,0.2));
+      }
+
+      .qty-controls {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 6px 8px;
+      }
+
+      .qty-controls button {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.06);
+        color: var(--text);
+      }
+
+      .price {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin: 12px 0;
+      }
+
+      .price strong {
+        font-size: 2rem;
+        letter-spacing: -0.05em;
+      }
+
+      .cart-status {
+        margin-top: 12px;
+        color: var(--success);
+        font-weight: 700;
+      }
+
+      .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .filter-row button {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--line);
+        color: var(--text);
+        padding: 7px 10px;
+      }
+
+      .filter-row button.active {
+        background: rgba(56, 186, 252, 0.18);
+        border-color: rgba(56, 186, 252, 0.6);
+      }
+
+      .course-item strong, .student-item strong, .project-item strong, .task-item strong {
+        display: block;
+      }
+
+      .student-item {
+        align-items: center;
+      }
+
+      .student-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 74px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(167, 139, 250, 0.18);
+        color: #e9defd;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .gallery-item {
+        aspect-ratio: 1 / 1;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(56,186,252,0.2), rgba(212,95,193,0.28));
+        display: grid;
+        place-items: center;
+        font-size: 2.3rem;
+        cursor: pointer;
+      }
+
+      .gallery-item.selected {
+        border-color: rgba(110, 231, 183, 0.7);
+        box-shadow: 0 0 0 2px rgba(110,231,183,0.2);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .tab {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--text);
+        padding: 8px 12px;
+      }
+
+      .tab.active {
+        background: rgba(56, 186, 252, 0.14);
+        border-color: rgba(56, 186, 252, 0.6);
+      }
+
+      .tab-panel {
+        display: none;
+      }
+
+      .tab-panel.active {
+        display: block;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        overflow: hidden;
+      }
+
+      .progress-bar span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), var(--success));
+      }
+
+      .profile-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .profile-form label {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .profile-form input {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255,255,255,0.04);
+        color: var(--text);
+        padding: 10px 12px;
+      }
+
+      .live-profile {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.03);
+        padding: 18px;
+      }
+
+      .live-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #fbbf24, var(--accent));
+        color: #041620;
+        font-weight: 800;
+      }
+
+      .react-stage {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+        gap: 18px;
+      }
+
+      .react-counter {
+        display: grid;
+        place-items: center;
+        gap: 16px;
+        min-height: 240px;
+        border: 1px solid rgba(85,197,255,0.24);
+        border-radius: 16px;
+        background:
+          radial-gradient(circle at 50% 25%, rgba(85,197,255,0.16), transparent 42%),
+          rgba(255,255,255,0.02);
+      }
+
+      .react-counter-value {
+        color: #b6eaff;
+        font-size: 4.2rem;
+        font-weight: 850;
+        letter-spacing: -0.08em;
+      }
+
+      .code-sample {
+        overflow-x: auto;
+        margin: 14px 0 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #080d18;
+        color: #b6eaff;
+        font: 0.86rem/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+        white-space: pre-wrap;
+      }
+
+      .react-concept {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .react-concept strong { color: var(--text); }
+
+      .react-feedback {
+        min-height: 48px;
+        margin-top: 12px !important;
+        padding: 11px 12px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.035);
+      }
+
+      @media (max-width: 1180px) {
+        .grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .panel-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .frame { padding-bottom: 16px; }
+        .hero { padding: 24px 20px 0; }
+        .hero::after { display: none; }
+        .section-heading { margin-right: 20px; margin-left: 20px; }
+        .selection-bar { margin-right: 20px; margin-left: 20px; }
+        .task-intro { margin-right: 20px; margin-left: 20px; flex-direction: column; gap: 4px; }
+
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          padding: 0 20px;
+        }
+
+        .card {
+          min-height: 132px;
+          padding: 13px;
+        }
+
+        .product-box {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .react-stage { grid-template-columns: 1fr; }
+        .task-panel { margin-right: 20px; margin-left: 20px; padding: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <header class="hero">
+        <p class="eyebrow">Component studio · learning by building</p>
+        <h1 class="title">Week 11-1</h1>
+        <p class="hero-copy">Explore reusable UI patterns, practice real interface behaviors, and see how components turn small pieces into complete experiences.</p>
+      </header>
+
+      <div class="section-heading">Choose a component lab</div>
+
+      <div class="selection-bar" aria-live="polite">
+        <span>Selected:</span>
+        <strong id="selectionLabel">ProfileCard</strong>
+      </div>
+
+      <section class="grid" aria-label="Week 11 task cards">
+        <button class="card is-active" type="button" data-label="ProfileCard" aria-pressed="true"><span class="card-icon">◉</span><span class="card-copy"><span class="card-title">ProfileCard</span><span class="card-description">Turn a profile into a reusable component.</span></span></button>
+        <button class="card" type="button" data-label="Notification List" aria-pressed="false"><span class="card-icon">✳</span><span class="card-copy"><span class="card-title">Notification List</span><span class="card-description">Manage unread updates and messages.</span></span></button>
+        <button class="card" type="button" data-label="Card Children" aria-pressed="false"><span class="card-icon">▤</span><span class="card-copy"><span class="card-title">Card Children</span><span class="card-description">Compose a parent card from child items.</span></span></button>
+        <button class="card" type="button" data-label="ProductCard Demo" aria-pressed="false"><span class="card-icon">✦</span><span class="card-copy"><span class="card-title">ProductCard Demo</span><span class="card-description">Explore product details and cart state.</span></span></button>
+        <button class="card" type="button" data-label="Course Catalog" aria-pressed="false"><span class="card-icon">▧</span><span class="card-copy"><span class="card-title">Course Catalog</span><span class="card-description">Filter courses and save your picks.</span></span></button>
+        <button class="card" type="button" data-label="Interactive Practice" aria-pressed="false"><span class="card-icon">⌁</span><span class="card-copy"><span class="card-title">Interactive Practice</span><span class="card-description">Practice state with a live counter.</span></span></button>
+        <button class="card" type="button" data-label="Student Directory" aria-pressed="false"><span class="card-icon">⌕</span><span class="card-copy"><span class="card-title">Student Directory</span><span class="card-description">Search and browse student profiles.</span></span></button>
+        <button class="card" type="button" data-label="Portfolio Gallery" aria-pressed="false"><span class="card-icon">▦</span><span class="card-copy"><span class="card-title">Portfolio Gallery</span><span class="card-description">Select a project from a visual grid.</span></span></button>
+        <button class="card" type="button" data-label="Component Lab" aria-pressed="false"><span class="card-icon">⌘</span><span class="card-copy"><span class="card-title">Component Lab</span><span class="card-description">Switch between component notes.</span></span></button>
+        <button class="card" type="button" data-label="React Selected Work" aria-pressed="false"><span class="card-icon">◇</span><span class="card-copy"><span class="card-title">React Selected Work</span><span class="card-description">Filter selected projects by category.</span></span></button>
+        <button class="card" type="button" data-label="React Task" aria-pressed="false"><span class="card-icon">⚛</span><span class="card-copy"><span class="card-title">React State Lab</span><span class="card-description">Learn props, state, and re-rendering.</span></span></button>
+        <button class="card" type="button" data-label="Week 11 Task Index" aria-pressed="false"><span class="card-icon">☷</span><span class="card-copy"><span class="card-title">Week 11 Task Index</span><span class="card-description">Review the learning objectives.</span></span></button>
+        <button class="card" type="button" data-label="Student Profile Card (Live)" aria-pressed="false"><span class="card-icon">✎</span><span class="card-copy"><span class="card-title">Student Profile Card (Live)</span><span class="card-description">Edit profile data and preview it live.</span></span></button>
+      </section>
+
+      <div class="section-heading">Selected task</div>
+      <div class="task-intro" id="taskIntro"><strong>Learning goal</strong><span>Build a reusable student summary with data-driven content.</span></div>
+      <section class="task-panel">
+        <div id="taskOutput" class="task-shell"></div>
+      </section>
+    </main>
+
+    <script>
+      const cards = document.querySelectorAll('.card');
+      const selectionLabel = document.getElementById('selectionLabel');
+      const taskOutput = document.getElementById('taskOutput');
+
+      const state = {
+        notifications: [
+          { text: 'New project review ready', read: false },
+          { text: 'Mentor commented on your design', read: false },
+          { text: 'Course reminder: deadline tomorrow', read: true },
+          { text: 'Portfolio item was published', read: true }
+        ],
+        qty: 1,
+        cart: 0,
+        courseFilter: 'All',
+        courses: [
+          { name: 'Design Systems', type: 'UI', seats: 12, favorite: true },
+          { name: 'JavaScript Patterns', type: 'Code', seats: 8, favorite: false },
+          { name: 'Product Thinking', type: 'Strategy', seats: 5, favorite: true },
+          { name: 'Motion Basics', type: 'UI', seats: 14, favorite: false }
+        ],
+        selectedGallery: 'UI',
+        activeTab: 'Overview',
+        reactFilter: 'All',
+        reactCounter: 0,
+        reactQuizAnswer: '',
+        reactQuizChecked: false,
+        counter: 0,
+        color: '#38bafc',
+        directoryQuery: '',
+        students: [
+          { name: 'Alicia Reed', track: 'Design' },
+          { name: 'Milo Hart', track: 'Frontend' },
+          { name: 'Nina Shah', track: 'Development' },
+          { name: 'Omar Tarek', track: 'Strategy' }
+        ],
+        profile: {
+          name: 'Maya Jordan',
+          major: 'Interactive Design',
+          year: 'Third Year'
+        }
+      };
+
+      const renderProfileCard = () => {
+        const profile = state.profile;
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>ProfileCard</h2>
+            <span class="status-badge">Active</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card">
+              <div class="profile-card">
+                <div class="avatar">MJ</div>
+                <div class="profile-meta">
+                  <h3>${profile.name}</h3>
+                  <p>${profile.major}</p>
+                  <p>${profile.year}</p>
+                </div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">UX Research</span>
+                <span class="tag">Frontend</span>
+                <span class="tag">Branding</span>
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3>Performance</h3>
+              <div class="metric-grid">
+                <div class="metric"><strong>18</strong><span>Projects</span></div>
+                <div class="metric"><strong>92%</strong><span>Success</span></div>
+                <div class="metric"><strong>4.9</strong><span>Rating</span></div>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderNotifications = () => {
+        const unread = state.notifications.filter((n) => !n.read).length;
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Notification List</h2>
+            <span class="status-badge">${unread} unread</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card">
+              <div class="notification-list">
+                ${state.notifications.map((item, index) => `
+                  <div class="notification-item ${item.read ? 'read' : 'unread'}">
+                    <div class="notification-main">
+                      <span class="dot"></span>
+                      <div>
+                        <strong>${item.text}</strong>
+                        <div style="color: var(--muted); font-size: 0.8rem; margin-top: 4px;">${item.read ? 'Read' : 'New'} • 2m ago</div>
+                      </div>
+                    </div>
+                    <button class="ghost-btn" data-notify-index="${index}" data-action="toggle-notification">${item.read ? 'Mark unread' : 'Mark read'}</button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3>Quick actions</h3>
+              <div class="btn-row" style="margin-top: 14px;">
+                <button class="action-btn" data-action="mark-all-read">Mark all read</button>
+                <button class="ghost-btn" data-action="clear-read">Clear read</button>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderChildren = () => {
+        const childCards = [
+          { name: 'UI polish', type: 'Design', status: 'Ready' },
+          { name: 'API review', type: 'Frontend', status: 'Review' },
+          { name: 'Marketing copy', type: 'Content', status: 'Draft' }
+        ];
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Card Children</h2>
+            <span class="status-badge">3 items</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card">
+              <div class="notification-list">
+                ${childCards.map((item) => `
+                  <div class="notification-item">
+                    <div class="notification-main">
+                      <div class="avatar" style="width: 42px; height: 42px; font-size: 1rem;">${item.name.split(' ')[0][0]}</div>
+                      <div>
+                        <strong>${item.name}</strong>
+                        <div style="color: var(--muted); font-size: 0.8rem; margin-top: 4px;">${item.type}</div>
+                      </div>
+                    </div>
+                    <button class="action-btn" data-child-status="${item.status}">${item.status}</button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3>Child summary</h3>
+              <div class="metric-grid">
+                <div class="metric"><strong>12</strong><span>Tasks</span></div>
+                <div class="metric"><strong>8</strong><span>Done</span></div>
+                <div class="metric"><strong>4</strong><span>Active</span></div>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderProductCard = () => {
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>ProductCard Demo</h2>
+            <span class="status-badge">Cart: ${state.cart}</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card product-box">
+              <div class="product-visual">🎧</div>
+              <div>
+                <h3>Pulse Pro Headset</h3>
+                <p>Wireless audio with immersive sound and all-day comfort.</p>
+                <div class="price"><strong>$129</strong><span>USD</span></div>
+                <div class="qty-controls">
+                  <button type="button" data-product-action="decrease">−</button>
+                  <span id="qtyValue">${state.qty}</span>
+                  <button type="button" data-product-action="increase">＋</button>
+                </div>
+                <div class="btn-row" style="margin-top: 16px;">
+                  <button class="primary-btn" data-product-action="add">Add to cart</button>
+                </div>
+                <div class="cart-status" id="cartStatus">Added ${state.cart} item(s)</div>
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3>Included features</h3>
+              <div class="tag-row">
+                <span class="tag">Noise canceling</span>
+                <span class="tag">40h battery</span>
+                <span class="tag">Fast charge</span>
+                <span class="tag">Bluetooth 5.3</span>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderCourseCatalog = () => {
+        const filtered = state.courseFilter === 'All'
+          ? state.courses
+          : state.courses.filter((course) => course.type === state.courseFilter);
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Course Catalog</h2>
+            <span class="status-badge">${filtered.length} visible</span>
+          </div>
+          <div class="mini-card">
+            <div class="filter-row">
+              ${['All','UI','Code','Strategy'].map((type) => `
+                <button type="button" class="${state.courseFilter === type ? 'active' : ''}" data-course-filter="${type}">${type}</button>
+              `).join('')}
+            </div>
+            <div class="course-list">
+              ${filtered.map((course) => `
+                <div class="course-item">
+                  <div>
+                    <strong>${course.name}</strong>
+                    <span style="color: var(--muted);">${course.type} • ${course.seats} seats left</span>
+                  </div>
+                  <button class="${course.favorite ? 'primary-btn' : 'ghost-btn'}" data-course-favorite="${course.name}">${course.favorite ? 'Saved' : 'Save'}</button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderInteractivePractice = () => {
+        const count = state.counter || 0;
+        const color = state.color || '#38bafc';
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Interactive Practice</h2>
+            <span class="status-badge">Counter: ${count}</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card" style="display: grid; place-items: center; gap: 16px;">
+              <div class="avatar" style="width: 96px; height: 96px; border-radius: 18px; background: ${color}; color: #02141d; font-size: 2.5rem;">${count}</div>
+              <div class="btn-row">
+                <button class="action-btn" data-counter-action="decrease">-1</button>
+                <button class="action-btn" data-counter-action="increase">+1</button>
+                <button class="primary-btn" data-counter-action="random">Random Color</button>
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3>Status</h3>
+              <p style="margin-top: 10px;">Current value is <strong>${count}</strong>. The highlight color updates to keep the panel lively.</p>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderStudentDirectory = () => {
+        const query = (state.directoryQuery || '').toLowerCase();
+        const visible = state.students.filter((student) => student.name.toLowerCase().includes(query) || student.track.toLowerCase().includes(query));
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Student Directory</h2>
+            <span class="status-badge">${visible.length} matches</span>
+          </div>
+          <div class="mini-card">
+            <div style="margin-bottom: 12px;">
+              <input id="directorySearch" type="text" value="${state.directoryQuery || ''}" placeholder="Search students..." style="width: 100%; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.04); color: var(--text); padding: 10px 12px;" />
+            </div>
+            <div class="student-list">
+              ${visible.map((student) => `
+                <div class="student-item">
+                  <div>
+                    <strong>${student.name}</strong>
+                    <span style="color: var(--muted);">${student.track}</span>
+                  </div>
+                  <span class="student-pill">${student.track.slice(0, 3).toUpperCase()}</span>
+                </div>
+              `).join('') || '<div class="student-item"><strong>No matching students</strong></div>'}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderGallery = () => {
+        const items = [
+          { label: 'UI', icon: '🧩' },
+          { label: 'Brand', icon: '🎨' },
+          { label: 'Code', icon: '💻' },
+          { label: 'Motion', icon: '✨' },
+          { label: 'Research', icon: '📊' },
+          { label: 'Story', icon: '📚' }
+        ];
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Portfolio Gallery</h2>
+            <span class="status-badge">${state.selectedGallery}</span>
+          </div>
+          <div class="mini-card">
+            <div class="gallery-grid">
+              ${items.map((item) => `
+                <div class="gallery-item ${state.selectedGallery === item.label ? 'selected' : ''}" data-gallery-item="${item.label}" title="${item.label}">${item.icon}</div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderComponentLab = () => {
+        const tabs = {
+          Overview: 'A curated design system with reusable UI pieces and a strong visual rhythm.',
+          Stack: 'HTML, CSS, JavaScript, and accessible interaction patterns built for clarity and performance.',
+          Notes: 'This lab keeps each component independent while sharing the same dark design language.'
+        };
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Component Lab</h2>
+            <span class="status-badge">${state.activeTab}</span>
+          </div>
+          <div class="mini-card">
+            <div class="tabs">
+              ${Object.keys(tabs).map((tab) => `
+                <button class="tab ${state.activeTab === tab ? 'active' : ''}" data-tab-name="${tab}">${tab}</button>
+              `).join('')}
+            </div>
+            <div class="tab-panel ${state.activeTab === 'Overview' ? 'active' : ''}" data-tab-panel="Overview">
+              <p>${tabs.Overview}</p>
+            </div>
+            <div class="tab-panel ${state.activeTab === 'Stack' ? 'active' : ''}" data-tab-panel="Stack">
+              <p>${tabs.Stack}</p>
+            </div>
+            <div class="tab-panel ${state.activeTab === 'Notes' ? 'active' : ''}" data-tab-panel="Notes">
+              <p>${tabs.Notes}</p>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderReactSelectedWork = () => {
+        const items = [
+          { name: 'Project Atlas', category: 'Design', level: 'High' },
+          { name: 'Course Portal', category: 'Web', level: 'Medium' },
+          { name: 'Brand Refresh', category: 'Brand', level: 'High' },
+          { name: 'Campaign UI', category: 'Web', level: 'High' }
+        ];
+        const visible = state.reactFilter === 'All' ? items : items.filter((item) => item.category === state.reactFilter);
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>React Selected Work</h2>
+            <span class="status-badge">${visible.length} items</span>
+          </div>
+          <div class="mini-card">
+            <div class="filter-row">
+              ${['All','Design','Web','Brand'].map((type) => `
+                <button type="button" class="${state.reactFilter === type ? 'active' : ''}" data-react-filter="${type}">${type}</button>
+              `).join('')}
+            </div>
+            <div class="project-list">
+              ${visible.map((project) => `
+                <div class="project-item">
+                  <div>
+                    <strong>${project.name}</strong>
+                    <span style="color: var(--muted);">${project.category}</span>
+                  </div>
+                  <span class="student-pill">${project.level}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderReactTask = () => {
+        const answerFeedback = state.reactQuizChecked
+          ? state.reactQuizAnswer === 'state'
+            ? '<strong style="color: var(--success);">Correct.</strong> State is component-owned data; updating it schedules a re-render.'
+            : '<strong style="color: var(--warning);">Not quite.</strong> Props are passed in. State is component-owned data that can change.'
+          : 'Choose an answer, then check it to see the explanation.';
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>React State Lab</h2>
+            <span class="status-badge">Components · props · state</span>
+          </div>
+          <p>React builds interfaces from components. Props pass information into a component; state stores information that changes over time.</p>
+          <div class="react-stage">
+            <div class="mini-card">
+              <h3>State in action</h3>
+              <p>Click a control to update the value. In a React app, changing state causes the component to render again.</p>
+              <div class="react-counter">
+                <span class="tag">Counter component</span>
+                <strong class="react-counter-value" aria-live="polite">${state.reactCounter}</strong>
+                <div class="btn-row">
+                  <button class="ghost-btn" type="button" data-react-counter="decrease" aria-label="Decrease counter">−</button>
+                  <button class="action-btn" type="button" data-react-counter="reset">Reset</button>
+                  <button class="primary-btn" type="button" data-react-counter="increase" aria-label="Increase counter">+</button>
+                </div>
+              </div>
+              <pre class="code-sample"><code>function Counter() {
+  const [count, setCount] = useState(0);
+  return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+    Count: {count}
+  &lt;/button&gt;;
+}</code></pre>
+            </div>
+            <div class="mini-card">
+              <h3>Quick check</h3>
+              <p>Which React feature should hold a counter value that changes after a button click?</p>
+              <div class="task-list" role="group" aria-label="React concept answer">
+                ${[
+                  { value: 'props', text: 'Props — inputs supplied by a parent' },
+                  { value: 'state', text: 'State — changing data owned by a component' },
+                  { value: 'css', text: 'CSS — visual styling rules' }
+                ].map((option) => `
+                  <button type="button" class="task-item ${state.reactQuizAnswer === option.value ? 'is-answer-selected' : ''}" data-react-answer="${option.value}" aria-pressed="${state.reactQuizAnswer === option.value}">
+                    <span>${option.text}</span>
+                  </button>
+                `).join('')}
+              </div>
+              <div class="btn-row" style="margin-top: 14px;">
+                <button class="primary-btn" type="button" data-react-quiz-check>Check answer</button>
+              </div>
+              <p class="react-feedback" aria-live="polite">${answerFeedback}</p>
+              <div class="react-concept"><span class="tag">Props</span><span>Read-only inputs used to configure reusable components.</span></div>
+              <div class="react-concept"><span class="tag">State</span><span>Local data that can change and update what the user sees.</span></div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderTaskIndex = () => {
+        const tasks = [
+          ['ProfileCard', 'Reusable profile layout with skills and performance metrics.'],
+          ['Notification List', 'Unread status, mark-read controls, and list actions.'],
+          ['Card Children', 'Parent and child card composition with summary data.'],
+          ['ProductCard Demo', 'Product details, quantity controls, and cart state.'],
+          ['Course Catalog', 'Category filters and saved course toggles.'],
+          ['Interactive Practice', 'A counter and color control driven by changing state.'],
+          ['Student Directory', 'Live text search over student records.'],
+          ['Portfolio Gallery', 'Selectable project tiles with a selected state.'],
+          ['Component Lab', 'Tabbed component notes and documentation.'],
+          ['React Selected Work', 'Filterable project collection.'],
+          ['React State Lab', 'Props vs. state, a counter, and a knowledge check.'],
+          ['Student Profile Card (Live)', 'Editable inputs connected to a live profile preview.']
+        ];
+
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Week 11 Task Index</h2>
+            <span class="status-badge">${tasks.length} interactive labs</span>
+          </div>
+          <div class="mini-card">
+            <div class="task-list">
+              ${tasks.map(([task, description]) => `
+                <div class="task-item">
+                  <div style="flex:1;">
+                    <strong>${task}</strong>
+                    <span style="display:block; color: var(--muted); margin-top: 4px;">${description}</span>
+                  </div>
+                  <span class="student-pill">Ready</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      };
+
+      const renderLiveProfileCard = () => {
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <h2>Student Profile Card (Live)</h2>
+            <span class="status-badge">Live editing</span>
+          </div>
+          <div class="panel-grid">
+            <div class="mini-card">
+              <div class="profile-form">
+                <label>
+                  Name
+                  <input id="liveName" type="text" value="${state.profile.name}" />
+                </label>
+                <label>
+                  Major
+                  <input id="liveMajor" type="text" value="${state.profile.major}" />
+                </label>
+                <label>
+                  Year
+                  <input id="liveYear" type="text" value="${state.profile.year}" />
+                </label>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="live-profile">
+                <div class="live-avatar">${state.profile.name.split(' ').map((word) => word[0]).join('').slice(0,2).toUpperCase()}</div>
+                <div>
+                  <h3>${state.profile.name}</h3>
+                  <p>${state.profile.major}</p>
+                  <p>${state.profile.year}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      const renderTask = (label) => {
+        selectionLabel.textContent = label;
+        const taskMap = {
+          'ProfileCard': renderProfileCard,
+          'Notification List': renderNotifications,
+          'Card Children': renderChildren,
+          'ProductCard Demo': renderProductCard,
+          'Course Catalog': renderCourseCatalog,
+          'Interactive Practice': renderInteractivePractice,
+          'Student Directory': renderStudentDirectory,
+          'Portfolio Gallery': renderGallery,
+          'Component Lab': renderComponentLab,
+          'React Selected Work': renderReactSelectedWork,
+          'React Task': renderReactTask,
+          'Week 11 Task Index': renderTaskIndex,
+          'Student Profile Card (Live)': renderLiveProfileCard
+        };
+
+        const render = taskMap[label] || renderProfileCard;
+        render();
+        const descriptions = {
+          'ProfileCard': 'Build a reusable student summary with data-driven content.',
+          'Notification List': 'Practice rendering a list from data and changing each item’s read state.',
+          'Card Children': 'See how a parent card can organize smaller reusable child components.',
+          'ProductCard Demo': 'Explore product props, quantity controls, and an interactive cart total.',
+          'Course Catalog': 'Use category filters and saved state to manage a small course collection.',
+          'Interactive Practice': 'Update component state and observe the interface respond immediately.',
+          'Student Directory': 'Search through a data set and narrow the visible results as you type.',
+          'Portfolio Gallery': 'Choose a portfolio category and see selection state reflected visually.',
+          'Component Lab': 'Switch between component documentation panels.',
+          'React Selected Work': 'Filter a portfolio of selected work by project category.',
+          'React Task': 'Learn the difference between props and state, try a stateful counter, and check your understanding.',
+          'Week 11 Task Index': 'Review the practical concepts demonstrated across the Week 11 component labs.',
+          'Student Profile Card (Live)': 'Edit the profile fields and watch the preview update in real time.'
+        };
+        document.querySelector('#taskIntro span').textContent = descriptions[label] || '';
+      };
+
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          cards.forEach((item) => {
+            const isSelected = item === card;
+            item.classList.toggle('is-active', isSelected);
+            item.setAttribute('aria-pressed', String(isSelected));
+          });
+          renderTask(card.dataset.label);
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        const target = event.target.closest('[data-action]');
+        if (target) {
+          const action = target.dataset.action;
+
+          if (action === 'toggle-notification') {
+            const index = Number(target.dataset.notifyIndex);
+            state.notifications[index].read = !state.notifications[index].read;
+            renderTask('Notification List');
+          }
+
+          if (action === 'mark-all-read') {
+            state.notifications = state.notifications.map((task) => ({ ...task, read: true }));
+            renderTask('Notification List');
+          }
+
+          if (action === 'clear-read') {
+            state.notifications = state.notifications.filter((task) => !task.read);
+            renderTask('Notification List');
+          }
+        }
+
+        const productAction = event.target.closest('[data-product-action]');
+        if (productAction) {
+          const action = productAction.dataset.productAction;
+          if (action === 'increase') state.qty += 1;
+          if (action === 'decrease') state.qty = Math.max(1, state.qty - 1);
+          if (action === 'add') {
+            state.cart += state.qty;
+            const status = document.getElementById('cartStatus');
+            if (status) status.textContent = `Added ${state.cart} item(s)`;
+          }
+          renderTask('ProductCard Demo');
+        }
+
+        const courseFilter = event.target.closest('[data-course-filter]');
+        if (courseFilter) {
+          state.courseFilter = courseFilter.dataset.courseFilter;
+          renderTask('Course Catalog');
+        }
+
+        const courseFavorite = event.target.closest('[data-course-favorite]');
+        if (courseFavorite) {
+          const itemName = courseFavorite.dataset.courseFavorite;
+        const course = state.courses.find((entry) => entry.name === itemName);
+          if (course) {
+            course.favorite = !course.favorite;
+          }
+          renderTask('Course Catalog');
+        }
+
+        const counterAction = event.target.closest('[data-counter-action]');
+        if (counterAction) {
+          const action = counterAction.dataset.counterAction;
+          if (action === 'increase') {
+            state.counter = (state.counter || 0) + 1;
+          }
+          if (action === 'decrease') {
+            state.counter = Math.max(0, (state.counter || 0) - 1);
+          }
+          if (action === 'random') {
+            const hue = Math.floor(Math.random() * 360);
+            state.color = `hsl(${hue} 80% 60%)`;
+          }
+          renderTask('Interactive Practice');
+        }
+
+        const galleryItem = event.target.closest('[data-gallery-item]');
+        if (galleryItem) {
+          state.selectedGallery = galleryItem.dataset.galleryItem;
+          renderTask('Portfolio Gallery');
+        }
+
+        const tabTrigger = event.target.closest('[data-tab-name]');
+        if (tabTrigger) {
+          state.activeTab = tabTrigger.dataset.tabName;
+          renderTask('Component Lab');
+        }
+
+        const reactFilter = event.target.closest('[data-react-filter]');
+        if (reactFilter) {
+          state.reactFilter = reactFilter.dataset.reactFilter;
+          renderTask('React Selected Work');
+        }
+
+        const reactCounter = event.target.closest('[data-react-counter]');
+        if (reactCounter) {
+          if (reactCounter.dataset.reactCounter === 'increase') state.reactCounter += 1;
+          if (reactCounter.dataset.reactCounter === 'decrease') state.reactCounter -= 1;
+          if (reactCounter.dataset.reactCounter === 'reset') state.reactCounter = 0;
+          renderTask('React Task');
+        }
+
+        const reactAnswer = event.target.closest('[data-react-answer]');
+        if (reactAnswer) {
+          state.reactQuizAnswer = reactAnswer.dataset.reactAnswer;
+          state.reactQuizChecked = false;
+          renderTask('React Task');
+        }
+
+        if (event.target.closest('[data-react-quiz-check]')) {
+          state.reactQuizChecked = true;
+          renderTask('React Task');
+        }
+
+        const liveNameInput = event.target.closest('#liveName');
+        const liveMajorInput = event.target.closest('#liveMajor');
+        const liveYearInput = event.target.closest('#liveYear');
+
+        if (liveNameInput && document.activeElement === liveNameInput) {
+          state.profile.name = liveNameInput.value || 'Maya Jordan';
+          renderTask('Student Profile Card (Live)');
+        }
+
+        if (liveMajorInput && document.activeElement === liveMajorInput) {
+          state.profile.major = liveMajorInput.value || 'Interactive Design';
+          renderTask('Student Profile Card (Live)');
+        }
+
+        if (liveYearInput && document.activeElement === liveYearInput) {
+          state.profile.year = liveYearInput.value || 'Third Year';
+          renderTask('Student Profile Card (Live)');
+        }
+      });
+
+      document.addEventListener('input', (event) => {
+        const searchInput = event.target.closest('#directorySearch');
+        if (searchInput) {
+          state.directoryQuery = searchInput.value;
+          const cursorPosition = searchInput.selectionStart;
+          renderTask('Student Directory');
+          const updatedSearch = document.getElementById('directorySearch');
+          updatedSearch.focus();
+          updatedSearch.setSelectionRange(cursorPosition, cursorPosition);
+        }
+
+        const liveNameInput = event.target.closest('#liveName');
+        if (liveNameInput) {
+          state.profile.name = liveNameInput.value || 'Maya Jordan';
+          const cursorPosition = liveNameInput.selectionStart;
+          renderTask('Student Profile Card (Live)');
+          const updatedInput = document.getElementById('liveName');
+          updatedInput.focus();
+          updatedInput.setSelectionRange(cursorPosition, cursorPosition);
+        }
+
+        const liveMajorInput = event.target.closest('#liveMajor');
+        if (liveMajorInput) {
+          state.profile.major = liveMajorInput.value || 'Interactive Design';
+          const cursorPosition = liveMajorInput.selectionStart;
+          renderTask('Student Profile Card (Live)');
+          const updatedInput = document.getElementById('liveMajor');
+          updatedInput.focus();
+          updatedInput.setSelectionRange(cursorPosition, cursorPosition);
+        }
+
+        const liveYearInput = event.target.closest('#liveYear');
+        if (liveYearInput) {
+          state.profile.year = liveYearInput.value || 'Third Year';
+          const cursorPosition = liveYearInput.selectionStart;
+          renderTask('Student Profile Card (Live)');
+          const updatedInput = document.getElementById('liveYear');
+          updatedInput.focus();
+          updatedInput.setSelectionRange(cursorPosition, cursorPosition);
+        }
+      });
+
+      renderTask('ProfileCard');
+    </script>
+  </body>
+</html>
