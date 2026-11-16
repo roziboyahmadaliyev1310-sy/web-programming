@@ -311,6 +311,8 @@
       .avatar {
         width: 78px;
         height: 78px;
+        flex: 0 0 78px;
+        overflow: hidden;
         border-radius: 50%;
         display: grid;
         place-items: center;
@@ -318,6 +320,15 @@
         color: #03131d;
         font-size: 1.7rem;
         font-weight: 800;
+      }
+
+      .avatar img,
+      .live-avatar img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 32%;
       }
 
       .profile-meta h3, .mini-card h3 {
@@ -328,6 +339,12 @@
       .profile-meta p, .mini-card p {
         margin: 6px 0 0;
         color: var(--muted);
+      }
+
+      .profile-meta .profile-bio {
+        max-width: 430px;
+        margin-top: 10px;
+        line-height: 1.5;
       }
 
       .tag-row {
@@ -345,6 +362,72 @@
         padding: 6px 10px;
         font-size: 0.75rem;
         font-weight: 700;
+        text-decoration: none;
+        transition: background 160ms ease, border-color 160ms ease;
+      }
+
+      a.tag:hover,
+      a.tag:focus-visible {
+        border-color: var(--accent);
+        background: rgba(91, 214, 182, 0.2);
+        outline: none;
+      }
+
+      .profile-projects {
+        margin-top: 20px;
+      }
+
+      .profile-projects h4 {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-callout {
+        margin-top: 20px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .portfolio-callout h4 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .portfolio-callout p {
+        margin: 6px 0 12px;
+        color: var(--muted);
+      }
+
+      .portfolio-actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+
+      .portfolio-actions a.primary-btn { color: #03131d; }
+      .portfolio-actions a.ghost-btn { color: var(--text); }
+
+      .project-embed {
+        overflow: hidden;
+        min-height: 65vh;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .project-embed iframe {
+        display: block;
+        width: 100%;
+        height: 65vh;
+        min-height: 520px;
+        border: 0;
+        background: #fff;
       }
 
       .metric-grid {
@@ -464,6 +547,19 @@
         align-items: center;
       }
 
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .product-grid .product-box {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+
       .product-visual {
         height: 180px;
         border-radius: 18px;
@@ -471,6 +567,10 @@
         place-items: center;
         font-size: 4rem;
         background: linear-gradient(135deg, rgba(56,186,252,0.2), rgba(167,139,250,0.2));
+      }
+
+      .product-grid .product-visual {
+        height: 150px;
       }
 
       .qty-controls {
@@ -556,6 +656,9 @@
 
       .gallery-item {
         aspect-ratio: 1 / 1;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
         border: 1px solid var(--line);
         border-radius: 14px;
         background: linear-gradient(135deg, rgba(56,186,252,0.2), rgba(212,95,193,0.28));
@@ -563,6 +666,43 @@
         place-items: center;
         font-size: 2.3rem;
         cursor: pointer;
+        color: var(--text);
+        padding: 0;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-item span {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        left: 8px;
+        padding: 7px 9px;
+        border-radius: 9px;
+        background: rgba(8, 13, 24, 0.84);
+        font-size: 0.82rem;
+        font-weight: 750;
+        text-align: left;
+      }
+
+      .gallery-featured {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 16px;
+      }
+
+      .gallery-featured img {
+        width: 112px;
+        height: 112px;
+        flex: 0 0 112px;
+        object-fit: cover;
+        border-radius: 14px;
+        border: 1px solid var(--line);
       }
 
       .gallery-item.selected {
@@ -646,6 +786,8 @@
       .live-avatar {
         width: 72px;
         height: 72px;
+        flex: 0 0 72px;
+        overflow: hidden;
         border-radius: 50%;
         display: grid;
         place-items: center;
@@ -743,12 +885,22 @@
           grid-template-columns: 1fr;
         }
 
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
         .gallery-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .gallery-featured {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
         .react-stage { grid-template-columns: 1fr; }
         .task-panel { margin-right: 20px; margin-left: 20px; padding: 16px; }
+        .project-embed iframe { height: 70vh; min-height: 440px; }
       }
     </style>
   </head>
@@ -771,11 +923,11 @@
         <button class="card is-active" type="button" data-label="ProfileCard" aria-pressed="true"><span class="card-icon">◉</span><span class="card-copy"><span class="card-title">ProfileCard</span><span class="card-description">Turn a profile into a reusable component.</span></span></button>
         <button class="card" type="button" data-label="Notification List" aria-pressed="false"><span class="card-icon">✳</span><span class="card-copy"><span class="card-title">Notification List</span><span class="card-description">Manage unread updates and messages.</span></span></button>
         <button class="card" type="button" data-label="Card Children" aria-pressed="false"><span class="card-icon">▤</span><span class="card-copy"><span class="card-title">Card Children</span><span class="card-description">Compose a parent card from child items.</span></span></button>
-        <button class="card" type="button" data-label="ProductCard Demo" aria-pressed="false"><span class="card-icon">✦</span><span class="card-copy"><span class="card-title">ProductCard Demo</span><span class="card-description">Explore product details and cart state.</span></span></button>
-        <button class="card" type="button" data-label="Course Catalog" aria-pressed="false"><span class="card-icon">▧</span><span class="card-copy"><span class="card-title">Course Catalog</span><span class="card-description">Filter courses and save your picks.</span></span></button>
+        <button class="card" type="button" data-label="ProductCard Demo" aria-pressed="false"><span class="card-icon">✦</span><span class="card-copy"><span class="card-title">ProductCard Demo</span><span class="card-description">Shop four products and add them to your cart.</span></span></button>
+        <button class="card" type="button" data-label="Course Catalog" aria-pressed="false"><span class="card-icon">▧</span><span class="card-copy"><span class="card-title">Course Catalog</span><span class="card-description">Browse and save your course categories.</span></span></button>
         <button class="card" type="button" data-label="Interactive Practice" aria-pressed="false"><span class="card-icon">⌁</span><span class="card-copy"><span class="card-title">Interactive Practice</span><span class="card-description">Practice state with a live counter.</span></span></button>
-        <button class="card" type="button" data-label="Student Directory" aria-pressed="false"><span class="card-icon">⌕</span><span class="card-copy"><span class="card-title">Student Directory</span><span class="card-description">Search and browse student profiles.</span></span></button>
-        <button class="card" type="button" data-label="Portfolio Gallery" aria-pressed="false"><span class="card-icon">▦</span><span class="card-copy"><span class="card-title">Portfolio Gallery</span><span class="card-description">Select a project from a visual grid.</span></span></button>
+        <button class="card" type="button" data-label="Student Directory" aria-pressed="false"><span class="card-icon">⌕</span><span class="card-copy"><span class="card-title">Student Directory</span><span class="card-description">Find students by name or student ID.</span></span></button>
+        <button class="card" type="button" data-label="Portfolio Gallery" aria-pressed="false"><span class="card-icon">▦</span><span class="card-copy"><span class="card-title">Portfolio Gallery</span><span class="card-description">View my portfolio photo, live site, and source.</span></span></button>
         <button class="card" type="button" data-label="Component Lab" aria-pressed="false"><span class="card-icon">⌘</span><span class="card-copy"><span class="card-title">Component Lab</span><span class="card-description">Switch between component notes.</span></span></button>
         <button class="card" type="button" data-label="React Selected Work" aria-pressed="false"><span class="card-icon">◇</span><span class="card-copy"><span class="card-title">React Selected Work</span><span class="card-description">Filter selected projects by category.</span></span></button>
         <button class="card" type="button" data-label="React Task" aria-pressed="false"><span class="card-icon">⚛</span><span class="card-copy"><span class="card-title">React State Lab</span><span class="card-description">Learn props, state, and re-rendering.</span></span></button>
@@ -802,16 +954,23 @@
           { text: 'Course reminder: deadline tomorrow', read: true },
           { text: 'Portfolio item was published', read: true }
         ],
-        qty: 1,
         cart: 0,
+        cartValue: 0,
+        shopProducts: [
+          { id: 'headphones', name: 'Pulse Pro Headset', description: 'Wireless audio with immersive sound and all-day comfort.', price: 129, visual: '🎧', quantity: 1, features: ['Noise canceling', '40h battery', 'Fast charge'] },
+          { id: 'keyboard', name: 'Orbit Mechanical Keyboard', description: 'Tactile keys and a compact layout for focused work.', price: 89, visual: '⌨️', quantity: 1, features: ['Hot-swappable', 'RGB backlight', 'USB-C'] },
+          { id: 'watch', name: 'Tempo Smart Watch', description: 'A lightweight daily companion for activity and notifications.', price: 179, visual: '⌚', quantity: 1, features: ['Health tracking', '5-day battery', 'Water resistant'] },
+          { id: 'speaker', name: 'Wave Mini Speaker', description: 'Portable, room-filling sound in a travel-ready design.', price: 59, visual: '🔊', quantity: 1, features: ['12h playtime', 'Bluetooth', 'Pocket-size'] }
+        ],
         courseFilter: 'All',
         courses: [
-          { name: 'Design Systems', type: 'UI', seats: 12, favorite: true },
-          { name: 'JavaScript Patterns', type: 'Code', seats: 8, favorite: false },
-          { name: 'Product Thinking', type: 'Strategy', seats: 5, favorite: true },
-          { name: 'Motion Basics', type: 'UI', seats: 14, favorite: false }
+          { name: 'Web Programming', type: 'Web programming', seats: 12, favorite: true },
+          { name: 'Special Topics', type: 'Special topics', seats: 8, favorite: false },
+          { name: '20-Minute Literary Journey', type: '20-minute literary journey', seats: 5, favorite: true },
+          { name: 'Discrete Math', type: 'Discrete math', seats: 14, favorite: false },
+          { name: 'Football', type: 'Football', seats: 20, favorite: false }
         ],
-        selectedGallery: 'UI',
+        selectedGallery: 'My Portfolio',
         activeTab: 'Overview',
         reactFilter: 'All',
         reactCounter: 0,
@@ -821,16 +980,85 @@
         color: '#5bd6b6',
         directoryQuery: '',
         students: [
+          { name: 'AKHMADJON', track: 'Computer Engineering', studentId: '202539468' },
           { name: 'Alicia Reed', track: 'Design' },
           { name: 'Milo Hart', track: 'Frontend' },
           { name: 'Nina Shah', track: 'Development' },
           { name: 'Omar Tarek', track: 'Strategy' }
         ],
         profile: {
-          name: 'Maya Jordan',
-          major: 'Interactive Design',
-          year: 'Third Year'
-        }
+          name: 'Ruziboy',
+          major: 'Computer Engineering',
+          university: 'Gachon University',
+          year: 'Second Year',
+          bio: 'A curious builder learning to make useful, thoughtful experiences for the web.'
+        },
+        projects: [
+          {
+            name: 'Book Search',
+            type: 'Open Library app',
+            href: '../week10/book-search.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week10/book-search.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week10/book-search.html'
+          },
+          {
+            name: 'Official Joke API',
+            type: 'Joke API exercise',
+            href: '../week6/official-joke-api.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/official-joke-api.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/official-joke-api.html'
+          },
+          {
+            name: 'JSONPlaceholder',
+            type: 'Posts API exercise',
+            href: '../week6/jsonplaceholder-api.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/jsonplaceholder-api.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/jsonplaceholder-api.html'
+          },
+          {
+            name: 'Open-Meteo Weather',
+            type: 'Weather API exercise',
+            href: '../week6/open-meteo-api.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/open-meteo-api.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/open-meteo-api.html'
+          },
+          {
+            name: 'Random User API',
+            type: 'User data exercise',
+            href: '../week6/random-user-api.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/random-user-api.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/random-user-api.html'
+          },
+          {
+            name: 'PokéAPI',
+            type: 'Pokémon API exercise',
+            href: '../week6/pokeapi.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/pokeapi.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/pokeapi.html'
+          },
+          {
+            name: 'Country Search',
+            type: 'REST Countries exercise',
+            href: '../week6/rest-countries-api.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/web-programming/week6/rest-countries-api.html',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week6/rest-countries-api.html'
+          },
+          {
+            name: 'API Atlas',
+            type: 'Team travel project',
+            href: '../group%20project/index.html',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/test/',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/group%20project'
+          },
+          {
+            name: 'React Portfolio',
+            type: 'Personal portfolio',
+            href: 'https://roziboyahmadaliyev1310-sy.github.io/Portfolio/',
+            liveUrl: 'https://roziboyahmadaliyev1310-sy.github.io/Portfolio/',
+            sourceUrl: 'https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio'
+          }
+        ],
+        currentTask: 'ProfileCard'
       };
 
       const renderProfileCard = () => {
@@ -843,25 +1071,37 @@
           <div class="panel-grid">
             <div class="mini-card">
               <div class="profile-card">
-                <div class="avatar">MJ</div>
+                <div class="avatar">
+                  <img src="../week10/portfolio/public/images/portfolio-photo.jpg" alt="Portrait of Ruziboy" loading="eager" />
+                </div>
                 <div class="profile-meta">
                   <h3>${profile.name}</h3>
-                  <p>${profile.major}</p>
-                  <p>${profile.year}</p>
+                  <p>${profile.major} · ${profile.year}</p>
+                  <p>${profile.university}</p>
+                  <p class="profile-bio">${profile.bio}</p>
                 </div>
               </div>
-              <div class="tag-row">
-                <span class="tag">UX Research</span>
-                <span class="tag">Frontend</span>
-                <span class="tag">Branding</span>
+              <div class="profile-projects">
+                <h4>Projects I’ve built</h4>
+                <div class="tag-row">
+                  ${state.projects.map((project) => `<a class="tag profile-project-link" href="${project.href}" data-profile-project="${project.name}" title="${project.type}" aria-label="${project.name}: ${project.type}">${project.name}</a>`).join('')}
+                </div>
+              </div>
+              <div class="portfolio-callout">
+                <h4>React in my portfolio</h4>
+                <p>Explore the live portfolio or browse the React source code.</p>
+                <div class="btn-row portfolio-actions">
+                  <a class="primary-btn" href="https://roziboyahmadaliyev1310-sy.github.io/Portfolio/" data-profile-project="React Portfolio">Open portfolio ↗</a>
+                  <a class="ghost-btn" href="https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio" target="_blank" rel="noopener noreferrer">View source ↗</a>
+                </div>
               </div>
             </div>
             <div class="mini-card">
-              <h3>Performance</h3>
+              <h3>Project snapshot</h3>
               <div class="metric-grid">
-                <div class="metric"><strong>18</strong><span>Projects</span></div>
-                <div class="metric"><strong>92%</strong><span>Success</span></div>
-                <div class="metric"><strong>4.9</strong><span>Rating</span></div>
+                <div class="metric"><strong>${state.projects.length}</strong><span>Projects</span></div>
+                <div class="metric"><strong>6</strong><span>API demos</span></div>
+                <div class="metric"><strong>2nd</strong><span>Year</span></div>
               </div>
             </div>
           </div>
@@ -948,34 +1188,36 @@
         taskOutput.innerHTML = `
           <div class="task-header">
             <h2>ProductCard Demo</h2>
-            <span class="status-badge">Cart: ${state.cart}</span>
+            <span class="status-badge">Cart: ${state.cart} · $${state.cartValue}</span>
           </div>
-          <div class="panel-grid">
-            <div class="mini-card product-box">
-              <div class="product-visual">🎧</div>
-              <div>
-                <h3>Pulse Pro Headset</h3>
-                <p>Wireless audio with immersive sound and all-day comfort.</p>
-                <div class="price"><strong>$129</strong><span>USD</span></div>
-                <div class="qty-controls">
-                  <button type="button" data-product-action="decrease">−</button>
-                  <span id="qtyValue">${state.qty}</span>
-                  <button type="button" data-product-action="increase">＋</button>
+          <div class="product-grid">
+            ${state.shopProducts.map((product) => `
+              <div class="mini-card product-box">
+                <div class="product-visual">${product.visual}</div>
+                <div>
+                  <h3>${product.name}</h3>
+                  <p>${product.description}</p>
+                  <div class="tag-row">
+                    ${product.features.map((feature) => `<span class="tag">${feature}</span>`).join('')}
+                  </div>
+                  <div class="price"><strong>$${product.price}</strong><span>USD</span></div>
+                  <div class="qty-controls">
+                    <button type="button" data-product-action="decrease" data-product-id="${product.id}" aria-label="Decrease ${product.name} quantity">−</button>
+                    <span>${product.quantity}</span>
+                    <button type="button" data-product-action="increase" data-product-id="${product.id}" aria-label="Increase ${product.name} quantity">＋</button>
+                  </div>
+                  <div class="btn-row" style="margin-top: 16px;">
+                    <button class="primary-btn" type="button" data-product-action="add" data-product-id="${product.id}">Add to cart</button>
+                  </div>
                 </div>
-                <div class="btn-row" style="margin-top: 16px;">
-                  <button class="primary-btn" data-product-action="add">Add to cart</button>
-                </div>
-                <div class="cart-status" id="cartStatus">Added ${state.cart} item(s)</div>
               </div>
-            </div>
-            <div class="mini-card">
-              <h3>Included features</h3>
-              <div class="tag-row">
-                <span class="tag">Noise canceling</span>
-                <span class="tag">40h battery</span>
-                <span class="tag">Fast charge</span>
-                <span class="tag">Bluetooth 5.3</span>
-              </div>
+            `).join('')}
+          </div>
+          <div class="mini-card" style="margin-top: 16px;">
+            <h3>ProductCard project links</h3>
+            <div class="btn-row">
+              <a class="primary-btn" href="https://roziboyahmadaliyev1310-sy.github.io/web-programming/week11/" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+              <a class="ghost-btn" href="https://github.com/roziboyahmadaliyev1310-sy/web-programming/blob/main/week11/index.html" target="_blank" rel="noopener noreferrer">Source code ↗</a>
             </div>
           </div>
         `;
@@ -993,7 +1235,7 @@
           </div>
           <div class="mini-card">
             <div class="filter-row">
-              ${['All','UI','Code','Strategy'].map((type) => `
+              ${['All', ...new Set(state.courses.map((course) => course.type))].map((type) => `
                 <button type="button" class="${state.courseFilter === type ? 'active' : ''}" data-course-filter="${type}">${type}</button>
               `).join('')}
             </div>
@@ -1039,7 +1281,11 @@
 
       const renderStudentDirectory = () => {
         const query = (state.directoryQuery || '').toLowerCase();
-        const visible = state.students.filter((student) => student.name.toLowerCase().includes(query) || student.track.toLowerCase().includes(query));
+        const visible = state.students.filter((student) => (
+          student.name.toLowerCase().includes(query)
+          || student.track.toLowerCase().includes(query)
+          || (student.studentId && student.studentId.includes(query))
+        ));
 
         taskOutput.innerHTML = `
           <div class="task-header">
@@ -1055,9 +1301,9 @@
                 <div class="student-item">
                   <div>
                     <strong>${student.name}</strong>
-                    <span style="color: var(--muted);">${student.track}</span>
+                    <span style="color: var(--muted);">${student.studentId ? `Student ID: ${student.studentId}` : student.track}</span>
                   </div>
-                  <span class="student-pill">${student.track.slice(0, 3).toUpperCase()}</span>
+                  <span class="student-pill">${student.studentId ? 'STUDENT' : student.track.slice(0, 3).toUpperCase()}</span>
                 </div>
               `).join('') || '<div class="student-item"><strong>No matching students</strong></div>'}
             </div>
@@ -1067,6 +1313,7 @@
 
       const renderGallery = () => {
         const items = [
+          { label: 'My Portfolio', image: '../week10/portfolio/public/images/portfolio-photo.jpg' },
           { label: 'UI', icon: '🧩' },
           { label: 'Brand', icon: '🎨' },
           { label: 'Code', icon: '💻' },
@@ -1083,9 +1330,25 @@
           <div class="mini-card">
             <div class="gallery-grid">
               ${items.map((item) => `
-                <div class="gallery-item ${state.selectedGallery === item.label ? 'selected' : ''}" data-gallery-item="${item.label}" title="${item.label}">${item.icon}</div>
+                <button class="gallery-item ${state.selectedGallery === item.label ? 'selected' : ''}" type="button" data-gallery-item="${item.label}" title="${item.label}" aria-label="Select ${item.label}">
+                  ${item.image ? `<img src="${item.image}" alt="Portfolio portrait for Ruziboy" loading="eager" />` : item.icon}
+                  <span>${item.label}</span>
+                </button>
               `).join('')}
             </div>
+            ${state.selectedGallery === 'My Portfolio' ? `
+              <div class="gallery-featured">
+                <img src="../week10/portfolio/public/images/portfolio-photo.jpg" alt="Ruziboy's portfolio portrait" loading="eager" />
+                <div>
+                  <h3>Ruziboy’s Portfolio</h3>
+                  <p>My personal portfolio, featuring my projects and profile.</p>
+                  <div class="btn-row">
+                    <a class="primary-btn" href="https://roziboyahmadaliyev1310-sy.github.io/Portfolio/" data-profile-project="React Portfolio">Live site ↗</a>
+                    <a class="ghost-btn" href="https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio" target="_blank" rel="noopener noreferrer">Source code ↗</a>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
           </div>
         `;
       };
@@ -1276,11 +1539,28 @@
             </div>
             <div class="mini-card">
               <div class="live-profile">
-                <div class="live-avatar">${state.profile.name.split(' ').map((word) => word[0]).join('').slice(0,2).toUpperCase()}</div>
+                <div class="live-avatar">
+                  <img src="../week10/portfolio/public/images/portfolio-photo.jpg" alt="Portrait of Ruziboy" loading="eager" />
+                </div>
                 <div>
                   <h3>${state.profile.name}</h3>
-                  <p>${state.profile.major}</p>
-                  <p>${state.profile.year}</p>
+                  <p>${state.profile.major} · ${state.profile.year}</p>
+                  <p>${state.profile.university}</p>
+                  <p>${state.profile.bio}</p>
+                </div>
+              </div>
+              <div class="profile-projects">
+                <h4>Projects I’ve built</h4>
+                <div class="tag-row">
+                  ${state.projects.map((project) => `<a class="tag profile-project-link" href="${project.href}" data-profile-project="${project.name}" title="${project.type}" aria-label="${project.name}: ${project.type}">${project.name}</a>`).join('')}
+                </div>
+              </div>
+              <div class="portfolio-callout">
+                <h4>React in my portfolio</h4>
+                <p>Explore the live portfolio or browse the React source code.</p>
+                <div class="btn-row portfolio-actions">
+                  <a class="primary-btn" href="https://roziboyahmadaliyev1310-sy.github.io/Portfolio/" data-profile-project="React Portfolio">Open portfolio ↗</a>
+                  <a class="ghost-btn" href="https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio" target="_blank" rel="noopener noreferrer">View source ↗</a>
                 </div>
               </div>
             </div>
@@ -1288,8 +1568,30 @@
         `;
       };
 
+      const renderProjectView = (project) => {
+        selectionLabel.textContent = project.name;
+        document.querySelector('#taskIntro span').textContent = `${project.type} · Opened inside Week 11-1.`;
+        taskOutput.innerHTML = `
+          <div class="task-header">
+            <div>
+              <h2>${project.name}</h2>
+              <p>${project.type}</p>
+            </div>
+            <button class="ghost-btn" type="button" data-action="back-to-profile">← Back to profile</button>
+          </div>
+          <div class="project-embed">
+            <iframe src="${project.href}" title="${project.name}" loading="lazy"></iframe>
+          </div>
+          <div class="btn-row portfolio-actions">
+            <a class="primary-btn" href="${project.liveUrl}" target="_blank" rel="noopener noreferrer">Live site ↗</a>
+            <a class="ghost-btn" href="${project.sourceUrl}" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+          </div>
+        `;
+      };
+
       const renderTask = (label) => {
         selectionLabel.textContent = label;
+        state.currentTask = label;
         const taskMap = {
           'ProfileCard': renderProfileCard,
           'Notification List': renderNotifications,
@@ -1312,11 +1614,11 @@
           'ProfileCard': 'Build a reusable student summary with data-driven content.',
           'Notification List': 'Practice rendering a list from data and changing each item’s read state.',
           'Card Children': 'See how a parent card can organize smaller reusable child components.',
-          'ProductCard Demo': 'Explore product props, quantity controls, and an interactive cart total.',
-          'Course Catalog': 'Use category filters and saved state to manage a small course collection.',
+          'ProductCard Demo': 'Shop four product cards, adjust quantities, and track your cart total.',
+          'Course Catalog': 'Filter and save my Web Programming, Special Topics, Literary Journey, Discrete Math, and Football courses.',
           'Interactive Practice': 'Update component state and observe the interface respond immediately.',
-          'Student Directory': 'Search through a data set and narrow the visible results as you type.',
-          'Portfolio Gallery': 'Choose a portfolio category and see selection state reflected visually.',
+          'Student Directory': 'Search the directory by student name, program, or ID.',
+          'Portfolio Gallery': 'View my portfolio photo and open its live site or source code.',
           'Component Lab': 'Switch between component documentation panels.',
           'React Selected Work': 'Filter a portfolio of selected work by project category.',
           'React Task': 'Learn the difference between props and state, try a stateful counter, and check your understanding.',
@@ -1338,9 +1640,23 @@
       });
 
       document.addEventListener('click', (event) => {
+        const projectLink = event.target.closest('[data-profile-project]');
+        if (projectLink) {
+          event.preventDefault();
+          const project = state.projects.find((item) => item.name === projectLink.dataset.profileProject);
+          if (!project) {
+            throw new Error(`Unknown profile project: ${projectLink.dataset.profileProject}`);
+          }
+          renderProjectView(project);
+        }
+
         const target = event.target.closest('[data-action]');
         if (target) {
           const action = target.dataset.action;
+
+          if (action === 'back-to-profile') {
+            renderTask(state.currentTask || 'ProfileCard');
+          }
 
           if (action === 'toggle-notification') {
             const index = Number(target.dataset.notifyIndex);
@@ -1362,12 +1678,15 @@
         const productAction = event.target.closest('[data-product-action]');
         if (productAction) {
           const action = productAction.dataset.productAction;
-          if (action === 'increase') state.qty += 1;
-          if (action === 'decrease') state.qty = Math.max(1, state.qty - 1);
+          const product = state.shopProducts.find((item) => item.id === productAction.dataset.productId);
+          if (!product) {
+            throw new Error(`Unknown product: ${productAction.dataset.productId}`);
+          }
+          if (action === 'increase') product.quantity += 1;
+          if (action === 'decrease') product.quantity = Math.max(1, product.quantity - 1);
           if (action === 'add') {
-            state.cart += state.qty;
-            const status = document.getElementById('cartStatus');
-            if (status) status.textContent = `Added ${state.cart} item(s)`;
+            state.cart += product.quantity;
+            state.cartValue += product.price * product.quantity;
           }
           renderTask('ProductCard Demo');
         }
@@ -1447,17 +1766,17 @@
         const liveYearInput = event.target.closest('#liveYear');
 
         if (liveNameInput && document.activeElement === liveNameInput) {
-          state.profile.name = liveNameInput.value || 'Maya Jordan';
+          state.profile.name = liveNameInput.value || 'Ruziboy';
           renderTask('Student Profile Card (Live)');
         }
 
         if (liveMajorInput && document.activeElement === liveMajorInput) {
-          state.profile.major = liveMajorInput.value || 'Interactive Design';
+          state.profile.major = liveMajorInput.value || 'Computer Engineering';
           renderTask('Student Profile Card (Live)');
         }
 
         if (liveYearInput && document.activeElement === liveYearInput) {
-          state.profile.year = liveYearInput.value || 'Third Year';
+          state.profile.year = liveYearInput.value || 'Second Year';
           renderTask('Student Profile Card (Live)');
         }
       });
@@ -1475,7 +1794,7 @@
 
         const liveNameInput = event.target.closest('#liveName');
         if (liveNameInput) {
-          state.profile.name = liveNameInput.value || 'Maya Jordan';
+          state.profile.name = liveNameInput.value || 'Ruziboy';
           const cursorPosition = liveNameInput.selectionStart;
           renderTask('Student Profile Card (Live)');
           const updatedInput = document.getElementById('liveName');
@@ -1485,7 +1804,7 @@
 
         const liveMajorInput = event.target.closest('#liveMajor');
         if (liveMajorInput) {
-          state.profile.major = liveMajorInput.value || 'Interactive Design';
+          state.profile.major = liveMajorInput.value || 'Computer Engineering';
           const cursorPosition = liveMajorInput.selectionStart;
           renderTask('Student Profile Card (Live)');
           const updatedInput = document.getElementById('liveMajor');
@@ -1495,7 +1814,7 @@
 
         const liveYearInput = event.target.closest('#liveYear');
         if (liveYearInput) {
-          state.profile.year = liveYearInput.value || 'Third Year';
+          state.profile.year = liveYearInput.value || 'Second Year';
           const cursorPosition = liveYearInput.selectionStart;
           renderTask('Student Profile Card (Live)');
           const updatedInput = document.getElementById('liveYear');
