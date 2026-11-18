@@ -34,7 +34,7 @@ export const skills: Skill[] = [
     icon: "html-css",
     note:
       "I use semantic markup and responsive CSS to shape clear interfaces that adapt to different screens.",
-    usedIn: ["api-atlas", "book-search", "api-lab", "observatory"],
+    usedIn: ["api-atlas", "book-search", "api-lab", "observatory", "shopping-cart"],
   },
   {
     id: "javascript",
@@ -44,7 +44,7 @@ export const skills: Skill[] = [
     icon: "javascript",
     note:
       "I use browser JavaScript to respond to form input, update the page, and work with asynchronous API results.",
-    usedIn: ["api-atlas", "book-search", "api-lab"],
+    usedIn: ["api-atlas", "book-search", "api-lab", "shopping-cart"],
   },
   {
     id: "typescript",
@@ -83,7 +83,7 @@ export const skills: Skill[] = [
     mark: "A11Y",
     note:
       "I use semantic elements, keyboard-friendly controls, live status text, and visible focus states in my interfaces.",
-    usedIn: ["book-search", "observatory"],
+    usedIn: ["book-search", "observatory", "shopping-cart"],
   },
   {
     id: "responsive-ui",
@@ -92,7 +92,7 @@ export const skills: Skill[] = [
     mark: "↔",
     note:
       "I build layouts that reflow for mobile and desktop instead of shrinking a desktop-only design.",
-    usedIn: ["api-atlas", "book-search", "api-lab", "observatory"],
+    usedIn: ["api-atlas", "book-search", "api-lab", "observatory", "shopping-cart"],
   },
   {
     id: "rest-apis",
@@ -120,6 +120,6 @@ export const skills: Skill[] = [
     icon: "github",
     note:
       "I publish static browser projects with GitHub Pages and verify both the working route and custom error page.",
-    usedIn: ["book-search", "api-lab"],
+    usedIn: ["book-search", "api-lab", "shopping-cart"],
   },
 ];

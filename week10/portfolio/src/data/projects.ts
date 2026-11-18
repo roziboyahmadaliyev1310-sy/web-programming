@@ -2,7 +2,8 @@ export type ProjectId =
   | "api-atlas"
   | "book-search"
   | "api-lab"
-  | "observatory";
+  | "observatory"
+  | "shopping-cart";
 
 export type Project = {
   id: ProjectId;
@@ -107,5 +108,29 @@ export const projects: Project[] = [
       "https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week10/portfolio",
     status: "live",
     visual: "stars",
+  },
+  {
+    id: "shopping-cart",
+    number: "05",
+    name: "The Good Shop",
+    kind: "Coursework · interactive shopping cart",
+    description:
+      "A small storefront with a product list, responsive cart, and live order total.",
+    details:
+      "Seven product cards connect to a state-driven cart. Add items, adjust quantities, remove products, and watch the subtotal, shipping, and total update immediately.",
+    technologies: ["HTML", "CSS", "JavaScript", "DOM state"],
+    skills: [
+      "html-css",
+      "javascript",
+      "accessible-ui",
+      "responsive-ui",
+      "github-pages",
+    ],
+    liveUrl:
+      "https://roziboyahmadaliyev1310-sy.github.io/web-programming/week12-1/",
+    sourceUrl:
+      "https://github.com/roziboyahmadaliyev1310-sy/web-programming/tree/main/week12-1",
+    status: "coursework",
+    visual: "atlas",
   },
 ];
